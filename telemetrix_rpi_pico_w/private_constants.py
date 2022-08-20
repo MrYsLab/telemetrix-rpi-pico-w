@@ -155,7 +155,7 @@ class PrivateConstants:
     # maximum number of DHT devices allowed
     MAX_DHTS = 2
 
-    # DHT Report sub-types
+    # DHT Report subtypes
     DHT_DATA = 0
     DHT_ERROR = 1
 

@@ -988,7 +988,7 @@ class TelemetrixRpiPicoW(threading.Thread):
 
                                  CLOCK=14
 
-        cammand message: [command, spi port, mosi, miso, clock, freq msb,
+        command message: [command, spi port, mosi, miso, clock, freq msb,
                           freq 3, freq 2, freq 1, number of cs pins, cs pins...]
         """
         # determine if the spi port is specified correctly
