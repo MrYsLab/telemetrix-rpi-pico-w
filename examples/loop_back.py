@@ -17,11 +17,11 @@
 
 import time
 import sys
-from telemetrix_rpi_pico_w import telemetrix_rpi_pico
+from telemetrix_rpi_pico_w import telemetrix_rpi_pico_w
 
 """
 Loopback some data to assure that data can be sent and received between
-the Telemetrix client and arduino-telemetrix server.
+the Telemetrix client and telemetrix server.
 """
 
 
@@ -51,7 +51,7 @@ def loop_back(my_board, loop_back_data):
         sys.exit(0)
 
 
-board = telemetrix_rpi_pico.TelemetrixRpiPico()
+board = telemetrix_rpi_pico_w.TelemetrixRpiPicoW()
 char_list = ['A', 'B', 'Z']
 try:
     loop_back(board, char_list)

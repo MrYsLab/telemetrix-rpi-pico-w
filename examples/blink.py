@@ -1,5 +1,5 @@
 """
- Copyright (c) 2021 Alan Yorinks All rights reserved.
+ Copyright (c) 2022 Alan Yorinks All rights reserved.
 
  This program is free software; you can redistribute it and/or
  modify it under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE
@@ -21,7 +21,7 @@
 import sys
 import time
 
-from telemetrix_rpi_pico_w import telemetrix_rpi_pico
+from telemetrix_rpi_pico_w import telemetrix_rpi_pico_w
 
 """
 Setup a pin for digital output 
@@ -32,7 +32,7 @@ and toggle the pin 5 times.
 DIGITAL_PIN = 25  # the board LED
 
 # Create a Telemetrix instance.
-board = telemetrix_rpi_pico.TelemetrixRpiPico()
+board = telemetrix_rpi_pico_w.TelemetrixRpiPicoW()
 
 # Set the DIGITAL_PIN as an output pin
 board.set_pin_mode_digital_output(DIGITAL_PIN)
