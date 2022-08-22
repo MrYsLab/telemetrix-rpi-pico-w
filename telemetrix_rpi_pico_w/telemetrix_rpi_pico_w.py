@@ -365,7 +365,7 @@ class TelemetrixRpiPicoW(threading.Thread):
                 self.shutdown()
             raise RuntimeError('User Hit Control-C')
 
-    def analog_write(self, pin, duty_cycle=0, raw=False):
+    def pwm_write(self, pin, duty_cycle=0, raw=False):
         """
         Set the specified pin to the specified value.
         This is a PWM write.
@@ -383,26 +383,59 @@ class TelemetrixRpiPicoW(threading.Thread):
         """
         if self.pico_pins[pin] != PrivateConstants.AT_PWM_OUTPUT \
                 and self.pico_pins[pin] != PrivateConstants.AT_SERVO:
-            raise RuntimeError('analog_write: You must set the pin mode before '
-                               'performing an Analog write.')
+            raise RuntimeError('pwm_write: You must set the pin mode before '
+                               'performing an pwm write.')
         if raw:
             if not (0 <= duty_cycle < PrivateConstants.MAX_RAW_DUTY_CYCLE):
                 raise RuntimeError('Raw PWM duty cycle out of range')
             # else:
             #     dc = duty_cycle
         else:
-            if not (0 <= duty_cycle <= 99):
+            if not (0 <= duty_cycle <= 100):
                 raise RuntimeError('Raw PWM duty cycle percentage of range')
             # calculate percentage of duty cycle
             else:
                 duty_cycle = ((PrivateConstants.MAX_RAW_DUTY_CYCLE * duty_cycle) // 100)
-                # print(duty_cycle)
 
         value_msb = duty_cycle >> 8
         value_lsb = duty_cycle & 0x00ff
 
         command = [PrivateConstants.ANALOG_WRITE, pin, value_msb, value_lsb]
         self._send_command(command)
+
+    def pwm_frequency(self, frequency):
+        """
+        Modify the pwm frequency. Valid values are in the range of 100Hz to 1MHz
+        :param frequency: desired PWM write frequency
+        """
+        if 100 <= frequency <= 1000000000:
+            msb_value = frequency & 0xFF000000 >> 24
+            msb_3 = frequency & 0x00FF0000 >> 16
+            msb_2 = frequency & 0x0000FF00 >> 8
+            lsb = frequency & 0x000000FF
+
+            command = [PrivateConstants.SET_PWM_FREQ, msb_value, msb_3, msb_2, lsb]
+            self._send_command(command)
+        else:
+            raise RuntimeError('pwm_frequency is out of range')
+
+    def pwm_range(self, range_pwm):
+        """
+        Set the duty cycle range.
+        The range of values is 16 to 65535
+        :param range_pwm: range value
+        """
+        if 16 <= range_pwm <= 65535:
+            msb = range_pwm & 0xFF000000 >> 24
+            msb_3 = range_pwm & 0x00FF0000 >> 16
+            msb_2 = range_pwm & 0x0000FF00 >> 8
+            lsb = range_pwm & 0x000000FF
+
+            command = [PrivateConstants.SET_PWM_RANGE, msb, msb_3,
+                       msb_2, lsb]
+            self._send_command(command)
+        else:
+            raise RuntimeError('pwm_range is out of range')
 
     def digital_write(self, pin, value):
         """
@@ -829,11 +862,9 @@ class TelemetrixRpiPicoW(threading.Thread):
     def set_pin_mode_pwm_output(self, pin_number):
         """
         Enable a pin as a PWM pin. Maximum number of PWMs is 16.
-        The frequency is fixed at 50 hz.
 
         Note: There are up to 16 pins that can be assigned as
         PWM. Servo pins share the 16 PWM pins.
-
 
         :param pin_number: pico GPIO pin number
 
