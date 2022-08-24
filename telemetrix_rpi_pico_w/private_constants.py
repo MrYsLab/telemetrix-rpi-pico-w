@@ -144,7 +144,7 @@ class PrivateConstants:
     NUMBER_OF_ANALOG_PINS = 20
 
     # maximum raw pwm duty cycle
-    MAX_RAW_DUTY_CYCLE = 20000
+    MAX_PWM_DUTY_CYCLE = 20000
 
     # indices to retrieve min and max duty cycles from the servo ranges dictionary
     MIN_SERVO_DUTY_CYCLE = 0

@@ -154,8 +154,11 @@ class TelemetrixRpiPicoW(threading.Thread):
             {PrivateConstants.STEPPER_TARGET_POSITION:
                  self._stepper_target_position_report})
 
-        # up to 16 pwm pins may be simultaneously active
+        # up to 16 pwm/servo pins may be simultaneously active
         self.pwm_active_count = 0
+
+        # maximum pwm duty cycle
+        self.maximum_pwm_duty_cycle = PrivateConstants.MAX_PWM_DUTY_CYCLE
 
         # dictionaries to store the callbacks for each pin
         self.analog_callbacks = {}
@@ -278,7 +281,7 @@ class TelemetrixRpiPicoW(threading.Thread):
         # get pico firmware version and print it
         print('\nRetrieving Telemetrix4picoW firmware ID...')
         self._get_firmware_version()
-        # time.sleep(.3)
+        time.sleep(.3)
         if not self.firmware_version:
             if self.shutdown_on_exception:
                 self.shutdown()
@@ -365,42 +368,30 @@ class TelemetrixRpiPicoW(threading.Thread):
                 self.shutdown()
             raise RuntimeError('User Hit Control-C')
 
-    def pwm_write(self, pin, duty_cycle=0, raw=False):
+    def pwm_write(self, pin, duty_cycle=0):
         """
         Set the specified pin to the specified value.
         This is a PWM write.
 
         :param pin: pico GPIO pin number
 
-        :param duty_cycle: if the raw parameter is False, then this is expressed
-                           as a percentage between 0 and 100
+        :param duty_cycle: output value - This is dependent upon
+                           the PWM range. Default is 20000, but it
+                           may be modified by calling pwm_rage
 
-                           if the raw parameter is True, then the valid range
-                           of values is from 0 - 19999
-
-       :param raw: Sets how the duty-cycle parameter is perceived.
 
         """
         if self.pico_pins[pin] != PrivateConstants.AT_PWM_OUTPUT \
                 and self.pico_pins[pin] != PrivateConstants.AT_SERVO:
             raise RuntimeError('pwm_write: You must set the pin mode before '
                                'performing an pwm write.')
-        if raw:
-            if not (0 <= duty_cycle < PrivateConstants.MAX_RAW_DUTY_CYCLE):
-                raise RuntimeError('Raw PWM duty cycle out of range')
-            # else:
-            #     dc = duty_cycle
-        else:
-            if not (0 <= duty_cycle <= 100):
-                raise RuntimeError('Raw PWM duty cycle percentage of range')
-            # calculate percentage of duty cycle
-            else:
-                duty_cycle = ((PrivateConstants.MAX_RAW_DUTY_CYCLE * duty_cycle) // 100)
 
-        value_msb = duty_cycle >> 8
-        value_lsb = duty_cycle & 0x00ff
+        if not (0 <= duty_cycle <= self.maximum_pwm_duty_cycle):
+            raise RuntimeError('Raw PWM duty cycle out of range')
 
-        command = [PrivateConstants.ANALOG_WRITE, pin, value_msb, value_lsb]
+        value = duty_cycle.to_bytes(2, byteorder='big')
+
+        command = [PrivateConstants.ANALOG_WRITE, pin, value[0], value[1]]
         self._send_command(command)
 
     def pwm_frequency(self, frequency):
@@ -409,12 +400,9 @@ class TelemetrixRpiPicoW(threading.Thread):
         :param frequency: desired PWM write frequency
         """
         if 100 <= frequency <= 1000000000:
-            msb_value = frequency & 0xFF000000 >> 24
-            msb_3 = frequency & 0x00FF0000 >> 16
-            msb_2 = frequency & 0x0000FF00 >> 8
-            lsb = frequency & 0x000000FF
+            freq = frequency.to_bytes(4, byteorder='big')
 
-            command = [PrivateConstants.SET_PWM_FREQ, msb_value, msb_3, msb_2, lsb]
+            command = [PrivateConstants.SET_PWM_FREQ, freq[0], freq[1], freq[2], freq[3]]
             self._send_command(command)
         else:
             raise RuntimeError('pwm_frequency is out of range')
@@ -425,14 +413,13 @@ class TelemetrixRpiPicoW(threading.Thread):
         The range of values is 16 to 65535
         :param range_pwm: range value
         """
-        if 16 <= range_pwm <= 65535:
-            msb = range_pwm & 0xFF000000 >> 24
-            msb_3 = range_pwm & 0x00FF0000 >> 16
-            msb_2 = range_pwm & 0x0000FF00 >> 8
-            lsb = range_pwm & 0x000000FF
 
-            command = [PrivateConstants.SET_PWM_RANGE, msb, msb_3,
-                       msb_2, lsb]
+        if 16 <= range_pwm <= 65535:
+            data = range_pwm.to_bytes(4, byteorder='big')
+            self.maximum_pwm_duty_cycle = range_pwm
+
+            command = [PrivateConstants.SET_PWM_RANGE, data[0], data[1],
+                       data[2], data[3]]
             self._send_command(command)
         else:
             raise RuntimeError('pwm_range is out of range')
@@ -850,7 +837,7 @@ class TelemetrixRpiPicoW(threading.Thread):
 
         self.number_of_pixels = num_pixels
 
-        command = [PrivateConstants.INITIALIZE_NEO_PIXELS, pin_number,
+        command = [PrivateConstants.INIT_NEOPIXELS, pin_number,
                    self.number_of_pixels, fill_r, fill_g, fill_b]
 
         self._send_command(command)
@@ -972,7 +959,6 @@ class TelemetrixRpiPicoW(threading.Thread):
 
         Attach a pin to a servo motor
 
-        Servo mode is a specialized version of PWM Output mode.
         There are 16 PWM pins shared between the Servo and PWM Output modes.
 
         :param pin_number: pin
@@ -982,6 +968,14 @@ class TelemetrixRpiPicoW(threading.Thread):
         :param max_pulse: maximum pulse width in microseconds
 
         """
+
+        if pin_number in self.pico_pins:
+            self.pico_pins[pin_number] = PrivateConstants.AT_PWM_OUTPUT
+            if self.pwm_active_count >= 15:
+                raise RuntimeError(
+                    'pwm or servo set mode: number of active PWM pins is at maximum')
+
+            self.pwm_active_count += 1
 
         self._set_pin_mode(pin_number, PrivateConstants.AT_SERVO, min_pulse, max_pulse)
         self.pico_pins[pin_number] = PrivateConstants.AT_SERVO
@@ -1099,8 +1093,6 @@ class TelemetrixRpiPicoW(threading.Thread):
         else:
             self.spi_1_active = True
 
-        # freq_msb = clk_frequency >> 8
-        # freq_lsb = clk_frequency & 0x00ff
         freq_bytes = clk_frequency.to_bytes(4, byteorder='big')
 
         self.pico_pins[mosi] = PrivateConstants.AT_SPI
@@ -1138,12 +1130,12 @@ class TelemetrixRpiPicoW(threading.Thread):
         min_duty = self.servo_ranges[pin_number][PrivateConstants.MIN_SERVO_DUTY_CYCLE]
         max_duty = self.servo_ranges[pin_number][PrivateConstants.MAX_SERVO_DUTY_CYCLE]
 
-        servo_range = max_duty - min_duty
+        mm = min_duty.to_bytes(2, byteorder='big')
+        mx = max_duty.to_bytes(2, byteorder='big')
 
-        duty_cycle = int(value / 180 * servo_range) + min_duty
-
-        # use a raw pwm write from the calculated values
-        self.analog_write(pin_number, duty_cycle, True)
+        command = [PrivateConstants.SERVO_WRITE, pin_number, value, mm[0], mm[1],
+                   mx[0], mx[1]]
+        self._send_command(command)
 
     def set_pin_mode_sonar(self, trigger_pin, echo_pin, callback=None):
         """
@@ -1402,18 +1394,23 @@ class TelemetrixRpiPicoW(threading.Thread):
                        PrivateConstants.AT_OUTPUT]
 
         elif pin_state == PrivateConstants.AT_ANALOG:
+            df = differential.to_bytes(2, byteorder='big')
+
             command = [PrivateConstants.SET_PIN_MODE, pin_number,
-                       PrivateConstants.AT_ANALOG,
-                       differential >> 8, differential & 0xff, 1]
+                       PrivateConstants.AT_ANALOG, df[0], df[1]]
 
         elif pin_state == PrivateConstants.AT_PWM_OUTPUT:
             command = [PrivateConstants.SET_PIN_MODE, pin_number,
                        PrivateConstants.AT_PWM_OUTPUT]
 
         elif pin_state == PrivateConstants.AT_SERVO:
-            # we reuse the PWM_OUTPUT command
-            command = [PrivateConstants.SET_PIN_MODE, pin_number,
-                       PrivateConstants.AT_PWM_OUTPUT]
+            # differential is being used for the min value
+            # value range is being used for the max value
+            df = differential.to_bytes(2, byteorder='big')
+            vr = value_range.to_bytes(2, byteorder='big')
+            command = [PrivateConstants.SERVO_ATTACH, pin_number, df[0], df[1], vr[0],
+                       vr[1]]
+
             self.servo_ranges[pin_number] = [differential, value_range]
 
         else:

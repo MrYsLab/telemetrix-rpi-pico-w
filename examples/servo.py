@@ -24,35 +24,30 @@ import time
 from telemetrix_rpi_pico_w import telemetrix_rpi_pico_w
 
 """
-Setup a pin for output and fade its intensity
+Attach a pin to a servo and move it about.
 """
 
 # some globals
-# make sure to select a PWM pin
-DIGITAL_PIN = 25
+SERVO_PIN = 16
+
 
 # Create a Telemetrix instance.
 board = telemetrix_rpi_pico_w.TelemetrixRpiPicoW()
-
-# Set the DIGITAL_PIN as an output pin
-board.set_pin_mode_pwm_output(DIGITAL_PIN)
-
-# When hitting control-c to end the program
-# in this loop, we are likely to get a KeyboardInterrupt
-# exception. Catch the exception and exit gracefully.
-
 try:
-    # use raw values for a fade
-    for level in range(0, 19999, 10):
-        board.pwm_write(DIGITAL_PIN, level)
-    # time.sleep(.01)
-    for level in range(19999, 0, -10):
-        board.pwm_write(DIGITAL_PIN, level)
-    # time.sleep(.05)
-
+    board.set_pin_mode_servo(SERVO_PIN, 1000, 2000)
+    time.sleep(.2)
+    board.servo_write(SERVO_PIN, 90)
+    time.sleep(1)
+    board.servo_write(SERVO_PIN, 0)
+    time.sleep(1)
+    board.servo_write(SERVO_PIN, 180)
+    time.sleep(1)
+    board.servo_write(SERVO_PIN, 90)
 except KeyboardInterrupt:
     board.shutdown()
-    exit(0)
+    sys.exit(0)
 
 board.shutdown()
-exit(0)
+sys.exit(0)
+
+

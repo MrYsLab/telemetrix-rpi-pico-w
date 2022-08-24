@@ -33,6 +33,7 @@ DIGITAL_PIN = 25
 
 # Create a Telemetrix instance.
 board = telemetrix_rpi_pico_w.TelemetrixRpiPicoW()
+board.pwm_range(255)
 
 # Set the DIGITAL_PIN as an output pin
 board.set_pin_mode_pwm_output(DIGITAL_PIN)
@@ -43,12 +44,12 @@ board.set_pin_mode_pwm_output(DIGITAL_PIN)
 
 try:
     # use raw values for a fade
-    for level in range(0, 19999, 10):
+    for level in range(0, 255, 1):
         board.pwm_write(DIGITAL_PIN, level)
-    # time.sleep(.01)
-    for level in range(19999, 0, -10):
+        time.sleep(.01)
+    for level in range(255, 0, -1):
         board.pwm_write(DIGITAL_PIN, level)
-    # time.sleep(.05)
+        time.sleep(.01)
 
 except KeyboardInterrupt:
     board.shutdown()
