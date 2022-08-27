@@ -119,10 +119,10 @@ class PrivateConstants:
 
     AT_INPUT = 0
     AT_OUTPUT = 1
-    AT_PWM_OUTPUT = 2
-    AT_INPUT_PULLUP = 3
-    AT_INPUT_PULL_DOWN = 4
-    AT_ANALOG = 5
+    AT_INPUT_PULLUP = 2
+    AT_INPUT_PULL_DOWN = 3
+    AT_ANALOG = 4
+    AT_PWM_OUTPUT = 5
     AT_SERVO = 6
     AT_SONAR = 7
     AT_DHT = 8

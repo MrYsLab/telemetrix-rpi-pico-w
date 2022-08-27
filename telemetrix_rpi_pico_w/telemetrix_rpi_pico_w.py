@@ -1453,7 +1453,7 @@ class TelemetrixRpiPicoW(threading.Thread):
 
         elif pin_state == PrivateConstants.AT_PWM_OUTPUT:
             command = [PrivateConstants.SET_PIN_MODE, pin_number,
-                       PrivateConstants.AT_PWM_OUTPUT]
+                       PrivateConstants.AT_OUTPUT]
 
         elif pin_state == PrivateConstants.AT_SERVO:
             # differential is being used for the min value
