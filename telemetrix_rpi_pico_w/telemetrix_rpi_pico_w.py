@@ -15,6 +15,7 @@
  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 """
+import struct
 import sys
 import threading
 import time
@@ -117,6 +118,8 @@ class TelemetrixRpiPicoW(threading.Thread):
         self.report_dispatch.update(
             {PrivateConstants.ANALOG_REPORT: self._analog_message})
         self.report_dispatch.update(
+            {PrivateConstants.CPU_TEMP_REPORT: self._cpu_temp_message})
+        self.report_dispatch.update(
             {PrivateConstants.FIRMWARE_REPORT: self._firmware_message})
         self.report_dispatch.update(
             {PrivateConstants.SERVO_UNAVAILABLE: self._servo_unavailable})
@@ -164,6 +167,9 @@ class TelemetrixRpiPicoW(threading.Thread):
         self.analog_callbacks = {}
 
         self.digital_callbacks = {}
+
+        self.cpu_temp_active = False
+        self.cpu_temp_callback = None
 
         # there are 2 i2c ports available
         # these values help support both
@@ -726,8 +732,9 @@ class TelemetrixRpiPicoW(threading.Thread):
 
                            Internal Mapping
                            ADC3 = GPIO 29 (Physical Pin 35) ADC Reference Voltage
-                           ADC4 = GPIO 30 (No Physical pin - mapped internally)
-                                          CPU temperature
+
+                           NOTE: This is different from telemetrix-rpi-pico
+                           To get cpu temperature, call get_cpu_temperature.
 
         :param differential: difference in previous to current value before
                              report will be generated
@@ -743,10 +750,54 @@ class TelemetrixRpiPicoW(threading.Thread):
 
         """
         # make sure adc number is in range
-        if not 0 <= adc_number < 5:
+        if not 0 <= adc_number < 4:
             raise RuntimeError('Invalid ADC Number')
         self._set_pin_mode(adc_number, PrivateConstants.AT_ANALOG, differential,
                            callback=callback)
+
+    def get_cpu_temperature(self, threshold=1.0, polling_interval=1000, callback=None):
+        """
+        Request the CPU temperature. This will continuously monitor the temperature
+        and report it back in degrees celsius. Call only once, unless you wish to
+        modify the polling interval.
+
+        :param threshold:    The threshold value is used to determine when a
+        temperature report is generated. The current temperature is compared to
+        plus and minus the threshold value and if the value is exceeded, a report is
+        generated. To receive continuous reports, set the threshold to 0. A maximum of
+        5.0 degrees is allowed.
+
+        :param polling_interval: number of milliseconds between temperature reads.
+                                 Maximum of 60 seconds (6000 ms.)
+
+        :param callback: callback function
+
+        callback returns a list:
+        [CPU_TEMPERATURE_REPORT, degrees_celsius, raw_time_stamp]
+
+        CPU_TEMPERATURE_REPORT = 20
+        """
+
+        if not callback:
+            raise RuntimeError('get_cpu_temperature: you must specify a callback')
+        # convert the floating point threshold to bytes
+
+        if 0.0 <= threshold < 30.0:
+            if 0 <= polling_interval < 60000:
+                thresh_list = list(struct.pack("f", threshold))
+                polling_list = polling_interval.to_bytes(2, byteorder='big')
+                self.cpu_temp_callback = callback
+
+                self.cpu_temp_active = True
+
+                command = [PrivateConstants.GET_CPU_TEMPERATURE, thresh_list[0], thresh_list[1],
+                           thresh_list[2], thresh_list[3], polling_list[0], polling_list[1]]
+
+                self._send_command(command)
+            else:
+                raise RuntimeError('get_cpu_temperature: polling interval out of range.')
+        else:
+            raise RuntimeError('get_cpu_temperature: threshold out of range.')
 
     def set_pin_mode_digital_input(self, pin_number, callback=None):
         """
@@ -1396,8 +1447,9 @@ class TelemetrixRpiPicoW(threading.Thread):
         elif pin_state == PrivateConstants.AT_ANALOG:
             df = differential.to_bytes(2, byteorder='big')
 
+            # last parameter enable reporting
             command = [PrivateConstants.SET_PIN_MODE, pin_number,
-                       PrivateConstants.AT_ANALOG, df[0], df[1]]
+                       PrivateConstants.AT_ANALOG, df[0], df[1], 1]
 
         elif pin_state == PrivateConstants.AT_PWM_OUTPUT:
             command = [PrivateConstants.SET_PIN_MODE, pin_number,
@@ -1474,7 +1526,23 @@ class TelemetrixRpiPicoW(threading.Thread):
             message = [PrivateConstants.ANALOG_REPORT, pin, value, time_stamp]
             self.analog_callbacks[pin](message)
 
-    # TBD
+    def _cpu_temp_message(self, data):
+        """
+        This is a private message handler method.
+        It is a message handler for cpu temperature messages.
+
+        :param data: message data
+
+        """
+
+        temperature = struct.unpack('<f', bytes(data))
+        temperature = round(temperature[0], 2)
+        time_stamp = time.time()
+        # self.digital_pins[pin].event_time = time_stamp
+        if self.cpu_temp_callback:
+            message = [PrivateConstants.CPU_TEMP_REPORT, temperature, time_stamp]
+            self.cpu_temp_callback(message)
+
     def _dht_report(self, data):
         """
         This is the dht report handler method.
