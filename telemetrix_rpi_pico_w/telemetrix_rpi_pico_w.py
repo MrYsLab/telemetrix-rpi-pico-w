@@ -1543,29 +1543,58 @@ class TelemetrixRpiPicoW(threading.Thread):
             message = [PrivateConstants.CPU_TEMP_REPORT, temperature, time_stamp]
             self.cpu_temp_callback(message)
 
-    def _dht_report(self, data):
+    def _dht_report(self, report):
         """
+        This is a private utility method.
+
         This is the dht report handler method.
 
-        :param data:
+        :param report:
+               data[0] = report error return
+                                No Errors = 0
 
-                                data[0] = report sub type - DHT_REPORT
+                                Checksum Error = 1
 
-                                data[1] = pin number
+                                Timeout Error = 2
 
-                                data[2] = humidity
+                                Invalid Value = 999
 
-                                data[3] = temperature
+               data[1] = pin number
 
-                                data[4] = timestamp
+               data[2] = humidity positivity flag
+
+               data[3] = temperature positivity value
+
+               data[4] = humidity integer
+
+               data[5] = humidity fractional value
+
+               data[6] = temperature integer
+
+               data[7] = temperature fractional value
 
 
-        """
-        cb = self.dht_callbacks[data[0]]
+                """
+        if report[0]:  # DHT_ERROR
+            # error report
+            # data[0] = report sub type, data[1] = pin, data[2] = error message
+            if self.dht_callbacks[report[1]]:
+                # Callback 0=DHT REPORT, DHT_ERROR, PIN, Time
+                message = [PrivateConstants.DHT_REPORT, report[0], report[1], report[2],
+                           time.time()]
+                self.dht_callbacks[report[1]](message)
+        else:
+            # got valid data DHT_DATA
+            f_humidity = float(report[4] + report[5] / 100)
+            if report[2]:
+                f_humidity *= -1.0
+            f_temperature = float(report[6] + report[7] / 100)
+            if report[3]:
+                f_temperature *= -1.0
+            message = [PrivateConstants.DHT_REPORT, report[0], report[1], report[2],
+                       f_humidity, f_temperature, time.time()]
 
-        cb_list = [PrivateConstants.DHT_REPORT, data[0],
-                   (data[1] + (data[2] / 100)), (data[3] + (data[4] / 100)), time.time()]
-        cb(cb_list)
+            self.dht_callbacks[report[1]](message)
 
     def _digital_message(self, data):
         """
