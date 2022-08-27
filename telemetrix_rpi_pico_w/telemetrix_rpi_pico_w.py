@@ -652,7 +652,7 @@ class TelemetrixRpiPicoW(threading.Thread):
         if r and g and b not in range(256):
             raise RuntimeError('Pixel value must be in the range of 0-255')
 
-        command = [PrivateConstants.SET_NEO_PIXEL, pixel_number, r, g, b, auto_show]
+        command = [PrivateConstants.SET_NEOPIXEL, pixel_number, r, g, b, auto_show]
         self._send_command(command)
 
         if auto_show:
@@ -667,7 +667,7 @@ class TelemetrixRpiPicoW(threading.Thread):
         """
         if not self.neopixels_initiated:
             raise RuntimeError('You must call set_pin_mode_neopixel first')
-        command = [PrivateConstants.CLEAR_ALL_NEO_PIXELS, auto_show]
+        command = [PrivateConstants.CLEAR_NEOPIXELS, auto_show]
         self._send_command(command)
         if auto_show:
             self.neopixel_show()
@@ -688,7 +688,7 @@ class TelemetrixRpiPicoW(threading.Thread):
             raise RuntimeError('You must call set_pin_mode_neopixel first')
         if r and g and b not in range(256):
             raise RuntimeError('Pixel value must be in the range of 0-255')
-        command = [PrivateConstants.FILL_ALL_NEO_PIXELS, r, g, b, auto_show]
+        command = [PrivateConstants.FILL_NEOPIXELS, r, g, b, auto_show]
         self._send_command(command)
 
         if auto_show:
@@ -701,7 +701,7 @@ class TelemetrixRpiPicoW(threading.Thread):
         """
         if not self.neopixels_initiated:
             raise RuntimeError('You must call set_pin_mode_neopixel first')
-        command = [PrivateConstants.SHOW_NEO_PIXELS]
+        command = [PrivateConstants.SHOW_NEOPIXELS]
         self._send_command(command)
 
     def loop_back(self, start_character, callback=None):
