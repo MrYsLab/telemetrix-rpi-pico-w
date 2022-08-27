@@ -1390,7 +1390,7 @@ class TelemetrixRpiPicoW(threading.Thread):
 
         :param pin_number: pico pin number
 
-        :param pin_state: INPUT/OUTPUT/ANALOG/PWM/PULLUP
+        :param pin_state: INPUT/OUTPUT/ANALOG/PWM
 
         :param differential: for analog inputs - threshold
                              value to be achieved for report to
