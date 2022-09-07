@@ -1028,6 +1028,9 @@ class TelemetrixRpiPicoW(threading.Thread):
 
         This command also specifies the SPISettings for the selected SPI port.
 
+        This method sets the SPISettings structure based on parameter values
+        provided.
+
         SPI support is provided as an abstraction. It is intended that
         only a single device is connected to an SPI port.
 
@@ -1161,32 +1164,13 @@ class TelemetrixRpiPicoW(threading.Thread):
                 self.shutdown()
             raise RuntimeError('Maximum number of supported sonar devices exceeded.')
 
-    def spi_cs_control(self, spi_port, select):
-        """
-        Control an SPI chip select line
-
-        :param spi_port: select spi port 0 or 1
-
-        :param select: 0=select, 1=deselect
-        """
-
-        if spi_port not in [0, 1]:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError('spi port must be either a 0 or 1')
-
-        if spi == 0:
-            chip_select_pin = self.spi0_chip_select
-        else:
-            chip_select_pin = self.spi1_chip_select
-
-        command = [PrivateConstants.SPI_CS_CONTROL, chip_select_pin, select]
-        self._send_command(command)
-
     def spi_read_blocking(self, register, number_of_bytes, spi_port=0, call_back=None):
         """
         Read the specified number of bytes from the specified SPI port and
         call the callback function with the reported data.
+
+        On the server side, this command incorporates SPI.beginTransaction
+        and chip select control.
 
         :param register: Register to be selected
 
@@ -1231,40 +1215,12 @@ class TelemetrixRpiPicoW(threading.Thread):
                    number_of_bytes]
         self._send_command(command)
 
-    def spi_set_format(self, spi_port=0, data_bits=8, spi_polarity=0, spi_phase=0):
-        """
-        Configure how the SPI serializes and de-serializes data on the wire.
-
-        :param spi_port: SPI port 0 or 1
-
-        :param data_bits: Number of data bits per transfer. Valid range = 4-16
-
-        :param spi_polarity: clock polarity. 0 or 1.
-
-        :param spi_phase: clock phase. 0 or 1.
-        """
-
-        if not spi_port:
-            if not self.spi_0_active:
-                if self.shutdown_on_exception:
-                    self.shutdown()
-                raise RuntimeError(
-                    'spi_set_format: set_pin_mode_spi never called for spi port 0.')
-
-        elif spi_port:
-            if not self.spi_1_active:
-                if self.shutdown_on_exception:
-                    self.shutdown()
-                raise RuntimeError(
-                    'spi_set_format: set_pin_mode_spi never called for spi port 1.')
-
-        command = [PrivateConstants.SPI_SET_FORMAT, spi_port, data_bits,
-                   spi_polarity, spi_phase]
-        self._send_command(command)
-
     def spi_write_blocking(self, bytes_to_write, spi_port=0):
         """
         Write a list of bytes to the SPI device.
+
+        On the server side, this command incorporates SPI.beginTransaction
+        and chip select control.
 
         :param bytes_to_write: A list of bytes to write. This must be in the form of a
         list.
