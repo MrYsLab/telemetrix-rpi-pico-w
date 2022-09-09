@@ -61,7 +61,7 @@ class TelemetrixRpiPicoW(threading.Thread):
                                       a RunTimeError exception, or
                                       receiving a KeyboardInterrupt exception
 
-        :para reset_on_shutdown: Reset the board upon shutdown
+        :param reset_on_shutdown: Reset the board upon shutdown
         """
 
         # initialize threading parent
