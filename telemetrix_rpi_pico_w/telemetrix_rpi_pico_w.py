@@ -242,6 +242,34 @@ class TelemetrixRpiPicoW(threading.Thread):
         for gpio_pin in range(25, 29):
             self.servo_ranges[gpio_pin] = [1000, 2000]
 
+            # updated when a new motor is added
+            self.next_stepper_assigned = 0
+
+            # valid list of stepper motor interface types
+            self.valid_stepper_interfaces = [1, 2, 3, 4, 6, 8]
+
+            # maximum number of steppers supported
+            self.max_number_of_steppers = 4
+
+            # number of steppers created - not to exceed the maximum
+            self.number_of_steppers = 0
+
+            # dictionary to hold stepper motor information
+            self.stepper_info = {'instance': False, 'is_running': None,
+                                 'maximum_speed': 1, 'speed': 0, 'acceleration': 0,
+                                 'distance_to_go_callback': None,
+                                 'target_position_callback': None,
+                                 'current_position_callback': None,
+                                 'is_running_callback': None,
+                                 'motion_complete_callback': None,
+                                 'acceleration_callback': None}
+
+            # build a list of stepper motor info items
+            self.stepper_info_list = []
+            # a list of dictionaries to hold stepper information
+            for motor in range(self.max_number_of_steppers):
+                self.stepper_info_list.append(self.stepper_info)
+
         self.the_reporter_thread.start()
         self.the_data_receive_thread.start()
 
@@ -1105,6 +1133,72 @@ class TelemetrixRpiPicoW(threading.Thread):
                    freq_bytes[1], freq_bytes[2], freq_bytes[3], data_order, data_mode]
         self._send_command(command)
 
+    def set_pin_mode_stepper(self, interface=1, pin1=2, pin2=3, pin3=4,
+                             pin4=5, enable=True):
+        """
+        Stepper motor support is implemented as a proxy for the
+        the AccelStepper library for the Arduino.
+
+        https://github.com/waspinator/AccelStepper
+
+        Instantiate a stepper motor.
+
+        Initialize the interface and pins for a stepper motor.
+
+        :param interface: Motor Interface Type:
+
+                1 = Stepper Driver, 2 driver pins required
+
+                2 = FULL2WIRE  2 wire stepper, 2 motor pins required
+
+                3 = FULL3WIRE 3 wire stepper, such as HDD spindle,
+                    3 motor pins required
+
+                4 = FULL4WIRE, 4 wire full stepper, 4 motor pins
+                    required
+
+                6 = HALF3WIRE, 3 wire half stepper, such as HDD spindle,
+                    3 motor pins required
+
+                8 = HALF4WIRE, 4 wire half stepper, 4 motor pins required
+
+        :param pin1: Arduino digital pin number for motor pin 1
+
+        :param pin2: Arduino digital pin number for motor pin 2
+
+        :param pin3: Arduino digital pin number for motor pin 3
+
+        :param pin4: Arduino digital pin number for motor pin 4
+
+        :param enable: If this is true, the output pins are enabled at construction time.
+
+        :return: Motor Reference number
+        """
+
+        if self.number_of_steppers == self.max_number_of_steppers:
+            if self.shutdown_on_exception:
+                self.shutdown()
+            raise RuntimeError('Maximum number of steppers has already been assigned')
+
+        if interface not in self.valid_stepper_interfaces:
+            if self.shutdown_on_exception:
+                self.shutdown()
+            raise RuntimeError('Invalid stepper interface')
+
+        self.number_of_steppers += 1
+
+        motor_id = self.next_stepper_assigned
+        self.next_stepper_assigned += 1
+        self.stepper_info_list[motor_id]['instance'] = True
+
+        # build message and send message to server
+        command = [PrivateConstants.SET_PIN_MODE_STEPPER, motor_id, interface, pin1,
+                   pin2, pin3, pin4, enable]
+        self._send_command(command)
+
+        # return motor id
+        return motor_id
+
     def servo_write(self, pin_number, value):
         """
         Write the value to the specified servo
@@ -1282,6 +1376,598 @@ class TelemetrixRpiPicoW(threading.Thread):
         :return: pico_pins
         """
         return self.pico_pins
+
+    def stepper_move_to(self, motor_id, position):
+        """
+        Set an absolution target position. If position is positive, the movement is
+        clockwise, else it is counter-clockwise.
+
+        The run() function (below) will try to move the motor (at most one step per call)
+        from the current position to the target position set by the most
+        recent call to this function. Caution: moveTo() also recalculates the
+        speed for the next step.
+        If you are trying to use constant speed movements, you should call setSpeed()
+        after calling moveTo().
+
+        :param motor_id: motor id: 0 - 3
+
+        :param position: target position. Maximum value is 32 bits.
+        """
+        if position < 0:
+            polarity = 1
+        else:
+            polarity = 0
+        position = abs(position)
+        if not self.stepper_info_list[motor_id]['instance']:
+            if self.shutdown_on_exception:
+                self.shutdown()
+            raise RuntimeError('stepper_move_to: Invalid motor_id.')
+
+        position_bytes = list(position.to_bytes(4, 'big', signed=True))
+
+        command = [PrivateConstants.STEPPER_MOVE_TO, motor_id]
+        for value in position_bytes:
+            command.append(value)
+        command.append(polarity)
+        self._send_command(command)
+
+    def stepper_move(self, motor_id, relative_position):
+        """
+        Set the target position relative to the current position.
+
+        :param motor_id: motor id: 0 - 3
+
+        :param relative_position: The desired position relative to the current
+                                  position. Negative is anticlockwise from
+                                  the current position. Maximum value is 32 bits.
+        """
+        if relative_position < 0:
+            polarity = 1
+        else:
+            polarity = 0
+
+        relative_position = abs(relative_position)
+        if not self.stepper_info_list[motor_id]['instance']:
+            if self.shutdown_on_exception:
+                self.shutdown()
+            raise RuntimeError('stepper_move: Invalid motor_id.')
+
+        position_bytes = list(relative_position.to_bytes(4, 'big', signed=True))
+
+        command = [PrivateConstants.STEPPER_MOVE, motor_id]
+        for value in position_bytes:
+            command.append(value)
+        command.append(polarity)
+        self._send_command(command)
+
+    def stepper_run(self, motor_id, completion_callback=None):
+        """
+        This method steps the selected motor based on the current speed.
+
+        Once called, the server will continuously attempt to step the motor.
+
+        :param motor_id: 0 - 3
+
+        :param completion_callback: call back function to receive motion complete
+                                    notification
+
+        callback returns a data list:
+
+        [report_type, motor_id, raw_time_stamp]
+
+        The report_type = 19
+        """
+        if not completion_callback:
+            if self.shutdown_on_exception:
+                self.shutdown()
+            raise RuntimeError('stepper_run: A motion complete callback must be '
+                               'specified.')
+
+        if not self.stepper_info_list[motor_id]['instance']:
+            if self.shutdown_on_exception:
+                self.shutdown()
+            raise RuntimeError('stepper_run: Invalid motor_id.')
+
+        self.stepper_info_list[motor_id]['motion_complete_callback'] = completion_callback
+        command = [PrivateConstants.STEPPER_RUN, motor_id]
+        self._send_command(command)
+
+    def stepper_run_speed(self, motor_id):
+        """
+        This method steps the selected motor based at a constant speed as set by the most
+        recent call to stepper_set_max_speed(). The motor will run continuously.
+
+        Once called, the server will continuously attempt to step the motor.
+
+        :param motor_id: 0 - 3
+
+        """
+        if not self.stepper_info_list[motor_id]['instance']:
+            if self.shutdown_on_exception:
+                self.shutdown()
+            raise RuntimeError('stepper_run_speed: Invalid motor_id.')
+
+        command = [PrivateConstants.STEPPER_RUN_SPEED, motor_id]
+        self._send_command(command)
+
+    def stepper_set_max_speed(self, motor_id, max_speed):
+        """
+        Sets the maximum permitted speed. The stepper_run() function will accelerate
+        up to the speed set by this function.
+
+        Caution: the maximum speed achievable depends on your processor and clock speed.
+        The default maxSpeed is 1 step per second.
+
+         Caution: Speeds that exceed the maximum speed supported by the processor may
+                  result in non-linear accelerations and decelerations.
+
+        :param motor_id: 0 - 3
+
+        :param max_speed: 1 - 1000
+        """
+
+        if not self.stepper_info_list[motor_id]['instance']:
+            if self.shutdown_on_exception:
+                self.shutdown()
+            raise RuntimeError('stepper_set_max_speed: Invalid motor_id.')
+
+        if not 1 < max_speed <= 1000:
+            if self.shutdown_on_exception:
+                self.shutdown()
+            raise RuntimeError('stepper_set_max_speed: Speed range is 1 - 1000.')
+
+        self.stepper_info_list[motor_id]['max_speed'] = max_speed
+        max_speed_msb = (max_speed & 0xff00) >> 8
+        max_speed_lsb = max_speed & 0xff
+
+        command = [PrivateConstants.STEPPER_SET_MAX_SPEED, motor_id, max_speed_msb,
+                   max_speed_lsb]
+        self._send_command(command)
+
+    def stepper_get_max_speed(self, motor_id):
+        """
+        Returns the maximum speed configured for this stepper
+        that was previously set by stepper_set_max_speed()
+
+        Value is stored in the client, so no callback is required.
+
+        :param motor_id: 0 - 3
+
+        :return: The currently configured maximum speed.
+        """
+        if not self.stepper_info_list[motor_id]['instance']:
+            if self.shutdown_on_exception:
+                self.shutdown()
+            raise RuntimeError('stepper_max_speed: Invalid motor_id.')
+
+        return self.stepper_info_list[motor_id]['max_speed']
+
+    def stepper_set_acceleration(self, motor_id, acceleration):
+        """
+        Sets the acceleration/deceleration rate.
+
+        :param motor_id: 0 - 3
+
+        :param acceleration: The desired acceleration in steps per second
+                             per second. Must be > 0.0. This is an
+                             expensive call since it requires a square
+                             root to be calculated on the server.
+                             Dont call more often than needed.
+
+        """
+        if not self.stepper_info_list[motor_id]['instance']:
+            if self.shutdown_on_exception:
+                self.shutdown()
+            raise RuntimeError('stepper_set_acceleration: Invalid motor_id.')
+
+        if not 1 < acceleration <= 1000:
+            if self.shutdown_on_exception:
+                self.shutdown()
+            raise RuntimeError('stepper_set_acceleration: Acceleration range is 1 - '
+                               '1000.')
+
+        self.stepper_info_list[motor_id]['acceleration'] = acceleration
+
+        max_accel_msb = acceleration >> 8
+        max_accel_lsb = acceleration & 0xff
+
+        command = [PrivateConstants.STEPPER_SET_ACCELERATION, motor_id, max_accel_msb,
+                   max_accel_lsb]
+        self._send_command(command)
+
+    def stepper_set_speed(self, motor_id, speed):
+        """
+        Sets the desired constant speed for use with stepper_run_speed().
+
+        :param motor_id: 0 - 3
+
+        :param speed: 0 - 1000 The desired constant speed in steps per
+                      second. Positive is clockwise. Speeds of more than 1000 steps per
+                      second are unreliable. Speed accuracy depends on the Arduino
+                      crystal. Jitter depends on how frequently you call the
+                      stepper_run_speed() method.
+                      The speed will be limited by the current value of
+                      stepper_set_max_speed().
+        """
+        if not self.stepper_info_list[motor_id]['instance']:
+            if self.shutdown_on_exception:
+                self.shutdown()
+            raise RuntimeError('stepper_set_speed: Invalid motor_id.')
+
+        if not 0 < speed <= 1000:
+            if self.shutdown_on_exception:
+                self.shutdown()
+            raise RuntimeError('stepper_set_speed: Speed range is 0 - '
+                               '1000.')
+
+        self.stepper_info_list[motor_id]['speed'] = speed
+
+        speed_msb = speed >> 8
+        speed_lsb = speed & 0xff
+
+        command = [PrivateConstants.STEPPER_SET_SPEED, motor_id, speed_msb, speed_lsb]
+        self._send_command(command)
+
+    def stepper_get_speed(self, motor_id):
+        """
+        Returns the  most recently set speed.
+        that was previously set by stepper_set_speed();
+
+        Value is stored in the client, so no callback is required.
+
+        :param motor_id:  0 - 3
+
+        """
+        if not self.stepper_info_list[motor_id]['instance']:
+            if self.shutdown_on_exception:
+                self.shutdown()
+            raise RuntimeError('stepper_get_speed: Invalid motor_id.')
+
+        return self.stepper_info_list[motor_id]['speed']
+
+    def stepper_get_distance_to_go(self, motor_id, distance_to_go_callback):
+        """
+        Request the distance from the current position to the target position
+        from the server.
+
+        :param motor_id: 0 - 3
+
+        :param distance_to_go_callback: required callback function to receive report
+
+        :return: The distance to go is returned via the callback as a list:
+
+        [REPORT_TYPE=15, motor_id, distance in steps, time_stamp]
+
+        A positive distance is clockwise from the current position.
+
+        """
+        if not distance_to_go_callback:
+            if self.shutdown_on_exception:
+                self.shutdown()
+            raise RuntimeError('stepper_get_distance_to_go Read: A callback function must be specified.')
+
+        if not self.stepper_info_list[motor_id]['instance']:
+            if self.shutdown_on_exception:
+                self.shutdown()
+            raise RuntimeError('stepper_get_distance_to_go: Invalid motor_id.')
+        self.stepper_info_list[motor_id][
+            'distance_to_go_callback'] = distance_to_go_callback
+        command = [PrivateConstants.STEPPER_GET_DISTANCE_TO_GO, motor_id]
+        self._send_command(command)
+
+    def stepper_get_target_position(self, motor_id, target_callback):
+        """
+        Request the most recently set target position from the server.
+
+        :param motor_id: 0 - 3
+
+        :param target_callback: required callback function to receive report
+
+        :return: The distance to go is returned via the callback as a list:
+
+        [REPORT_TYPE=16, motor_id, target position in steps, time_stamp]
+
+        Positive is clockwise from the 0 position.
+
+        """
+        if not target_callback:
+            if self.shutdown_on_exception:
+                self.shutdown()
+            raise RuntimeError(
+                'stepper_get_target_position Read: A callback function must be specified.')
+
+        if not self.stepper_info_list[motor_id]['instance']:
+            if self.shutdown_on_exception:
+                self.shutdown()
+            raise RuntimeError('stepper_get_target_position: Invalid motor_id.')
+
+        self.stepper_info_list[motor_id][
+            'target_position_callback'] = target_callback
+
+        command = [PrivateConstants.STEPPER_GET_TARGET_POSITION, motor_id]
+        self._send_command(command)
+
+    def stepper_get_current_position(self, motor_id, current_position_callback):
+        """
+        Request the current motor position from the server.
+
+        :param motor_id: 0 - 3
+
+        :param current_position_callback: required callback function to receive report
+
+        :return: The current motor position returned via the callback as a list:
+
+        [REPORT_TYPE=17, motor_id, current position in steps, time_stamp]
+
+        Positive is clockwise from the 0 position.
+        """
+        if not current_position_callback:
+            if self.shutdown_on_exception:
+                self.shutdown()
+            raise RuntimeError(
+                'stepper_get_current_position Read: A callback function must be specified.')
+
+        if not self.stepper_info_list[motor_id]['instance']:
+            if self.shutdown_on_exception:
+                self.shutdown()
+            raise RuntimeError('stepper_get_current_position: Invalid motor_id.')
+
+        self.stepper_info_list[motor_id]['current_position_callback'] = current_position_callback
+
+        command = [PrivateConstants.STEPPER_GET_CURRENT_POSITION, motor_id]
+        self._send_command(command)
+
+    def stepper_set_current_position(self, motor_id, position):
+        """
+        Resets the current position of the motor, so that wherever the motor
+        happens to be right now is considered to be the new 0 position. Useful
+        for setting a zero position on a stepper after an initial hardware
+        positioning move.
+
+        Has the side effect of setting the current motor speed to 0.
+
+        :param motor_id:  0 - 3
+
+        :param position: Position in steps. This is a 32 bit value
+        """
+
+        if not self.stepper_info_list[motor_id]['instance']:
+            if self.shutdown_on_exception:
+                self.shutdown()
+            raise RuntimeError('stepper_set_current_position: Invalid motor_id.')
+        position_bytes = list(position.to_bytes(4, 'big',  signed=True))
+
+        command = [PrivateConstants.STEPPER_SET_CURRENT_POSITION, motor_id]
+        for value in position_bytes:
+            command.append(value)
+        self._send_command(command)
+
+    def stepper_run_speed_to_position(self, motor_id, completion_callback=None):
+        """
+        Runs the motor at the currently selected speed until the target position is
+        reached.
+
+        Does not implement accelerations.
+
+        :param motor_id: 0 - 3
+
+        :param completion_callback: call back function to receive motion complete
+                                    notification
+
+        callback returns a data list:
+
+        [report_type, motor_id, raw_time_stamp]
+
+        The report_type = 19
+        """
+        if not completion_callback:
+            if self.shutdown_on_exception:
+                self.shutdown()
+            raise RuntimeError('stepper_run_speed_to_position: A motion complete '
+                               'callback must be '
+                               'specified.')
+        if not self.stepper_info_list[motor_id]['instance']:
+            if self.shutdown_on_exception:
+                self.shutdown()
+            raise RuntimeError('stepper_run_speed_to_position: Invalid motor_id.')
+
+        self.stepper_info_list[motor_id]['motion_complete_callback'] = completion_callback
+        command = [PrivateConstants.STEPPER_RUN_SPEED_TO_POSITION, motor_id]
+        self._send_command(command)
+
+    def stepper_stop(self, motor_id):
+        """
+        Sets a new target position that causes the stepper
+        to stop as quickly as possible, using the current speed and
+        acceleration parameters.
+
+        :param motor_id:  0 - 3
+        """
+        if not self.stepper_info_list[motor_id]['instance']:
+            if self.shutdown_on_exception:
+                self.shutdown()
+            raise RuntimeError('stepper_stop: Invalid motor_id.')
+
+        command = [PrivateConstants.STEPPER_STOP, motor_id]
+        self._send_command(command)
+
+    def stepper_disable_outputs(self, motor_id):
+        """
+        Disable motor pin outputs by setting them all LOW.
+
+        Depending on the design of your electronics this may turn off
+        the power to the motor coils, saving power.
+
+        This is useful to support Arduino low power modes: disable the outputs
+        during sleep and then re-enable with enableOutputs() before stepping
+        again.
+
+        If the enable Pin is defined, sets it to OUTPUT mode and clears
+        the pin to disabled.
+
+        :param motor_id: 0 - 3
+        """
+        if not self.stepper_info_list[motor_id]['instance']:
+            if self.shutdown_on_exception:
+                self.shutdown()
+            raise RuntimeError('stepper_disable_outputs: Invalid motor_id.')
+
+        command = [PrivateConstants.STEPPER_DISABLE_OUTPUTS, motor_id]
+        self._send_command(command)
+
+    def stepper_enable_outputs(self, motor_id):
+        """
+        Enable motor pin outputs by setting the motor pins to OUTPUT
+        mode.
+
+        If the enable Pin is defined, sets it to OUTPUT mode and sets
+        the pin to enabled.
+
+        :param motor_id: 0 - 3
+        """
+        if not self.stepper_info_list[motor_id]['instance']:
+            if self.shutdown_on_exception:
+                self.shutdown()
+            raise RuntimeError('stepper_enable_outputs: Invalid motor_id.')
+
+        command = [PrivateConstants.STEPPER_ENABLE_OUTPUTS, motor_id]
+        self._send_command(command)
+
+    def stepper_set_min_pulse_width(self, motor_id, minimum_width):
+        """
+        Sets the minimum pulse width allowed by the stepper driver.
+
+        The minimum practical pulse width is approximately 20 microseconds.
+
+        Times less than 20 microseconds will usually result in 20 microseconds or so.
+
+        :param motor_id: 0 -3
+
+        :param minimum_width: A 16 bit unsigned value expressed in microseconds.
+        """
+        if not self.stepper_info_list[motor_id]['instance']:
+            if self.shutdown_on_exception:
+                self.shutdown()
+            raise RuntimeError('stepper_set_min_pulse_width: Invalid motor_id.')
+
+        if not 0 < minimum_width <= 0xff:
+            if self.shutdown_on_exception:
+                self.shutdown()
+            raise RuntimeError('stepper_set_min_pulse_width: Pulse width range = '
+                               '0-0xffff.')
+
+        width_msb = minimum_width >> 8
+        width_lsb = minimum_width & 0xff
+
+        command = [PrivateConstants.STEPPER_SET_MINIMUM_PULSE_WIDTH, motor_id, width_msb,
+                   width_lsb]
+        self._send_command(command)
+
+    def stepper_set_enable_pin(self, motor_id, pin=0xff):
+        """
+        Sets the enable pin number for stepper drivers.
+        0xFF indicates unused (default).
+
+        Otherwise, if a pin is set, the pin will be turned on when
+        enableOutputs() is called and switched off when disableOutputs()
+        is called.
+
+        :param motor_id: 0 - 4
+        :param pin: 0-0xff
+        """
+        if not self.stepper_info_list[motor_id]['instance']:
+            if self.shutdown_on_exception:
+                self.shutdown()
+            raise RuntimeError('stepper_set_enable_pin: Invalid motor_id.')
+
+        if not 0 < pin <= 0xff:
+            if self.shutdown_on_exception:
+                self.shutdown()
+            raise RuntimeError('stepper_set_enable_pin: Pulse width range = '
+                               '0-0xff.')
+        command = [PrivateConstants.STEPPER_SET_ENABLE_PIN, motor_id, pin]
+
+        self._send_command(command)
+
+    def stepper_set_3_pins_inverted(self, motor_id, direction=False, step=False,
+                                    enable=False):
+        """
+        Sets the inversion for stepper driver pins.
+
+        :param motor_id: 0 - 3
+
+        :param direction: True=inverted or False
+
+        :param step: True=inverted or False
+
+        :param enable: True=inverted or False
+        """
+        if not self.stepper_info_list[motor_id]['instance']:
+            if self.shutdown_on_exception:
+                self.shutdown()
+            raise RuntimeError('stepper_set_3_pins_inverted: Invalid motor_id.')
+
+        command = [PrivateConstants.STEPPER_SET_3_PINS_INVERTED, motor_id, direction,
+                   step, enable]
+
+        self._send_command(command)
+
+    def stepper_set_4_pins_inverted(self, motor_id, pin1_invert=False, pin2_invert=False,
+                                    pin3_invert=False, pin4_invert=False, enable=False):
+        """
+        Sets the inversion for 2, 3 and 4 wire stepper pins
+
+        :param motor_id: 0 - 3
+
+        :param pin1_invert: True=inverted or False
+
+        :param pin2_invert: True=inverted or False
+
+        :param pin3_invert: True=inverted or False
+
+        :param pin4_invert: True=inverted or False
+
+        :param enable: True=inverted or False
+        """
+        if not self.stepper_info_list[motor_id]['instance']:
+            if self.shutdown_on_exception:
+                self.shutdown()
+            raise RuntimeError('stepper_set_4_pins_inverted: Invalid motor_id.')
+
+        command = [PrivateConstants.STEPPER_SET_4_PINS_INVERTED, motor_id, pin1_invert,
+                   pin2_invert, pin3_invert, pin4_invert, enable]
+
+        self._send_command(command)
+
+    def stepper_is_running(self, motor_id, callback):
+        """
+        Checks to see if the motor is currently running to a target.
+
+        Callback return True if the speed is not zero or not at the target position.
+
+        :param motor_id: 0-4
+
+        :param callback: required callback function to receive report
+
+        :return: The current running state returned via the callback as a list:
+
+        [REPORT_TYPE=18, motor_id, True or False for running state, time_stamp]
+        """
+        if not callback:
+            if self.shutdown_on_exception:
+                self.shutdown()
+            raise RuntimeError(
+                'stepper_is_running: A callback function must be specified.')
+
+        if not self.stepper_info_list[motor_id]['instance']:
+            if self.shutdown_on_exception:
+                self.shutdown()
+            raise RuntimeError('stepper_is_running: Invalid motor_id.')
+
+        self.stepper_info_list[motor_id]['is_running_callback'] = callback
+
+        command = [PrivateConstants.STEPPER_IS_RUNNING, motor_id]
+        self._send_command(command)
 
     def _set_pin_mode(self, pin_number, pin_state, differential=0, value_range=0,
                       callback=None):
