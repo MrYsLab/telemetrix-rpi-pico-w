@@ -21,17 +21,15 @@ import threading
 import time
 from collections import deque
 import serial
-# noinspection PyPackageRequirementscd
 from serial.serialutil import SerialException
-# noinspection PyPackageRequirements
 from serial.tools import list_ports
 import warnings
 
-# noinspection PyUnresolvedReferences
 from telemetrix_rpi_pico_w.private_constants import PrivateConstants
 
+# noinspection PyMethodMayBeStatic
 
-# noinspection PyPep8,PyMethodMayBeStatic,GrazieInspection
+
 class TelemetrixRpiPicoW(threading.Thread):
     """
     This class exposes and implements a Telemetrix type
@@ -40,11 +38,12 @@ class TelemetrixRpiPicoW(threading.Thread):
     It includes the public API methods as well as
     a set of private methods.
 
+    All pin numbers are specified using PICO GPIO pin numbering.
+
     """
 
     def __init__(self, ip_address=None,
                  ip_port=31335,
-                 use_arduino_pin_numbering=False,
                  sleep_tune=0.000001,
                  shutdown_on_exception=True,
                  reset_on_shutdown=True):
@@ -54,9 +53,6 @@ class TelemetrixRpiPicoW(threading.Thread):
         :param ip_address: IP address assigned to the Pico W
 
         :param ip_port: IP Port number.
-
-        :param use_arduino_pin_numbering: If False use PICO gpio scheme,
-                                          else, use Arduino pin numbering.
 
         :param sleep_tune: A tuning parameter (typically not changed by user)
 
@@ -94,7 +90,6 @@ class TelemetrixRpiPicoW(threading.Thread):
         # save input parameters as instance variables
         self.ip_address = ip_address
         self.ip_port = ip_port
-        self.use_arduino_pin_numbering = use_arduino_pin_numbering
         self.sleep_tune = sleep_tune
         self.shutdown_on_exception = shutdown_on_exception
         self.reset_on_shutdown = reset_on_shutdown
@@ -130,7 +125,7 @@ class TelemetrixRpiPicoW(threading.Thread):
                 PrivateConstants.I2C_TOO_FEW_BYTES_RECEIVED: self._i2c_too_few_bytes_received})
         self.report_dispatch.update(
             {
-                PrivateConstants.I2C_TOO_MANY_BYTES_RECEIVEDD: self._i2c_too_many_bytes_received})
+                PrivateConstants.I2C_TOO_MANY_BYTES_RECEIVED: self._i2c_too_many_bytes_received})
         self.report_dispatch.update(
             {PrivateConstants.SONAR_DISTANCE: self._sonar_distance_report})
         self.report_dispatch.update({PrivateConstants.DHT_REPORT: self._dht_report})
@@ -1136,7 +1131,7 @@ class TelemetrixRpiPicoW(threading.Thread):
     def set_pin_mode_stepper(self, interface=1, pin1=2, pin2=3, pin3=4,
                              pin4=5, enable=True):
         """
-        Stepper motor support is implemented as a proxy for the
+        Stepper motor support is implemented as a proxy for
         the AccelStepper library for the Arduino.
 
         https://github.com/waspinator/AccelStepper
@@ -1548,11 +1543,11 @@ class TelemetrixRpiPicoW(threading.Thread):
 
         :param motor_id: 0 - 3
 
-        :param acceleration: The desired acceleration in steps per second
+        :param acceleration: The desired acceleration in steps
                              per second. Must be > 0.0. This is an
                              expensive call since it requires a square
                              root to be calculated on the server.
-                             Dont call more often than needed.
+                             Don't call more often than needed.
 
         """
         if not self.stepper_info_list[motor_id]['instance']:
@@ -1802,8 +1797,8 @@ class TelemetrixRpiPicoW(threading.Thread):
         during sleep and then re-enable with enableOutputs() before stepping
         again.
 
-        If the enable Pin is defined, sets it to OUTPUT mode and clears
-        the pin to disabled.
+        If the enable Pin is defined, sets the pin to OUTPUT mode and clears
+        the pin to be disabled.
 
         :param motor_id: 0 - 3
         """
@@ -1821,7 +1816,7 @@ class TelemetrixRpiPicoW(threading.Thread):
         mode.
 
         If the enable Pin is defined, sets it to OUTPUT mode and sets
-        the pin to enabled.
+        the pin to be enabled.
 
         :param motor_id: 0 - 3
         """
@@ -1865,7 +1860,7 @@ class TelemetrixRpiPicoW(threading.Thread):
 
     def stepper_set_enable_pin(self, motor_id, pin=0xff):
         """
-        Sets the enable pin number for stepper drivers.
+        Sets the enable-pin number for stepper drivers.
         0xFF indicates unused (default).
 
         Otherwise, if a pin is set, the pin will be turned on when
@@ -2043,7 +2038,7 @@ class TelemetrixRpiPicoW(threading.Thread):
                        PrivateConstants.AT_OUTPUT]
 
         elif pin_state == PrivateConstants.AT_SERVO:
-            # differential is being used for the min value
+            # differential is being used for the min
             # value range is being used for the max value
             df = differential.to_bytes(2, byteorder='big')
             vr = value_range.to_bytes(2, byteorder='big')
@@ -2278,7 +2273,7 @@ class TelemetrixRpiPicoW(threading.Thread):
         if self.loop_back_callback:
             self.loop_back_callback(data)
 
-    # onewire is not available for the pico as of yet
+    # onewire is not available for the pico
     # def _onewire_report(self, report):
     #     cb_list = [PrivateConstants.ONE_WIRE_REPORT, report[0]] + report[1:]
     #     cb_list.append(time.time())
