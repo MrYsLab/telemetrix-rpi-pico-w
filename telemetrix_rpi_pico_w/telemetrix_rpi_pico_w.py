@@ -27,6 +27,7 @@ import warnings
 
 from telemetrix_rpi_pico_w.private_constants import PrivateConstants
 
+
 # noinspection PyMethodMayBeStatic
 
 
@@ -157,7 +158,7 @@ class TelemetrixRpiPicoW(threading.Thread):
         # up to 16 pwm/servo pins may be simultaneously active
         self.pwm_active_count = 0
 
-        # maximum pwm duty cycle
+        # maximum pwm duty cycle - 20000
         self.maximum_pwm_duty_cycle = PrivateConstants.MAX_PWM_DUTY_CYCLE
 
         # dictionaries to store the callbacks for each pin
@@ -237,33 +238,33 @@ class TelemetrixRpiPicoW(threading.Thread):
         for gpio_pin in range(25, 29):
             self.servo_ranges[gpio_pin] = [1000, 2000]
 
-            # updated when a new motor is added
-            self.next_stepper_assigned = 0
+        # updated when a new motor is added
+        self.next_stepper_assigned = 0
 
-            # valid list of stepper motor interface types
-            self.valid_stepper_interfaces = [1, 2, 3, 4, 6, 8]
+        # valid list of stepper motor interface types
+        self.valid_stepper_interfaces = [1, 2, 3, 4, 6, 8]
 
-            # maximum number of steppers supported
-            self.max_number_of_steppers = 4
+        # maximum number of steppers supported
+        self.max_number_of_steppers = 4
 
-            # number of steppers created - not to exceed the maximum
-            self.number_of_steppers = 0
+        # number of steppers created - not to exceed the maximum
+        self.number_of_steppers = 0
 
-            # dictionary to hold stepper motor information
-            self.stepper_info = {'instance': False, 'is_running': None,
-                                 'maximum_speed': 1, 'speed': 0, 'acceleration': 0,
-                                 'distance_to_go_callback': None,
-                                 'target_position_callback': None,
-                                 'current_position_callback': None,
-                                 'is_running_callback': None,
-                                 'motion_complete_callback': None,
-                                 'acceleration_callback': None}
+        # dictionary to hold stepper motor information
+        self.stepper_info = {'instance': False, 'is_running': None,
+                             'maximum_speed': 1, 'speed': 0, 'acceleration': 0,
+                             'distance_to_go_callback': None,
+                             'target_position_callback': None,
+                             'current_position_callback': None,
+                             'is_running_callback': None,
+                             'motion_complete_callback': None,
+                             'acceleration_callback': None}
 
-            # build a list of stepper motor info items
-            self.stepper_info_list = []
-            # a list of dictionaries to hold stepper information
-            for motor in range(self.max_number_of_steppers):
-                self.stepper_info_list.append(self.stepper_info)
+        # build a list of stepper motor info items
+        self.stepper_info_list = []
+        # a list of dictionaries to hold stepper information
+        for motor in range(self.max_number_of_steppers):
+            self.stepper_info_list.append(self.stepper_info)
 
         self.the_reporter_thread.start()
         self.the_data_receive_thread.start()
@@ -367,24 +368,17 @@ class TelemetrixRpiPicoW(threading.Thread):
             self._run_threads()
             # time.sleep(self.pico_wait)
 
-            # self._get_pico_id()
-            # if self.pico_instance_id:
-            #     if self.reported_pico_id != self.pico_instance_id:
-            #         if self.shutdown_on_exception:
-            #             self.shutdown()
-            #         raise RuntimeError(f'Incorrect pico ID: {self.reported_pico_id}')
-            # print('Valid pico ID Found.')
-            # get pico firmware version and print it
-            print('\nRetrieving Telemetrix4pico firmware ID...')
+            # get Telemetrix4PicoW version and print it
+            print('\nRetrieving Telemetrix4picoW firmware ID...')
             self._get_firmware_version()
 
             if not self.firmware_version:
                 if self.shutdown_on_exception:
                     self.shutdown()
-                raise RuntimeError(f'Telemetrix4pico Sketch Firmware Version Not Found')
+                raise RuntimeError(f'Telemetrix4picoW Sketch Firmware Version Not Found')
 
             else:
-                print(f'Telemetrix4pico firmware version: {self.firmware_version[0]}.'
+                print(f'Telemetrix4picoW firmware version: {self.firmware_version[0]}.'
                       f'{self.firmware_version[1]}')
         except KeyboardInterrupt:
             if self.shutdown_on_exception:
@@ -400,7 +394,7 @@ class TelemetrixRpiPicoW(threading.Thread):
 
         :param duty_cycle: output value - This is dependent upon
                            the PWM range. Default is 20000, but it
-                           may be modified by calling pwm_rage
+                           may be modified by calling pwm_range
 
 
         """
@@ -420,6 +414,7 @@ class TelemetrixRpiPicoW(threading.Thread):
     def pwm_frequency(self, frequency):
         """
         Modify the pwm frequency. Valid values are in the range of 100Hz to 1MHz
+
         :param frequency: desired PWM write frequency
         """
         if 100 <= frequency <= 1000000000:
@@ -434,6 +429,7 @@ class TelemetrixRpiPicoW(threading.Thread):
         """
         Set the duty cycle range.
         The range of values is 16 to 65535
+
         :param range_pwm: range value
         """
 
@@ -474,7 +470,7 @@ class TelemetrixRpiPicoW(threading.Thread):
         """
         Disables analog reporting for a single analog pin.
 
-        :param pin: Analog pin number. For example for ADC, the number is 0.
+        :param pin: Analog pin number. For example for ADC0, the number is 0.
 
         """
         command = [PrivateConstants.MODIFY_REPORTING,
@@ -515,16 +511,6 @@ class TelemetrixRpiPicoW(threading.Thread):
                    PrivateConstants.REPORTING_DIGITAL_ENABLE, pin]
         self._send_command(command)
 
-    def _get_pico_id(self):
-        """
-        Retrieve pico-telemetrix pico id
-
-        """
-        command = [PrivateConstants.RETRIEVE_PICO_UNIQUE_ID]
-        self._send_command(command)
-        # provide time for the reply
-        time.sleep(.5)
-
     def _get_firmware_version(self):
         """
         This method retrieves the
@@ -536,7 +522,6 @@ class TelemetrixRpiPicoW(threading.Thread):
         # provide time for the reply
         time.sleep(.5)
 
-    # TBD
     def i2c_read(self, address, register, number_of_bytes,
                  callback=None, i2c_port=0, send_stop=True):
         """
@@ -602,7 +587,6 @@ class TelemetrixRpiPicoW(threading.Thread):
 
         self._send_command(command)
 
-    # TBD
     def i2c_write(self, address, args, i2c_port=0):
         """
         Write data to an i2c device.
@@ -1015,7 +999,6 @@ class TelemetrixRpiPicoW(threading.Thread):
             raise RuntimeError(
                 f'Maximum Number Of DHTs Exceeded - set_pin_mode_dht fails for pin {pin}')
 
-    # noinspection PyRedundantParentheses
     def set_pin_mode_servo(self, pin_number, min_pulse=1000, max_pulse=2000):
         """
 
@@ -1132,7 +1115,7 @@ class TelemetrixRpiPicoW(threading.Thread):
                              pin4=5, enable=True):
         """
         Stepper motor support is implemented as a proxy for
-        the AccelStepper library for the Arduino.
+        the AccelStepper library.
 
         https://github.com/waspinator/AccelStepper
 
@@ -1157,13 +1140,13 @@ class TelemetrixRpiPicoW(threading.Thread):
 
                 8 = HALF4WIRE, 4 wire half stepper, 4 motor pins required
 
-        :param pin1: Arduino digital pin number for motor pin 1
+        :param pin1: Pico digital pin number for motor pin 1
 
-        :param pin2: Arduino digital pin number for motor pin 2
+        :param pin2: Pico digital pin number for motor pin 2
 
-        :param pin3: Arduino digital pin number for motor pin 3
+        :param pin3: Pico digital pin number for motor pin 3
 
-        :param pin4: Arduino digital pin number for motor pin 4
+        :param pin4: Pico digital pin number for motor pin 4
 
         :param enable: If this is true, the output pins are enabled at construction time.
 
@@ -1578,7 +1561,7 @@ class TelemetrixRpiPicoW(threading.Thread):
 
         :param speed: 0 - 1000 The desired constant speed in steps per
                       second. Positive is clockwise. Speeds of more than 1000 steps per
-                      second are unreliable. Speed accuracy depends on the Arduino
+                      second are unreliable. Speed accuracy depends on the board
                       crystal. Jitter depends on how frequently you call the
                       stepper_run_speed() method.
                       The speed will be limited by the current value of
@@ -1639,7 +1622,8 @@ class TelemetrixRpiPicoW(threading.Thread):
         if not distance_to_go_callback:
             if self.shutdown_on_exception:
                 self.shutdown()
-            raise RuntimeError('stepper_get_distance_to_go Read: A callback function must be specified.')
+            raise RuntimeError(
+                'stepper_get_distance_to_go Read: A callback function must be specified.')
 
         if not self.stepper_info_list[motor_id]['instance']:
             if self.shutdown_on_exception:
@@ -1707,7 +1691,8 @@ class TelemetrixRpiPicoW(threading.Thread):
                 self.shutdown()
             raise RuntimeError('stepper_get_current_position: Invalid motor_id.')
 
-        self.stepper_info_list[motor_id]['current_position_callback'] = current_position_callback
+        self.stepper_info_list[motor_id][
+            'current_position_callback'] = current_position_callback
 
         command = [PrivateConstants.STEPPER_GET_CURRENT_POSITION, motor_id]
         self._send_command(command)
@@ -1730,7 +1715,7 @@ class TelemetrixRpiPicoW(threading.Thread):
             if self.shutdown_on_exception:
                 self.shutdown()
             raise RuntimeError('stepper_set_current_position: Invalid motor_id.')
-        position_bytes = list(position.to_bytes(4, 'big',  signed=True))
+        position_bytes = list(position.to_bytes(4, 'big', signed=True))
 
         command = [PrivateConstants.STEPPER_SET_CURRENT_POSITION, motor_id]
         for value in position_bytes:
@@ -1793,7 +1778,7 @@ class TelemetrixRpiPicoW(threading.Thread):
         Depending on the design of your electronics this may turn off
         the power to the motor coils, saving power.
 
-        This is useful to support Arduino low power modes: disable the outputs
+        This is useful to support low power modes: disable the outputs
         during sleep and then re-enable with enableOutputs() before stepping
         again.
 
@@ -2417,7 +2402,6 @@ class TelemetrixRpiPicoW(threading.Thread):
                     self.shutdown()
                 raise RuntimeError('write fail in _send_command')
 
-    # TBD
     def _servo_unavailable(self, report):
         """
         Message if no servos are available for use.
