@@ -12,7 +12,7 @@ Pico.
 A full User's Guide is [available online.](https://mryslab.github.
 io/telemetrix-rpi-pico-w/)
 
-Python API documentation  may be found [here.](https://htmlpreview.github.io/?https://github.com/MrYsLab/telemetrix-rpi-pico/blob/master/html/telemetrix_rpi_pico/index.html) 
+Python API documentation  may be found [here.](https://htmlpreview.github.io/?https://github.com/MrYsLab/telemetrix-rpi-pico-w/blob/master/html/telemetrix_rpi_pico_w/index.html) 
 
 The Pico server code may be viewed [here.](https://github.com/MrYsLab/Telemetrix4RpiPicoW)
 
