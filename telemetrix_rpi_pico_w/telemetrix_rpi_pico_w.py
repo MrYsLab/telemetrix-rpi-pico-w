@@ -15,14 +15,12 @@
  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 """
+from collections import deque
+import socket
 import struct
 import sys
 import threading
 import time
-from collections import deque
-import serial
-from serial.serialutil import SerialException
-from serial.tools import list_ports
 import warnings
 
 from telemetrix_rpi_pico_w.private_constants import PrivateConstants
@@ -74,7 +72,7 @@ class TelemetrixRpiPicoW(threading.Thread):
         self.the_reporter_thread = threading.Thread(target=self._reporter)
         self.the_reporter_thread.daemon = True
 
-        self.the_data_receive_thread = threading.Thread(target=self._serial_receiver)
+        self.the_data_receive_thread = threading.Thread(target=self._tcp_receiver)
 
         # flag to allow the reporter and receive threads to run.
         self.run_event = threading.Event()
@@ -198,8 +196,8 @@ class TelemetrixRpiPicoW(threading.Thread):
 
         self.dht_count = 0
 
-        # TEMPORARY serial port in use
-        self.serial_port = None
+        # socket for tcp/ip communications
+        self.sock = None
 
         # flag to indicate we are in shutdown mode
         self.shutdown_flag = False
@@ -277,27 +275,21 @@ class TelemetrixRpiPicoW(threading.Thread):
         print(f"TelemetrixRpiPicoW:  Version {PrivateConstants.TELEMETRIX_VERSION}\n\n"
               f"Copyright (c) 2022 Alan Yorinks All Rights Reserved.\n")
 
-        # TEMPORARY using the serial link
-
+        print('Establishing IP connection...')
+        self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         try:
-            self._find_pico()
-        except KeyboardInterrupt:
-            if self.shutdown_on_exception:
-                self.shutdown()
+            self.sock.settimeout(8)
+            self.sock.connect((self.ip_address, self.ip_port))
+        except (socket.timeout, OSError):
+            print(f'Could not establish a connection to {self.ip_address}:{self.ip_port}')
+            try:
+                self.sock.shutdown(socket.SHUT_RDWR)
+                self.sock.close()
+            except Exception:
+                pass
+            raise
 
-        if self.serial_port:
-            print(
-                f"Serial compatible device found and connected to"
-                f" {self.serial_port.port}")
-
-            self.serial_port.reset_input_buffer()
-            self.serial_port.reset_output_buffer()
-
-        # no com_port found - raise a runtime exception
-        else:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError('No pico Found or User Aborted Program')
+        print(f'Successfully connected to: {self.ip_address}:{self.ip_port}')
 
         # allow the threads to run
         self._run_threads()
@@ -320,70 +312,6 @@ class TelemetrixRpiPicoW(threading.Thread):
         # Have the server reset its data structures
         command = [PrivateConstants.RESET_DATA]
         self._send_command(command)
-
-    def _find_pico(self):
-        """
-        This method will search all potential serial ports for a pico
-        board using its USB PID and VID.
-        """
-
-        # a list of serial ports to be checked
-        serial_ports = []
-
-        print('Opening all potential serial ports...')
-        the_ports_list = list_ports.comports()
-        for port in the_ports_list:
-            if port.pid is None:
-                continue
-            if port.pid != 10 or port.vid != 11914:
-                continue
-            try:
-                self.serial_port = serial.Serial(port.device, 115200,
-                                                 timeout=1, writeTimeout=0)
-            except SerialException:
-                continue
-            # create a list of serial ports that we opened
-            # make sure this is a pico board
-            if port.pid == 10 and port.vid == 11914:
-                serial_ports.append(self.serial_port)
-
-                # display to the user
-                print('\t' + port.device)
-
-                # clear out the serial buffers
-                self.serial_port.reset_input_buffer()
-                self.serial_port.reset_output_buffer()
-
-    def _manual_open(self):
-        """
-        Com port was specified by the user - try to open up that port
-
-        """
-        # if port is not found, a serial exception will be thrown
-        try:
-            print(f'Opening {self.com_port}...')
-            self.serial_port = serial.Serial(self.com_port, 115200,
-                                             timeout=1, writeTimeout=0)
-
-            self._run_threads()
-            # time.sleep(self.pico_wait)
-
-            # get Telemetrix4PicoW version and print it
-            print('\nRetrieving Telemetrix4picoW firmware ID...')
-            self._get_firmware_version()
-
-            if not self.firmware_version:
-                if self.shutdown_on_exception:
-                    self.shutdown()
-                raise RuntimeError(f'Telemetrix4picoW Sketch Firmware Version Not Found')
-
-            else:
-                print(f'Telemetrix4picoW firmware version: {self.firmware_version[0]}.'
-                      f'{self.firmware_version[1]}')
-        except KeyboardInterrupt:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError('User Hit Control-C')
 
     def pwm_write(self, pin, duty_cycle=0):
         """
@@ -2053,24 +1981,30 @@ class TelemetrixRpiPicoW(threading.Thread):
 
     def shutdown(self):
         """
-        This method attempts an orderly shutdown
+        This method attempts to perform an orderly shutdown.
         If any exceptions are thrown, they are ignored.
         """
-
         self.shutdown_flag = True
 
         self._stop_threads()
 
-        # try:
-        command = [PrivateConstants.STOP_ALL_REPORTS]
-        self._send_command(command)
-        time.sleep(.2)
-        if self.reset_on_shutdown:
-            command = [PrivateConstants.RESET_DATA_BOARD]
+        try:
+            command = [PrivateConstants.STOP_ALL_REPORTS]
             self._send_command(command)
-            time.sleep(.2)
-        self.serial_port.close()
-        self.serial_port = None
+            time.sleep(.1)
+
+            command = [PrivateConstants.RESET, self.reset_board_on_shutdown]
+            self._send_command(command)
+
+            time.sleep(1)
+            try:
+                self.sock.shutdown(socket.SHUT_RDWR)
+                self.sock.close()
+            except Exception:
+                pass
+
+        except Exception:
+            raise RuntimeError('Shutdown failed - could not send stop streaming message')
 
     '''
     report message handlers
@@ -2394,13 +2328,7 @@ class TelemetrixRpiPicoW(threading.Thread):
         # print(command)
         send_message = bytes(command)
 
-        if self.serial_port:
-            try:
-                self.serial_port.write(send_message)
-            except SerialException:
-                if self.shutdown_on_exception:
-                    self.shutdown()
-                raise RuntimeError('write fail in _send_command')
+        self.sock.sendall(send_message)
 
     def _servo_unavailable(self, report):
         """
@@ -2503,22 +2431,24 @@ class TelemetrixRpiPicoW(threading.Thread):
             else:
                 time.sleep(self.sleep_tune)
 
-    def _serial_receiver(self):
+    def _tcp_receiver(self):
         """
+        This is a private utility method.
+
         Thread to continuously check for incoming data.
         When a byte comes in, place it onto the deque.
         """
         self.run_event.wait()
 
-        while self._is_running() and not self.shutdown_flag:
-            # we can get an OSError: [Errno9] Bad file descriptor when shutting down
-            # just ignore it
-            try:
-                if self.serial_port.inWaiting():
-                    c = self.serial_port.read()
-                    self.the_deque.append(ord(c))
-                else:
-                    time.sleep(self.sleep_tune)
-                    # continue
-            except OSError:
-                pass
+        # Start this thread only if ip_address is set
+
+        if self.ip_address:
+
+            while self._is_running() and not self.shutdown_flag:
+                try:
+                    payload = self.sock.recv(1)
+                    self.the_deque.append(ord(payload))
+                except Exception:
+                    pass
+        else:
+            return
