@@ -27,11 +27,9 @@ The following functionality is implemented in this release:
 * NeoPixel Support
 * Servo Support
 * HC-SR04 Type Sonar Distance Sensor Support
+* Stepper Motor Support
 * DHT 11 and 22 Humidity/Temperature Sensor Support
-* Autodetect PICO device over USB Serial.
 * Automatic board reset of the PICO using the watchdog timer when application exits.
-    * Board will blink twice upon reset.
-* Retrieval of the PICO's unique ID.
 
 
 ## To install The Client Library:
