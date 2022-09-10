@@ -5,7 +5,7 @@
 
 Interact and monitor  a Raspberry  Pi Pico W remotely  from your PC using Python.
 It is similar to Arduino Firmata, but written specifically for the Raspberry Pi
-Pico.
+Pico W.
 
 ![](images/tmx.png)
 
