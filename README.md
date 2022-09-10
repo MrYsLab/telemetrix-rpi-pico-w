@@ -37,13 +37,13 @@ The following functionality is implemented in this release:
 
 
 ```bash
-pip install telemetrix-rpi-pico_w 
+pip install telemetrix-rpi-pico-w 
 ```
 
 ### If you are upgrading from a previously installed version:
 
 ```bash
-pip install telemetrix-rpi-pico --upgrade
+pip install telemetrix-rpi-pico-w --upgrade
 ```
 
 ## To Install The Pico-W Server Application
