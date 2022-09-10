@@ -1,5 +1,5 @@
 
-# Telemetrix-RPi-Pico-W
+# telemetrix-rpi-pico-w
 
 # THIS IS A WORK IN PROGRESS
 
@@ -34,31 +34,13 @@ The following functionality is implemented in this release:
 
 ## To install The Client Library:
 
-**Linux/macOS:**
-
-```bash
-sudo pip3 install telemetrix-rpi-pico
-```
-
-
-**Windows:**
 
 
 ```bash
-pip install telemetrix-rpi-pico 
+pip install telemetrix-rpi-pico_w 
 ```
 
 ### If you are upgrading from a previously installed version:
-
-**Linux/macOS:**
-
-```bash
-sudo pip3 install telemetrix-rpi-pico --upgrade
-```
-
-
-**Windows:**
-
 
 ```bash
 pip install telemetrix-rpi-pico --upgrade
@@ -70,7 +52,7 @@ TBD
 ## Download And Run The Examples
    
 1. [Download,](https://github.com/MrYsLab/telemetrix-rpi-pico-w/archive/master.zip) 
-   save, and uncompress the teletmetrix-rpi-pico Github repository.
+   save, and uncompress the teletmetrix-rpi-pico-w Github repository.
    
 2. Open the _examples_ directory and run any of the examples. You may
 modify them to suit your needs.
