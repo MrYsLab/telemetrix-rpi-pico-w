@@ -1,7 +1,8 @@
 
 
-<div style="text-align:center;color:#990033; font-family:times, serif;font-size:3em"><i>The Telemetrix User's Guide</i></div>
-<div style="text-align:center;color:#990033; font-family:times, serif;font-size:3em"><i>For The Raspberry Pi Pico  </i></div>
+<div style="text-align:center;color:#990033; font-family:times, serif;font-size:2.5em"><i>The Telemetrix User's Guide</i></div>
+<div style="text-align:center;color:#990033; font-family:times, serif;font-size:2.5em"><i>For The</i></div>
+<div style="text-align:center;color:#990033; font-family:times, serif;font-size:2.5em"><i>Raspberry Pi Pico W  </i></div>
 
 <br>
 
@@ -12,15 +13,15 @@ processing.
 
 The 
 Telemetrix Project
-for the Raspberry Pi Pico does just that.
+for the Raspberry Pi Pico W does just that.
 
-Telemetrix for the Raspberry Pi Pico consists of two main software components. 
+Telemetrix for the Raspberry Pi Pico W consists of two main software components. 
 A resident Pico server, and a client, residing on a Windows, Linux, or macOS 
 PC.  
 The 
 server is 
 implemented using the 
-[Raspberry Pico C SDK,](https://datasheets.raspberrypi.org/pico/raspberry-pi-pico-c-sdk.pdf)
+[The arduino-pico library](https://github.com/earlephilhower/arduino-pico)
 providing full access to all Pico processor features 
 and providing the best possible performance. 
 There are two Python clients to choose from. 
@@ -31,8 +32,7 @@ implement concurrency, and
 uses Python asyncio for concurrency.
 
 
-The server and client are physically connected using a USB cable, and they
-communicate with each other over a serial transport running at 115000 baud.
+The server and client are connected via WiFi.
 
 With Telemetrix, you can do things such as establish a GPIO pin as a PWM output pin, 
 and set its value to run a DC motor, or perhaps establish the pin as a control pin for a 
@@ -75,7 +75,7 @@ For example, to receive asynchronous digital pin state data change notifications
 traditional Python, you do the following:
 
 
-### 1. Set a pin mode for the pin and register an associated callback function for the pin. 
+###**1. Set a pin mode for the pin and register an associated callback function for the pin.** 
 
 The example below illustrates how this is done.
 
@@ -107,7 +107,7 @@ The first element in the list is the pin type. Knowing the pin type, you may
 optionally have a single callback function handle multiple event types using the 
 pin type to identify the callback source.
 
-### 2. Have your application sit in a loop, waiting for notifications.
+###**2. Have your application sit in a loop, waiting for notifications.**
 
  
 # A Working Example   
@@ -118,7 +118,7 @@ Here is a Telemetrix example that monitors several digital input pins:
 import sys
 import time
 
-from telemetrix_rpi_pico import telemetrix_rpi_pico
+from telemetrix_rpi_pico_w import telemetrix_rpi_pico_w
 
 """
 Monitor 4 digital input pins with pull-up enabled for each
@@ -148,7 +148,7 @@ def the_callback(data):
           f'Value: {data[CB_VALUE]} Time Stamp: {date}')
 
 
-board = telemetrix_rpi_pico.TelemetrixRpiPico()
+board = telemetrix_rpi_pico_w.TelemetrixRpiPicoW()
 board.set_pin_mode_digital_input_pullup(12, the_callback)
 board.set_pin_mode_digital_input_pullup(13, the_callback)
 board.set_pin_mode_digital_input_pullup(14, the_callback)
@@ -165,28 +165,22 @@ except KeyboardInterrupt:
 And here is some sample output:
 
 ```python
-TelemetrixRpiPico:  Version 0.7
+TelemetrixRpiPicoW:  Version 1.0
 
-Copyright (c) 2020 Alan Yorinks All Rights Reserved.
-
-Opening all potential serial ports...
-	/dev/ttyACM0
-Serial compatible device found and connected to /dev/ttyACM0
-Retrieving pico ID...
-Pico Unique ID: [230, 96, 68, 48, 67, 85, 0, 0]
+Copyright (c) 2022 Alan Yorinks All Rights Reserved.
 
 Retrieving Telemetrix4pico firmware ID...
-Telemetrix4pico firmware version: 0.3
-Report Type: 2 Pin: 12 Value: 1 Time Stamp: 2021-03-14 13:34:52
-Report Type: 2 Pin: 13 Value: 1 Time Stamp: 2021-03-14 13:34:52
-Report Type: 2 Pin: 14 Value: 1 Time Stamp: 2021-03-14 13:34:52
-Report Type: 2 Pin: 15 Value: 1 Time Stamp: 2021-03-14 13:34:52
-Report Type: 2 Pin: 13 Value: 0 Time Stamp: 2021-03-14 13:35:21
-Report Type: 2 Pin: 13 Value: 1 Time Stamp: 2021-03-14 13:35:22
-Report Type: 2 Pin: 14 Value: 0 Time Stamp: 2021-03-14 13:35:29
-Report Type: 2 Pin: 14 Value: 1 Time Stamp: 2021-03-14 13:35:31
-Report Type: 2 Pin: 15 Value: 0 Time Stamp: 2021-03-14 13:35:33
-Report Type: 2 Pin: 15 Value: 1 Time Stamp: 2021-03-14 13:35:34
+Telemetrix4pico firmware version: 1.0
+Report Type: 2 Pin: 12 Value: 1 Time Stamp: 2022-03-14 13:34:52
+Report Type: 2 Pin: 13 Value: 1 Time Stamp: 2022-03-14 13:34:52
+Report Type: 2 Pin: 14 Value: 1 Time Stamp: 2022-03-14 13:34:52
+Report Type: 2 Pin: 15 Value: 1 Time Stamp: 2022-03-14 13:34:52
+Report Type: 2 Pin: 13 Value: 0 Time Stamp: 2022-03-14 13:35:21
+Report Type: 2 Pin: 13 Value: 1 Time Stamp: 2022-03-14 13:35:22
+Report Type: 2 Pin: 14 Value: 0 Time Stamp: 2022-03-14 13:35:29
+Report Type: 2 Pin: 14 Value: 1 Time Stamp: 2022-03-14 13:35:31
+Report Type: 2 Pin: 15 Value: 0 Time Stamp: 2022-03-14 13:35:33
+Report Type: 2 Pin: 15 Value: 1 Time Stamp: 2022-03-14 13:35:34
 
 
 ```
