@@ -6,111 +6,31 @@
 
 <br>
 
+![](./images/tmx.png)
 
 *Telemetry* is a system for collecting data on a remote device and then 
 automatically transmitting the collected data back to local receiving equipment for 
-processing.
+processing. The Telemetrix Project for the Raspberry Pi Pico W does just that.
 
-The 
-Telemetrix Project
-for the Raspberry Pi Pico W does just that.
+With Telemetrix, you can do things such as establish a GPIO pin as a PWM output pin, and 
+set its value to run a DC motor, perhaps select the pin as a control
+pin for a NeoPixel strip or communicate with your favorite i2c device. 
+All within a Python application.
 
-Telemetrix for the Raspberry Pi Pico W consists of two main software components. 
-A resident Pico server, and a client, residing on a Windows, Linux, or macOS 
-PC.  
-The 
-server is 
-implemented using the 
-[The arduino-pico library](https://github.com/earlephilhower/arduino-pico)
-providing full access to all Pico processor features 
-and providing the best possible performance. 
-There are two Python clients to choose from. 
-[Telemetrix-RPi-Pico](https://github.com/MrYsLab/telemetrix-rpi-pico)
-is implemented using Python threading to 
-implement concurrency, and 
-[Tmx-Pico-Aio](https://github.com/MrYsLab/tmx-pico-aio)
-uses Python asyncio for concurrency.
+Telemetrix gives the appearance that the Pico is being _programmed_, but in fact, the 
+Pico is running a fixed application and is not programmed in the 
+traditional sense. Instead, a Python application is written using a
+[Traditional Python API.](https://htmlpreview.github.io/?https://github.com/MrYsLab/telemetrix-rpi-pico-w/blob/master/html/telemetrix_rpi_pico_w/index.html)
+or [Python asyncio API.](https://htmlpreview.github.io/?https://github.com/MrYsLab/telemetrix-rpi-pico-w/blob/master/html/telemetrix_rpi_pico_w_aio/index.html)
+and communicates with the Pico W over WIFI.
+
+Telemetrix automatically reports input data changes to the Python application using a 
+callback mechanism, ensuring that the 
+application receives the latest data changes quickly and that no data changes are lost.
 
 
-The server and client are connected via WiFi.
 
-With Telemetrix, you can do things such as establish a GPIO pin as a PWM output pin, 
-and set its value to run a DC motor, or perhaps establish the pin as a control pin for a 
-NeoPixel strip. With 
-Telemetrix, you can even have the Pico communicate with your favorite i2c device.
-
-![](./images/tmx.png)
-
-Telemetrix gives the appearance that the Pico is being _programmed_ using a
-[Traditional Python API.](https://htmlpreview.github.io/?https://github.com/MrYsLab/telemetrix-rpi-pico/blob/master/html/telemetrix_rpi_pico/index.html)
-or [Python asyncio API.](https://htmlpreview.github.io/?https://github.com/MrYsLab/tmx-pico-aio/blob/master/html/tmx_pico_aio/index.html#tmx_pico_aio.tmx_pico_aio.TmxPicoAio.reset_board)
-But in fact, the Pico is running a fixed application and is not programmed in the 
-traditional sense. Once the server is installed on the Pico, code is not generated nor 
-uploaded to the Pico. Instead, 
-the Pico awaits commands from the server and interprets and acts upon those commands.
-
-If the client commands the Pico to establish a GPIO pin as an input, the Pico 
-autonomously monitors the pin for data changes. When a change is detected, the 
-Pico forms a report and relays it to the client over the serial link.
-
-
-<br>
-
-# Summary Of Major Features
-
-* Applications are programmed using conventional Python 3.7 or greater.
-* All Data change events are reported asynchronously via user registered callback functions. 
-* Each data change event is time-stamped.
-* Online API Reference Documentation is provided:
-    * For the [Threaded Python Client.](https://htmlpreview.github.io/?https://github.com/MrYsLab/telemetrix-rpi-pico/blob/master/html/telemetrix_rpi_pico/index.html)
-    * For the [Asyncio Python Client.](https://htmlpreview.github.io/?https://github.com/MrYsLab/tmx-pico-aio/blob/master/html/tmx_pico_aio/index.html)
-* A complete set of working examples is provided for both [traditional Python](https://github.com/MrYsLab/telemetrix-rpi-pico/tree/master/examples)
-  and the [asyncio version.](https://github.com/MrYsLab/tmx-pico-aio/tree/master/examples)
-* Integrated debugging methods are included as part of the Pico Server 
-  SDK source code to aid in adding new features.
-
-# Intuitive And Easy To Use APIs
-
-For example, to receive asynchronous digital pin state data change notifications using 
-traditional Python, you do the following:
-
-
-###**1. Set a pin mode for the pin and register an associated callback function for the pin.** 
-
-The example below illustrates how this is done.
-
-#### Callbacks
-
-All callbacks are written to accept a single parameter. In the example below, this 
-parameter is named _data_. 
-
-
-```python
-        def the_callback(data):
-     
-            # Your code here.
-```
-Upon receiving a data change report message from the Pico,
-the client 
-creates a 
-list containing the data describing the change event and calls the associated callback 
-function 
-passing in the list as a parameter.
-
-For a digital data change, the list would contain the following:
-    
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**[pin_type=digital input, pin_number, pin_value, time stamp]**
-
-Each input pin type returns a unique list, as described in the API.
-
-The first element in the list is the pin type. Knowing the pin type, you may 
-optionally have a single callback function handle multiple event types using the 
-pin type to identify the callback source.
-
-###**2. Have your application sit in a loop, waiting for notifications.**
-
- 
-# A Working Example   
+## A Working Example   
 
 Here is a Telemetrix example that monitors several digital input pins:
 
@@ -184,13 +104,51 @@ Report Type: 2 Pin: 15 Value: 1 Time Stamp: 2022-03-14 13:35:34
 
 
 ```
-A [similar example](https://github.com/MrYsLab/tmx-pico-aio/blob/master/examples/digital_input_pullup.py)
-is provided for asyncio.
 
 
+ 
+## A Client/Server Model
+
+Telemetrix for the Raspberry Pi Pico W consists of two main components.
+
+The first component is a fixed resident Pico server, implemented using 
+[The arduino-pico library](https://github.com/earlephilhower/arduino-pico). 
+Once the server is installed on the Pico, no additional code is generated or 
+uploaded to the Pico.
+
+The second component is a Python client application written by the user using a
+telemetrix-rpi-pico-w Python API. WIFI is used to transport commands and responses 
+between client and server.
+
+There are two Python client APIs from which to choose. The difference between the two is 
+how concurrency is implemented.
+
+[telemetrix_rpi_pico_w](https://github.com/MrYsLab/telemetrix-rpi-pico-w/tree/master/telemetrix_rpi_pico_w)
+is implemented using Python threading, and 
+[telemetrix_rpi_pico_w_aio](https://github.com/MrYsLab/telemetrix-rpi-pico-w/tree/master/telemetrix_rpi_pico_w_aio)
+uses Python asyncio for concurrency.
+
+They both utilize the same server and support similar features.
+
 <br>
-<br>
+
+# Summary Of Major Features
+
+* Applications are programmed using conventional Python 3.7 or greater.
+* All Data change events are reported asynchronously via user-registered callback 
+  functions. 
+* Each data change event is time-stamped.
+* Online API Reference Documentation is provided:
+    * For the [Threaded Python Client.](https://htmlpreview.github.io/?https://github.com/MrYsLab/telemetrix-rpi-pico/blob/master/html/telemetrix_rpi_pico/index.html)
+    * For the [Asyncio Python Client.](https://htmlpreview.github.io/?https://github.com/MrYsLab/tmx-pico-aio/blob/master/html/tmx_pico_aio/index.html)
+* A complete set of working examples is provided for both [traditional Python](https://github.com/MrYsLab/telemetrix-rpi-pico/tree/master/examples)
+  and the [asyncio version.](https://github.com/MrYsLab/tmx-pico-aio/tree/master/examples)
+* Integrated debugging methods are included as part of the Pico Server 
+  SDK source code to aid in adding new features.
+
+
+
 
 Copyright (C) 2022 Alan Yorinks. All Rights Reserved.
 
-**Last updated 1 July 2022**
+**Last updated 15 September 2022**
