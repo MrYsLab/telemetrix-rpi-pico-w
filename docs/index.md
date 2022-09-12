@@ -144,7 +144,7 @@ They both utilize the same server and support similar features.
     * For the [Threaded Python Client.](https://htmlpreview.github.io/?https://github.com/MrYsLab/telemetrix-rpi-pico-w/blob/master/html/telemetrix_rpi_pico_w/index.html)
     * For the [Asyncio Python Client.](https://htmlpreview.github.io/?https://github.com/MrYsLab/telemetrix-rpi-pico-w/blob/master/html/telemetrix_rpi_pico_w_aio/index.html)
 * A complete set of working examples is provided for both [traditional Python](https://github.com/MrYsLab/telemetrix-rpi-pico-w/tree/master/examples) and the 
-  [asyncio version.](https://github.com/MrYsLab/telemetrix-rpi-pico-w/tree/master/examples)
+  [asyncio version.](https://github.com/MrYsLab/telemetrix-rpi-pico-w/tree/master/examples_aio)
 * Integrated debugging methods are included as part of the Pico Server 
   SDK source code to aid in adding new features.
 
