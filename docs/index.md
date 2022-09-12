@@ -10,7 +10,7 @@
 
 *Telemetry* is a system for collecting data on a remote device and then 
 automatically transmitting the collected data back to local receiving equipment for 
-processing. The Telemetrix Project for the Raspberry Pi Pico W does just that.
+processing. The Telemetrix Project for the Raspberry Pi Pico W does just that and more.
 
 With Telemetrix, you can do things such as establish a GPIO pin as a PWM output pin, and 
 set its value to run a DC motor, perhaps select the pin as a control
@@ -107,7 +107,7 @@ Report Type: 2 Pin: 15 Value: 1 Time Stamp: 2022-03-14 13:35:34
 
 
  
-## A Client/Server Model
+## The Telemetrix Client/Server Model
 
 Telemetrix for the Raspberry Pi Pico W consists of two main components.
 
@@ -116,17 +116,19 @@ The first component is a fixed resident Pico server, implemented using
 Once the server is installed on the Pico, no additional code is generated or 
 uploaded to the Pico.
 
-The second component is a Python client application written by the user using a
+The second component is a Python client application, written using a
 telemetrix-rpi-pico-w Python API. WIFI is used to transport commands and responses 
 between client and server.
 
-There are two Python client APIs from which to choose. The difference between the two is 
-how concurrency is implemented.
+There are two Python client APIs from which to choose. The difference between the two is
+concurrency implementation.
 
-[telemetrix_rpi_pico_w](https://github.com/MrYsLab/telemetrix-rpi-pico-w/tree/master/telemetrix_rpi_pico_w)
-is implemented using Python threading, and 
-[telemetrix_rpi_pico_w_aio](https://github.com/MrYsLab/telemetrix-rpi-pico-w/tree/master/telemetrix_rpi_pico_w_aio)
-uses Python asyncio for concurrency.
+The [telemetrix_rpi_pico_w](https://github.
+com/MrYsLab/telemetrix-rpi-pico-w/tree/master/telemetrix_rpi_pico_w)
+API is implemented using Python threading, and 
+the [telemetrix_rpi_pico_w_aio](https://github.
+com/MrYsLab/telemetrix-rpi-pico-w/tree/master/telemetrix_rpi_pico_w_aio)
+API uses Python asyncio for concurrency.
 
 They both utilize the same server and support similar features.
 
@@ -139,10 +141,10 @@ They both utilize the same server and support similar features.
   functions. 
 * Each data change event is time-stamped.
 * Online API Reference Documentation is provided:
-    * For the [Threaded Python Client.](https://htmlpreview.github.io/?https://github.com/MrYsLab/telemetrix-rpi-pico/blob/master/html/telemetrix_rpi_pico/index.html)
-    * For the [Asyncio Python Client.](https://htmlpreview.github.io/?https://github.com/MrYsLab/tmx-pico-aio/blob/master/html/tmx_pico_aio/index.html)
-* A complete set of working examples is provided for both [traditional Python](https://github.com/MrYsLab/telemetrix-rpi-pico/tree/master/examples)
-  and the [asyncio version.](https://github.com/MrYsLab/tmx-pico-aio/tree/master/examples)
+    * For the [Threaded Python Client.](https://htmlpreview.github.io/?https://github.com/MrYsLab/telemetrix-rpi-pico-w/blob/master/html/telemetrix_rpi_pico_w/index.html)
+    * For the [Asyncio Python Client.](https://htmlpreview.github.io/?https://github.com/MrYsLab/telemetrix-rpi-pico-w/blob/master/html/telemetrix_rpi_pico_w_aio/index.html)
+* A complete set of working examples is provided for both [traditional Python](https://github.com/MrYsLab/telemetrix-rpi-pico-w/tree/master/examples) and the 
+  [asyncio version.](https://github.com/MrYsLab/telemetrix-rpi-pico-w/tree/master/examples)
 * Integrated debugging methods are included as part of the Pico Server 
   SDK source code to aid in adding new features.
 
