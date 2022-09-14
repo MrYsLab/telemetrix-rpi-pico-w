@@ -24,7 +24,7 @@ import sys
 class TelemetrixAioSocket:
     """
     This class encapsulates management of a tcp/ip connection that communicates
-    with the WiFi link.
+    with the Wi-Fi link.
     """
     def __init__(self, ip_address, ip_port, loop):
         self.ip_address = ip_address
@@ -55,7 +55,7 @@ class TelemetrixAioSocket:
         :return: None
         """
         # we need to convert data formats,
-        # so all of the below.
+        # so all below is performed.
         output_list = []
 
         # create an array of integers from the data to be sent
@@ -76,3 +76,4 @@ class TelemetrixAioSocket:
         """
         buffer = await self.reader.readexactly(num_bytes)
         return buffer
+
