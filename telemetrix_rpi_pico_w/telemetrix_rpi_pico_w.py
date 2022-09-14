@@ -228,6 +228,8 @@ class TelemetrixRpiPicoW(threading.Thread):
         for pin in range(25, 29):
             self.pico_pins[pin] = PrivateConstants.AT_MODE_NOT_SET
 
+        self.pico_pins[32] = PrivateConstants.AT_MODE_NOT_SET
+
         # create a dictionary that holds all the servo ranges
         self.servo_ranges = {gpio_pin: [1000, 2000] for gpio_pin in
                              range(23)}
@@ -277,6 +279,7 @@ class TelemetrixRpiPicoW(threading.Thread):
 
         print('Establishing IP connection...')
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, True)
         try:
             self.sock.settimeout(8)
             self.sock.connect((self.ip_address, self.ip_port))
@@ -305,7 +308,7 @@ class TelemetrixRpiPicoW(threading.Thread):
 
         else:
             print(f'Telemetrix4picoW firmware version: {self.firmware_version[0]}.'
-                  f'{self.firmware_version[1]}')
+                  f'{self.firmware_version[1]}.{self.firmware_version[2]}')
         command = [PrivateConstants.ENABLE_ALL_REPORTS]
         self._send_command(command)
 
@@ -1993,10 +1996,10 @@ class TelemetrixRpiPicoW(threading.Thread):
             self._send_command(command)
             time.sleep(.1)
 
-            command = [PrivateConstants.RESET, self.reset_board_on_shutdown]
+            command = [PrivateConstants.RESET_BOARD, self.reset_on_shutdown]
             self._send_command(command)
 
-            time.sleep(1)
+            time.sleep(2)
             try:
                 self.sock.shutdown(socket.SHUT_RDWR)
                 self.sock.close()
@@ -2119,7 +2122,7 @@ class TelemetrixRpiPicoW(threading.Thread):
         :param data: data[0] = major number, data[1] = minor number
         """
 
-        self.firmware_version = [data[0], data[1]]
+        self.firmware_version = [data[0], data[1], data[2]]
 
     def _i2c_read_report(self, data):
         """
@@ -2329,6 +2332,7 @@ class TelemetrixRpiPicoW(threading.Thread):
         send_message = bytes(command)
 
         self.sock.sendall(send_message)
+        time.sleep(.1)
 
     def _servo_unavailable(self, report):
         """
