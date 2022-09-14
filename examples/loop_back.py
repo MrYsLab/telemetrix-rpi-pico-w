@@ -46,12 +46,13 @@ def loop_back(my_board, loop_back_data):
         for data in loop_back_data:
             my_board.loop_back(data, callback=the_callback)
             print(f'Sending: {data}')
+            time.sleep(.1)
     except KeyboardInterrupt:
         board.shutdown()
         sys.exit(0)
 
 
-board = telemetrix_rpi_pico_w.TelemetrixRpiPicoW()
+board = telemetrix_rpi_pico_w.TelemetrixRpiPicoW(ip_address='192.168.2.102')
 char_list = ['A', 'B', 'Z']
 try:
     loop_back(board, char_list)
