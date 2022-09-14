@@ -2414,7 +2414,6 @@ class TelemetrixRpiPicoWAio:
                 break
             try:
                 packet_length = ord(await self.sock.read())
-                print(packet_length)
             except TypeError:
                 continue
 
