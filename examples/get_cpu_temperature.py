@@ -51,7 +51,7 @@ def get_cpu_temp():
     """
      This function will request cpu temperature reports
      """
-    board = telemetrix_rpi_pico_w.TelemetrixRpiPicoW()
+    board = telemetrix_rpi_pico_w.TelemetrixRpiPicoW(ip_address='192.168.2.102')
 
     # set the pin mode
     board.get_cpu_temperature(threshold=.01, polling_interval=3000,
@@ -61,7 +61,7 @@ def get_cpu_temp():
     try:
 
         while True:
-            time.sleep(5)
+            time.sleep(.1)
     except KeyboardInterrupt:
         board.shutdown()
         sys.exit(0)
