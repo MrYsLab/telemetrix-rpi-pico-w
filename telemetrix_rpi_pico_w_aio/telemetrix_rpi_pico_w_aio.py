@@ -15,6 +15,7 @@
  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 """
+import asyncio
 import socket
 import struct
 import sys
@@ -26,7 +27,6 @@ from telemetrix_rpi_pico_w_aio.telemetrix_pico_w_aio_socket import TelemetrixAio
 
 
 # noinspection PyMethodMayBeStatic
-
 
 class TelemetrixRpiPicoWAio:
     """
@@ -46,7 +46,8 @@ class TelemetrixRpiPicoWAio:
                  autostart=True,
                  loop=None,
                  shutdown_on_exception=True,
-                 reset_on_shutdown=True):
+                 reset_on_shutdown=True,
+                 close_loop_on_shutdown=True):
 
         """
 
@@ -66,6 +67,8 @@ class TelemetrixRpiPicoWAio:
                                       receiving a KeyboardInterrupt exception
 
         :param reset_on_shutdown: Reset the board upon shutdown
+
+        :param close_loop_on_shutdown: If true, close the loop during shutdown
         """
 
         self.shutdown_on_exception = shutdown_on_exception
@@ -81,8 +84,8 @@ class TelemetrixRpiPicoWAio:
 
         # set the event loop
         if loop is None:
-            loop = asyncio.new_event_loop()
-            asyncio.set_event_loop(loop)
+            self.loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(self.loop)
         else:
             self.loop = loop
 
@@ -231,6 +234,8 @@ class TelemetrixRpiPicoWAio:
         for pin in range(25, 29):
             self.pico_pins[pin] = PrivateConstants.AT_MODE_NOT_SET
 
+        self.pico_pins[32] = PrivateConstants.AT_MODE_NOT_SET
+
         # create a dictionary that holds all the servo ranges
         self.servo_ranges = {gpio_pin: [1000, 2000] for gpio_pin in
                              range(23)}
@@ -267,8 +272,8 @@ class TelemetrixRpiPicoWAio:
         for motor in range(self.max_number_of_steppers):
             self.stepper_info_list.append(self.stepper_info)
 
-        self.the_reporter_thread.start()
-        self.the_data_receive_thread.start()
+        # self.the_reporter_thread.start()
+        # self.the_data_receive_thread.start()
 
         # neopixel data
         self.number_of_pixels = None
@@ -288,35 +293,33 @@ class TelemetrixRpiPicoWAio:
 
     async def start_aio(self):
         """
-        This method completes the instantiation of the TmxNano2040WifiAio
+        This method completes the instantiation of the TelemetrixPicoWAIO
         class. If you set autostart to False, then your application decides
         when to complete the instantiation.
         """
-
         self.sock = TelemetrixAioSocket(self.ip_address, self.ip_port, self.loop)
         await self.sock.start()
 
         self.the_task = self.loop.create_task(self._arduino_report_dispatcher())
 
-        # getting instance ID
-        await self._get_arduino_id()
-
         # get telemetrix firmware version and print it
-        print('\nRetrieving Telemetrix4Connect2040 firmware ID...')
+        print('\nRetrieving Telemetrix4RpiPicoW firmware ID...')
         await self._get_firmware_version()
+
         if not self.firmware_version:
+            print(self.firmware_version)
             await self._get_firmware_version()
             if not self.firmware_version:
                 if self.shutdown_on_exception:
                     await self.shutdown()
                     await asyncio.sleep(.3)
-                raise RuntimeError(f'Telemetrix4Connect2040 firmware version')
+                raise RuntimeError(f'Telemetrix4RpiPicoW  firmware version')
 
         else:
-            print(f'Telemetrix4Connect2040 firmware version: {self.firmware_version[0]}.'
+            print(f'Telemetrix4RpiPicoW  firmware version: {self.firmware_version[0]}.'
                   f'{self.firmware_version[1]}.{self.firmware_version[2]}')
         command = [PrivateConstants.ENABLE_ALL_REPORTS]
-        await self.send_command(command)
+        await self._send_command(command)
 
     async def pwm_write(self, pin, duty_cycle=0):
         """
@@ -342,7 +345,7 @@ class TelemetrixRpiPicoWAio:
         value = duty_cycle.to_bytes(2, byteorder='big')
 
         command = [PrivateConstants.ANALOG_WRITE, pin, value[0], value[1]]
-        await self.send_command(command)
+        await self._send_command(command)
 
     async def pwm_frequency(self, frequency):
         """
@@ -354,7 +357,7 @@ class TelemetrixRpiPicoWAio:
             freq = frequency.to_bytes(4, byteorder='big')
 
             command = [PrivateConstants.SET_PWM_FREQ, freq[0], freq[1], freq[2], freq[3]]
-            await self.send_command(command)
+            await self._send_command(command)
         else:
             raise RuntimeError('pwm_frequency is out of range')
 
@@ -372,7 +375,7 @@ class TelemetrixRpiPicoWAio:
 
             command = [PrivateConstants.SET_PWM_RANGE, data[0], data[1],
                        data[2], data[3]]
-            await self.send_command(command)
+            await self._send_command(command)
         else:
             raise RuntimeError('pwm_range is out of range')
 
@@ -389,7 +392,7 @@ class TelemetrixRpiPicoWAio:
             raise RuntimeError('digital_write: You must set the pin mode before '
                                'performing a digital write.')
         command = [PrivateConstants.DIGITAL_WRITE, pin, value]
-        await self.send_command(command)
+        await self._send_command(command)
 
     async def disable_all_reporting(self):
         """
@@ -397,7 +400,7 @@ class TelemetrixRpiPicoWAio:
         """
         command = [PrivateConstants.MODIFY_REPORTING,
                    PrivateConstants.REPORTING_DISABLE_ALL, 0]
-        await self.send_command(command)
+        await self._send_command(command)
 
     async def disable_analog_reporting(self, pin):
         """
@@ -408,7 +411,7 @@ class TelemetrixRpiPicoWAio:
         """
         command = [PrivateConstants.MODIFY_REPORTING,
                    PrivateConstants.REPORTING_ANALOG_DISABLE, pin]
-        await self.send_command(command)
+        await self._send_command(command)
 
     async def disable_digital_reporting(self, pin):
         """
@@ -419,7 +422,7 @@ class TelemetrixRpiPicoWAio:
         """
         command = [PrivateConstants.MODIFY_REPORTING,
                    PrivateConstants.REPORTING_DIGITAL_DISABLE, pin]
-        await self.send_command(command)
+        await self._send_command(command)
 
     async def enable_analog_reporting(self, pin):
         """
@@ -431,7 +434,7 @@ class TelemetrixRpiPicoWAio:
         """
         command = [PrivateConstants.MODIFY_REPORTING,
                    PrivateConstants.REPORTING_ANALOG_ENABLE, pin]
-        await self.send_command(command)
+        await self._send_command(command)
 
     async def enable_digital_reporting(self, pin):
         """
@@ -442,7 +445,7 @@ class TelemetrixRpiPicoWAio:
 
         command = [PrivateConstants.MODIFY_REPORTING,
                    PrivateConstants.REPORTING_DIGITAL_ENABLE, pin]
-        await self.send_command(command)
+        await self._send_command(command)
 
     async def _get_firmware_version(self):
         """
@@ -451,9 +454,11 @@ class TelemetrixRpiPicoWAio:
 
         """
         command = [PrivateConstants.GET_FIRMWARE_VERSION]
-        await self.send_command(command)
+
+        await self._send_command(command)
+
         # provide time for the reply
-        time.sleep(.5)
+        await asyncio.sleep(.5)
 
     async def i2c_read(self, address, register, number_of_bytes,
                        callback=None, i2c_port=0, send_stop=True):
@@ -518,7 +523,7 @@ class TelemetrixRpiPicoWAio:
         if not register:
             command[3] = PrivateConstants.I2C_NO_REGISTER
 
-        await self.send_command(command)
+        await self._send_command(command)
 
     async def i2c_write(self, address, args, i2c_port=0):
         """
@@ -555,7 +560,7 @@ class TelemetrixRpiPicoWAio:
         for item in args:
             command.append(item)
 
-        await self.send_command(command)
+        await self._send_command(command)
 
     async def neo_pixel_set_value(self, pixel_number, r=0, g=0, b=0, auto_show=False):
         """
@@ -583,7 +588,7 @@ class TelemetrixRpiPicoWAio:
             raise RuntimeError('Pixel value must be in the range of 0-255')
 
         command = [PrivateConstants.SET_NEOPIXEL, pixel_number, r, g, b, auto_show]
-        await self.send_command(command)
+        await self._send_command(command)
 
         if auto_show:
             await self.shutdown()
@@ -598,7 +603,7 @@ class TelemetrixRpiPicoWAio:
         if not self.neopixels_initiated:
             raise RuntimeError('You must call set_pin_mode_neopixel first')
         command = [PrivateConstants.CLEAR_NEOPIXELS, auto_show]
-        await self.send_command(command)
+        await self._send_command(command)
         if auto_show:
             await self.shutdown()
 
@@ -619,7 +624,7 @@ class TelemetrixRpiPicoWAio:
         if r and g and b not in range(256):
             raise RuntimeError('Pixel value must be in the range of 0-255')
         command = [PrivateConstants.FILL_NEOPIXELS, r, g, b, auto_show]
-        await self.send_command(command)
+        await self._send_command(command)
 
         if auto_show:
             await self.shutdown()
@@ -632,7 +637,7 @@ class TelemetrixRpiPicoWAio:
         if not self.neopixels_initiated:
             raise RuntimeError('You must call set_pin_mode_neopixel first')
         command = [PrivateConstants.SHOW_NEOPIXELS]
-        await self.send_command(command)
+        await self._send_command(command)
 
     async def loop_back(self, start_character, callback=None):
         """
@@ -647,7 +652,7 @@ class TelemetrixRpiPicoWAio:
         """
         command = [PrivateConstants.LOOP_COMMAND, ord(start_character)]
         self.loop_back_callback = callback
-        await self.send_command(command)
+        await self._send_command(command)
 
     async def set_pin_mode_analog_input(self, adc_number, differential=0, callback=None):
         """
@@ -726,7 +731,7 @@ class TelemetrixRpiPicoWAio:
                            thresh_list[2], thresh_list[3], polling_list[0],
                            polling_list[1]]
 
-                await self.send_command(command)
+                await self._send_command(command)
             else:
                 raise RuntimeError('get_cpu_temperature: polling interval out of range.')
         else:
@@ -824,7 +829,7 @@ class TelemetrixRpiPicoWAio:
         command = [PrivateConstants.INIT_NEOPIXELS, pin_number,
                    self.number_of_pixels, fill_r, fill_g, fill_b]
 
-        await self.send_command(command)
+        await self._send_command(command)
 
         self.pico_pins[pin_number] = PrivateConstants.AT_NEO_PIXEL
 
@@ -899,7 +904,7 @@ class TelemetrixRpiPicoWAio:
         self.pico_pins[sda_gpio] = self.pico_pins[scl_gpio] = PrivateConstants.AT_I2C
 
         command = [PrivateConstants.I2C_BEGIN, i2c_port]
-        await self.send_command(command)
+        await self._send_command(command)
 
     async def set_pin_mode_dht(self, pin, callback=None):
         """
@@ -926,7 +931,7 @@ class TelemetrixRpiPicoWAio:
             self.dht_count += 1
             self.pico_pins[pin] = PrivateConstants.AT_DHT
             command = [PrivateConstants.DHT_NEW, pin]
-            await self.send_command(command)
+            await self._send_command(command)
         else:
             if self.shutdown_on_exception:
                 await self.shutdown()
@@ -1043,7 +1048,7 @@ class TelemetrixRpiPicoWAio:
 
         command = [PrivateConstants.SPI_INIT, spi_port, chip_select, freq_bytes[0],
                    freq_bytes[1], freq_bytes[2], freq_bytes[3], data_order, data_mode]
-        await self.send_command(command)
+        await self._send_command(command)
 
     async def set_pin_mode_stepper(self, interface=1, pin1=2, pin2=3, pin3=4,
                                    pin4=5, enable=True):
@@ -1106,7 +1111,7 @@ class TelemetrixRpiPicoWAio:
         # build message and send message to server
         command = [PrivateConstants.SET_PIN_MODE_STEPPER, motor_id, interface, pin1,
                    pin2, pin3, pin4, enable]
-        await self.send_command(command)
+        await self._send_command(command)
 
         # return motor id
         return motor_id
@@ -1134,7 +1139,7 @@ class TelemetrixRpiPicoWAio:
 
         command = [PrivateConstants.SERVO_WRITE, pin_number, value, mm[0], mm[1],
                    mx[0], mx[1]]
-        await self.send_command(command)
+        await self._send_command(command)
 
     async def set_pin_mode_sonar(self, trigger_pin, echo_pin, callback=None):
         """
@@ -1164,7 +1169,7 @@ class TelemetrixRpiPicoWAio:
                 PrivateConstants.AT_SONAR
 
             command = [PrivateConstants.SONAR_NEW, trigger_pin, echo_pin]
-            await self.send_command(command)
+            await self._send_command(command)
         else:
             if self.shutdown_on_exception:
                 await self.shutdown()
@@ -1220,7 +1225,7 @@ class TelemetrixRpiPicoWAio:
 
         command = [PrivateConstants.SPI_READ_BLOCKING, spi_port, register,
                    number_of_bytes]
-        await self.send_command(command)
+        await self._send_command(command)
 
     async def spi_write_blocking(self, bytes_to_write, spi_port=0):
         """
@@ -1254,7 +1259,7 @@ class TelemetrixRpiPicoWAio:
         for data in bytes_to_write:
             command.append(data)
 
-        await self.send_command(command)
+        await self._send_command(command)
 
     async def get_pico_pins(self):
         """
@@ -1322,7 +1327,7 @@ class TelemetrixRpiPicoWAio:
         for value in position_bytes:
             command.append(value)
         command.append(polarity)
-        await self.send_command(command)
+        await self._send_command(command)
 
     async def stepper_move(self, motor_id, relative_position):
         """
@@ -1351,7 +1356,7 @@ class TelemetrixRpiPicoWAio:
         for value in position_bytes:
             command.append(value)
         command.append(polarity)
-        await self.send_command(command)
+        await self._send_command(command)
 
     async def stepper_run(self, motor_id, completion_callback=None):
         """
@@ -1383,7 +1388,7 @@ class TelemetrixRpiPicoWAio:
 
         self.stepper_info_list[motor_id]['motion_complete_callback'] = completion_callback
         command = [PrivateConstants.STEPPER_RUN, motor_id]
-        await self.send_command(command)
+        await self._send_command(command)
 
     async def stepper_run_speed(self, motor_id):
         """
@@ -1401,7 +1406,7 @@ class TelemetrixRpiPicoWAio:
             raise RuntimeError('stepper_run_speed: Invalid motor_id.')
 
         command = [PrivateConstants.STEPPER_RUN_SPEED, motor_id]
-        await self.send_command(command)
+        await self._send_command(command)
 
     async def stepper_set_max_speed(self, motor_id, max_speed):
         """
@@ -1435,7 +1440,7 @@ class TelemetrixRpiPicoWAio:
 
         command = [PrivateConstants.STEPPER_SET_MAX_SPEED, motor_id, max_speed_msb,
                    max_speed_lsb]
-        await self.send_command(command)
+        await self._send_command(command)
 
     async def stepper_get_max_speed(self, motor_id):
         """
@@ -1486,7 +1491,7 @@ class TelemetrixRpiPicoWAio:
 
         command = [PrivateConstants.STEPPER_SET_ACCELERATION, motor_id, max_accel_msb,
                    max_accel_lsb]
-        await self.send_command(command)
+        await self._send_command(command)
 
     async def stepper_set_speed(self, motor_id, speed):
         """
@@ -1519,7 +1524,7 @@ class TelemetrixRpiPicoWAio:
         speed_lsb = speed & 0xff
 
         command = [PrivateConstants.STEPPER_SET_SPEED, motor_id, speed_msb, speed_lsb]
-        await self.send_command(command)
+        await self._send_command(command)
 
     async def stepper_get_speed(self, motor_id):
         """
@@ -1567,7 +1572,7 @@ class TelemetrixRpiPicoWAio:
         self.stepper_info_list[motor_id][
             'distance_to_go_callback'] = distance_to_go_callback
         command = [PrivateConstants.STEPPER_GET_DISTANCE_TO_GO, motor_id]
-        await self.send_command(command)
+        await self._send_command(command)
 
     async def stepper_get_target_position(self, motor_id, target_callback):
         """
@@ -1599,7 +1604,7 @@ class TelemetrixRpiPicoWAio:
             'target_position_callback'] = target_callback
 
         command = [PrivateConstants.STEPPER_GET_TARGET_POSITION, motor_id]
-        await self.send_command(command)
+        await self._send_command(command)
 
     async def stepper_get_current_position(self, motor_id, current_position_callback):
         """
@@ -1630,7 +1635,7 @@ class TelemetrixRpiPicoWAio:
             'current_position_callback'] = current_position_callback
 
         command = [PrivateConstants.STEPPER_GET_CURRENT_POSITION, motor_id]
-        await self.send_command(command)
+        await self._send_command(command)
 
     async def stepper_set_current_position(self, motor_id, position):
         """
@@ -1655,7 +1660,7 @@ class TelemetrixRpiPicoWAio:
         command = [PrivateConstants.STEPPER_SET_CURRENT_POSITION, motor_id]
         for value in position_bytes:
             command.append(value)
-        await self.send_command(command)
+        await self._send_command(command)
 
     async def stepper_run_speed_to_position(self, motor_id, completion_callback=None):
         """
@@ -1688,7 +1693,7 @@ class TelemetrixRpiPicoWAio:
 
         self.stepper_info_list[motor_id]['motion_complete_callback'] = completion_callback
         command = [PrivateConstants.STEPPER_RUN_SPEED_TO_POSITION, motor_id]
-        await self.send_command(command)
+        await self._send_command(command)
 
     async def stepper_stop(self, motor_id):
         """
@@ -1704,7 +1709,7 @@ class TelemetrixRpiPicoWAio:
             raise RuntimeError('stepper_stop: Invalid motor_id.')
 
         command = [PrivateConstants.STEPPER_STOP, motor_id]
-        await self.send_command(command)
+        await self._send_command(command)
 
     async def stepper_disable_outputs(self, motor_id):
         """
@@ -1728,7 +1733,7 @@ class TelemetrixRpiPicoWAio:
             raise RuntimeError('stepper_disable_outputs: Invalid motor_id.')
 
         command = [PrivateConstants.STEPPER_DISABLE_OUTPUTS, motor_id]
-        await self.send_command(command)
+        await self._send_command(command)
 
     async def stepper_enable_outputs(self, motor_id):
         """
@@ -1746,7 +1751,7 @@ class TelemetrixRpiPicoWAio:
             raise RuntimeError('stepper_enable_outputs: Invalid motor_id.')
 
         command = [PrivateConstants.STEPPER_ENABLE_OUTPUTS, motor_id]
-        await self.send_command(command)
+        await self._send_command(command)
 
     async def stepper_set_min_pulse_width(self, motor_id, minimum_width):
         """
@@ -1776,7 +1781,7 @@ class TelemetrixRpiPicoWAio:
 
         command = [PrivateConstants.STEPPER_SET_MINIMUM_PULSE_WIDTH, motor_id, width_msb,
                    width_lsb]
-        await self.send_command(command)
+        await self._send_command(command)
 
     async def stepper_set_enable_pin(self, motor_id, pin=0xff):
         """
@@ -1802,7 +1807,7 @@ class TelemetrixRpiPicoWAio:
                                '0-0xff.')
         command = [PrivateConstants.STEPPER_SET_ENABLE_PIN, motor_id, pin]
 
-        await self.send_command(command)
+        await self._send_command(command)
 
     async def stepper_set_3_pins_inverted(self, motor_id, direction=False, step=False,
                                           enable=False):
@@ -1825,7 +1830,7 @@ class TelemetrixRpiPicoWAio:
         command = [PrivateConstants.STEPPER_SET_3_PINS_INVERTED, motor_id, direction,
                    step, enable]
 
-        await self.send_command(command)
+        await self._send_command(command)
 
     async def stepper_set_4_pins_inverted(self, motor_id, pin1_invert=False,
                                           pin2_invert=False,
@@ -1854,7 +1859,7 @@ class TelemetrixRpiPicoWAio:
         command = [PrivateConstants.STEPPER_SET_4_PINS_INVERTED, motor_id, pin1_invert,
                    pin2_invert, pin3_invert, pin4_invert, enable]
 
-        await self.send_command(command)
+        await self._send_command(command)
 
     async def stepper_is_running(self, motor_id, callback):
         """
@@ -1884,7 +1889,7 @@ class TelemetrixRpiPicoWAio:
         self.stepper_info_list[motor_id]['is_running_callback'] = callback
 
         command = [PrivateConstants.STEPPER_IS_RUNNING, motor_id]
-        await self.send_command(command)
+        await self._send_command(command)
 
     async def _set_pin_mode(self, pin_number, pin_state, differential=0, value_range=0,
                             callback=None):
@@ -1986,7 +1991,7 @@ class TelemetrixRpiPicoWAio:
             self.pico_pins[pin_number] = pin_state
 
         if command:
-            await self.send_command(command)
+            await self._send_command(command)
 
     async def shutdown(self):
         """
@@ -1997,13 +2002,13 @@ class TelemetrixRpiPicoWAio:
 
         try:
             command = [PrivateConstants.STOP_ALL_REPORTS]
-            await self.send_command(command)
-            time.sleep(.1)
+            await self._send_command(command)
+            await asyncio.sleep(.1)
 
-            command = [PrivateConstants.RESET, self.reset_board_on_shutdown]
-            await self.send_command(command)
+            command = [PrivateConstants.RESET_BOARD, self.reset_board_on_shutdown]
+            await self._send_command(command)
 
-            time.sleep(1)
+            await asyncio.sleep(1)
             try:
                 self.sock.shutdown(socket.SHUT_RDWR)
                 self.sock.close()
@@ -2037,7 +2042,7 @@ class TelemetrixRpiPicoWAio:
         # self.digital_pins[pin].event_time = time_stamp
         if self.analog_callbacks[pin]:
             message = [PrivateConstants.ANALOG_REPORT, pin, value, time_stamp]
-            self.analog_callbacks[pin](message)
+            await self.analog_callbacks[pin](message)
 
     async def _cpu_temp_message(self, data):
         """
@@ -2050,11 +2055,12 @@ class TelemetrixRpiPicoWAio:
 
         temperature = struct.unpack('<f', bytes(data))
         temperature = round(temperature[0], 2)
+        print(f'temp {temperature}')
         time_stamp = time.time()
         # self.digital_pins[pin].event_time = time_stamp
         if self.cpu_temp_callback:
             message = [PrivateConstants.CPU_TEMP_REPORT, temperature, time_stamp]
-            self.cpu_temp_callback(message)
+            await self.cpu_temp_callback(message)
 
     async def _dht_report(self, report):
         """
@@ -2123,7 +2129,7 @@ class TelemetrixRpiPicoWAio:
         time_stamp = time.time()
         if self.digital_callbacks[pin]:
             message = [PrivateConstants.DIGITAL_REPORT, pin, value, time_stamp]
-            self.digital_callbacks[pin](message)
+            await self.digital_callbacks[pin](message)
 
     async def _firmware_message(self, data):
         """
@@ -2131,7 +2137,7 @@ class TelemetrixRpiPicoWAio:
         :param data: data[0] = major number, data[1] = minor number
         """
 
-        self.firmware_version = [data[0], data[1]]
+        self.firmware_version = [data[0], data[1], data[2]]
 
     async def _i2c_read_report(self, data):
         """
@@ -2146,9 +2152,9 @@ class TelemetrixRpiPicoWAio:
         cb_list.append(time.time())
 
         if cb_list[1]:
-            self.i2c_callback2(cb_list)
+            await self.i2c_callback2(cb_list)
         else:
-            self.i2c_callback(cb_list)
+            await self.i2c_callback(cb_list)
 
     async def _i2c_too_few_bytes_received(self, data):
         """
@@ -2161,7 +2167,7 @@ class TelemetrixRpiPicoWAio:
         raise RuntimeError(
             f'i2c Too few bytes received for I2C port {data[0]}')
         while True:
-            time.sleep(1)
+            await asyncio.sleep(1)
 
     async def _i2c_too_many_bytes_received(self, data):
         """
@@ -2174,7 +2180,7 @@ class TelemetrixRpiPicoWAio:
         raise RuntimeError(
             f'i2c too many bytes received for I2C port {data[0]}')
         while True:
-            time.sleep(.1)
+            await asyncio.sleep(.1)
 
     async def _report_unique_id(self, data):
         """
@@ -2202,7 +2208,7 @@ class TelemetrixRpiPicoWAio:
         :return:
         """
         if self.loop_back_callback:
-            self.loop_back_callback(data)
+            await self.loop_back_callback(data)
 
     # onewire is not available for the pico
     # def _onewire_report(self, report):
@@ -2337,10 +2343,10 @@ class TelemetrixRpiPicoWAio:
         """
         # the length of the list is added at the head
         command.insert(0, len(command))
-        # print(command)
+
         send_message = bytes(command)
 
-        self.sock.sendall(send_message)
+        await self.sock.write(send_message)
 
     async def _servo_unavailable(self, report):
         """
@@ -2391,80 +2397,6 @@ class TelemetrixRpiPicoWAio:
         else:
             self.spi_callback(cb_list)
 
-    async def _run_threads(self):
-        self.run_event.set()
-
-    async def _is_running(self):
-        return self.run_event.is_set()
-
-    async def _stop_threads(self):
-        self.run_event.clear()
-
-    async def _reporter(self):
-        """
-        This is the reporter thread. It continuously pulls data from
-        the deque. When a full message is detected, that message is
-        processed.
-        """
-        self.run_event.wait()
-
-        while self._is_running() and not self.shutdown_flag:
-            if len(self.the_deque):
-                # response_data will be populated with the received data for the report
-                response_data = []
-                packet_length = self.the_deque.popleft()
-
-                if packet_length:
-                    # get all the data for the report and place it into response_data
-                    for i in range(packet_length):
-                        while not len(self.the_deque):
-                            time.sleep(self.sleep_tune)
-                        data = self.the_deque.popleft()
-                        response_data.append(data)
-
-                    # get the report type and look up its dispatch method
-                    # here we pop the report type off of response_data
-                    report_type = response_data.pop(0)
-
-                    # retrieve the report handler from the dispatch table
-                    dispatch_entry = self.report_dispatch.get(report_type)
-
-                    # if there is additional data for the report,
-                    # it will be contained in response_data
-                    # noinspection PyArgumentList
-                    await dispatch_entry(response_data)
-                    continue
-
-                else:
-                    if self.shutdown_on_exception:
-                        await self.shutdown()
-                    raise RuntimeError(
-                        'A report with a packet length of zero was received.')
-            else:
-                time.sleep(self.sleep_tune)
-
-    async def _tcp_receiver(self):
-        """
-        This is a private utility method.
-
-        Thread to continuously check for incoming data.
-        When a byte comes in, place it onto the deque.
-        """
-        self.run_event.wait()
-
-        # Start this thread only if ip_address is set
-
-        if self.ip_address:
-
-            while self._is_running() and not self.shutdown_flag:
-                try:
-                    payload = self.sock.recv(1)
-                    self.the_deque.append(ord(payload))
-                except Exception:
-                    pass
-        else:
-            return
-
     async def _arduino_report_dispatcher(self):
         """
         This is a private method.
@@ -2477,12 +2409,12 @@ class TelemetrixRpiPicoWAio:
 
         :returns: This method never returns
         """
-
         while True:
             if self.shutdown_flag:
                 break
             try:
                 packet_length = ord(await self.sock.read())
+                print(packet_length)
             except TypeError:
                 continue
 
@@ -2494,6 +2426,6 @@ class TelemetrixRpiPicoWAio:
             # handle all other messages by looking them up in the
             # command dictionary
 
-            # noinspection PyArgumentList
             await self.report_dispatch[report](packet[1:])
             await asyncio.sleep(self.sleep_tune)
+
