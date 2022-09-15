@@ -76,7 +76,7 @@ def analog_in(my_board):
         sys.exit(0)
 
 
-board = telemetrix_rpi_pico_w.TelemetrixRpiPicoW()
+board = telemetrix_rpi_pico_w.TelemetrixRpiPicoW(ip_address='192.168.102')
 
 try:
     analog_in(board)

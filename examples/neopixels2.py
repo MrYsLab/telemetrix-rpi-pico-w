@@ -57,7 +57,7 @@ def neopixel_demo2(my_board):
     my_board.neopixel_clear()
 
 
-board = telemetrix_rpi_pico_w.TelemetrixRpiPicoW()
+board = telemetrix_rpi_pico_w.TelemetrixRpiPicoW(ip_address='192.168.102')
 try:
     neopixel_demo2(board)
     board.shutdown()

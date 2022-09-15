@@ -122,7 +122,7 @@ def step_absolute(the_board):
 
 
 # instantiate telemetrix
-board = telemetrix_rpi_pico_w.TelemetrixRpiPicoW()
+board = telemetrix_rpi_pico_w.TelemetrixRpiPicoW(ip_address='192.168.102')
 try:
     # start the main function
     step_absolute(board)

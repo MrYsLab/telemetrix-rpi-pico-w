@@ -80,7 +80,7 @@ def dht(my_board, pin, callback):
     my_board.set_pin_mode_dht(pin, callback)
 
 
-board = telemetrix_rpi_pico_w.TelemetrixRpiPicoW()
+board = telemetrix_rpi_pico_w.TelemetrixRpiPicoW(ip_address='192.168.102')
 try:
     dht(board, 28, the_callback)
 

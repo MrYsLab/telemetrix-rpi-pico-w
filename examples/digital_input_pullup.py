@@ -50,7 +50,7 @@ def the_callback(data):
           f'Value: {data[CB_VALUE]} Time Stamp: {date}')
 
 
-board = telemetrix_rpi_pico_w.TelemetrixRpiPicoW()
+board = telemetrix_rpi_pico_w.TelemetrixRpiPicoW(ip_address='192.168.102')
 board.set_pin_mode_digital_input_pullup(12, the_callback)
 board.set_pin_mode_digital_input_pullup(13, the_callback)
 board.set_pin_mode_digital_input_pullup(14, the_callback)

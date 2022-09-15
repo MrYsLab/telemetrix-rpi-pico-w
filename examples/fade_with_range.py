@@ -30,7 +30,7 @@ Setup a pin for output and fade its intensity
 DIGITAL_PIN = 25
 
 # Create a Telemetrix instance.
-board = telemetrix_rpi_pico_w.TelemetrixRpiPicoW()
+board = telemetrix_rpi_pico_w.TelemetrixRpiPicoW(ip_address='192.168.102')
 board.pwm_range(255)
 
 # Set the DIGITAL_PIN as an output pin

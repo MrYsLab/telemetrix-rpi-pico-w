@@ -49,7 +49,7 @@ def device_callback(data):
 
 
 # instantiate an instance of TelemetrixRpiPicoW
-board = telemetrix_rpi_pico_w.TelemetrixRpiPicoW()
+board = telemetrix_rpi_pico_w.TelemetrixRpiPicoW(ip_address='192.168.102')
 
 # set the pin mode for SPI0. Set the chip select to pin5 so that it will
 # work with the Pimoroni Pico Explorer Base. Accept all other parameters as

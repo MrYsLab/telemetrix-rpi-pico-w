@@ -26,7 +26,7 @@ Run a motor continuously without acceleration
 """
 
 # Create a Telemetrix instance.
-board = telemetrix_rpi_pico_w.TelemetrixRpiPicoW()
+board = telemetrix_rpi_pico_w.TelemetrixRpiPicoW(ip_address='192.168.102')
 
 
 # for continuous motion, the callback is not used, but provided to meet the
