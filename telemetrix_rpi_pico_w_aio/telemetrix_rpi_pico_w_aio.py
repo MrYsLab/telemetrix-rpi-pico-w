@@ -2310,7 +2310,7 @@ class TelemetrixRpiPicoWAio:
 
         cb_list = [PrivateConstants.STEPPER_RUNNING_REPORT, report[0], time.time()]
 
-        cb(cb_list)
+        await cb(cb_list)
 
     async def _stepper_run_complete_report(self, report):
         """
@@ -2328,7 +2328,7 @@ class TelemetrixRpiPicoWAio:
         cb_list = [PrivateConstants.STEPPER_RUN_COMPLETE_REPORT, report[0],
                    time.time()]
 
-        cb(cb_list)
+        await cb(cb_list)
 
     async def _features_report(self, report):
         self.reported_features = report[0]
