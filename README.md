@@ -12,11 +12,9 @@ other, uses [Python asyncio.](https://htmlpreview.github.io/?https://github.com/
 
 ![](images/tmx.png)
 
-A full User's Guide is [available online.](https://mryslab.github.
-io/telemetrix-rpi-pico-w/)
+A full User's Guide is [available online.](https://mryslab.github.io/telemetrix-rpi-pico-w/)
 
-The Pico W server code is available to be viewed [here.](https://github.
-com/MrYsLab/Telemetrix4RpiPicoW)
+The Pico W server code is available to be viewed [here.](https://github.com/MrYsLab/Telemetrix4RpiPicoW)
 
 The following functionality is implemented in this release:
 
