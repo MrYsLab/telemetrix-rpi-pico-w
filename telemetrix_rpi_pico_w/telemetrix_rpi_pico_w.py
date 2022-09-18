@@ -878,12 +878,14 @@ class TelemetrixRpiPicoW(threading.Thread):
             raise RuntimeError('i2c port must be either a 0 or 1')
         if sda_gpio or scl_gpio:
             if i2c_port == 0:
-                warnings.warn('SDA = 4, and SCL = 5. Ignoring pins specified')
+                if sda_gpio != 4 or scl_gpio != 5:
+                    warnings.warn('SDA = 4, and SCL = 5. Ignoring pins specified')
             else:
-                warnings.warn('SDA = 26, and SCL = 27. Ignoring pins specified')
+                if sda_gpio != 26 or scl_gpio != 27:
+                    warnings.warn('SDA = 26, and SCL = 27. Ignoring pins specified')
 
         # test for i2c port 0
-        if not i2c_port:
+        if i2c_port == 0:
             self.i2c_0_active = True
             sda_gpio = 4
             scl_gpio = 5
@@ -1973,7 +1975,7 @@ class TelemetrixRpiPicoW(threading.Thread):
                 self.pico_pins[26] = PrivateConstants.AT_ANALOG
             elif pin_number == 1:
                 self.pico_pins[27] = PrivateConstants.AT_ANALOG
-            elif pin_number == 13:
+            elif pin_number == 2:
                 self.pico_pins[28] = PrivateConstants.AT_ANALOG
 
         else:
@@ -1996,10 +1998,11 @@ class TelemetrixRpiPicoW(threading.Thread):
             self._send_command(command)
             time.sleep(.1)
 
-            command = [PrivateConstants.RESET_BOARD, self.reset_on_shutdown]
-            self._send_command(command)
+            if self.reset_on_shutdown:
+                command = [PrivateConstants.RESET_BOARD, self.reset_on_shutdown]
+                self._send_command(command)
 
-            time.sleep(2)
+            time.sleep(.2)
             try:
                 self.sock.shutdown(socket.SHUT_RDWR)
                 self.sock.close()
@@ -2084,7 +2087,7 @@ class TelemetrixRpiPicoW(threading.Thread):
             # data[0] = report sub type, data[1] = pin, data[2] = error message
             if self.dht_callbacks[report[1]]:
                 # Callback 0=DHT REPORT, DHT_ERROR, PIN, Time
-                message = [PrivateConstants.DHT_REPORT, report[0], report[1], report[2],
+                message = [PrivateConstants.DHT_REPORT, report[0], report[1],
                            time.time()]
                 self.dht_callbacks[report[1]](message)
         else:
@@ -2095,10 +2098,14 @@ class TelemetrixRpiPicoW(threading.Thread):
             f_temperature = float(report[6] + report[7] / 100)
             if report[3]:
                 f_temperature *= -1.0
-            message = [PrivateConstants.DHT_REPORT, report[0], report[1], report[2],
+            message = [PrivateConstants.DHT_REPORT, report[1],
                        f_humidity, f_temperature, time.time()]
 
-            self.dht_callbacks[report[1]](message)
+            try:
+                self.dht_callbacks[report[1]](message)
+                time.sleep(.3)
+            except KeyError:
+                print('a')
 
     def _digital_message(self, data):
         """
@@ -2331,7 +2338,10 @@ class TelemetrixRpiPicoW(threading.Thread):
         # print(command)
         send_message = bytes(command)
 
-        self.sock.sendall(send_message)
+        try:
+            self.sock.sendall(send_message)
+        except OSError:
+            pass
         time.sleep(.1)
 
     def _servo_unavailable(self, report):

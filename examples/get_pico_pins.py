@@ -27,12 +27,13 @@ def dummy_callback(data):
 
 
 # Create a Telemetrix instance.
-board = telemetrix_rpi_pico_w.TelemetrixRpiPicoW(ip_address='192.168.102')
+board = telemetrix_rpi_pico_w.TelemetrixRpiPicoW(ip_address='192.168.2.102')
 
 # set some pins to different modes
 board.set_pin_mode_digital_output(4)
 board.set_pin_mode_digital_input(6, callback=dummy_callback)
-board.set_pin_mode_analog_input(1, callback=dummy_callback)
+# adc0 is on gpio 26
+board.set_pin_mode_analog_input(0, callback=dummy_callback)
 board.set_pin_mode_digital_input_pullup(9, callback=dummy_callback)
 board.set_pin_mode_neopixel(14)
 board.set_pin_mode_i2c(0, 4, 5)

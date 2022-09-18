@@ -26,11 +26,11 @@ Attach a pin to a servo and move it about.
 """
 
 # some globals
-SERVO_PIN = 16
+SERVO_PIN = 0
 
 
 # Create a Telemetrix instance.
-board = telemetrix_rpi_pico_w.TelemetrixRpiPicoW(ip_address='192.168.102')
+board = telemetrix_rpi_pico_w.TelemetrixRpiPicoW(ip_address='192.168.2.102')
 try:
     board.set_pin_mode_servo(SERVO_PIN, 1000, 2000)
     time.sleep(.2)

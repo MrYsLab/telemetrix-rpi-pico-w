@@ -19,6 +19,10 @@ import time
 import sys
 from telemetrix_rpi_pico_w import telemetrix_rpi_pico_w
 
+"""
+Demo using an 8 LED NeoPixel strip
+"""
+
 
 def neopixel_demo(my_board):
     """
@@ -26,8 +30,8 @@ def neopixel_demo(my_board):
     :param my_board: Pico board instance
     """
 
-    # enable neopixel support on the Pico
-    my_board.set_pin_mode_neopixel()
+    # enable neopixel support on the Pico pin 0
+    my_board.set_pin_mode_neopixel(pin_number=0)
 
     # set some values and the show them
     my_board.neo_pixel_set_value(5, 255, 0, 0)
@@ -60,11 +64,14 @@ def neopixel_demo(my_board):
             my_board.neopixel_clear()
 
 
-board = telemetrix_rpi_pico_w.TelemetrixRpiPicoW(ip_address='192.168.102')
+board = telemetrix_rpi_pico_w.TelemetrixRpiPicoW(ip_address='192.168.2.102')
 try:
     neopixel_demo(board)
+
     board.shutdown()
 
 except KeyboardInterrupt:
+    board.neopixel_clear()
+
     board.shutdown()
     sys.exit(0)

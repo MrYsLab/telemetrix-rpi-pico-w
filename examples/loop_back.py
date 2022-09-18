@@ -53,6 +53,7 @@ def loop_back(my_board, loop_back_data):
 
 
 board = telemetrix_rpi_pico_w.TelemetrixRpiPicoW(ip_address='192.168.2.102')
+
 char_list = ['A', 'B', 'Z']
 try:
     loop_back(board, char_list)

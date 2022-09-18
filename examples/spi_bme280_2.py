@@ -51,17 +51,17 @@ def device_callback(data):
 board = telemetrix_rpi_pico_w.TelemetrixRpiPicoW(ip_address='192.168.2.102')
 
 # set the pin mode for SPI0.
-board.set_pin_mode_spi()
+board.set_pin_mode_spi(spi_port=1)
 
 # reset the bme280
 # the data to write must be presented in the form of a list
-board.spi_write_blocking([bme_reset_register])
+board.spi_write_blocking([bme_reset_register], spi_port=1)
 
 # after resetting, we must call set pin mode again to start a new SPI.begin()
-board.set_pin_mode_spi()
+board.set_pin_mode_spi(spi_port=1)
 
 # get the raw temperature
-board.spi_read_blocking(bme_temp_register, 3, spi_port=0, call_back=device_callback)
+board.spi_read_blocking(bme_temp_register, 3, spi_port=1, call_back=device_callback)
 
 # provide time for the data to return
 try:

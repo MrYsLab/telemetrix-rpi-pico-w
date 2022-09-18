@@ -65,7 +65,6 @@ def adxl345(my_board):
 
     # read_count = 20
     while True:
-        time.sleep(1)
         # read 6 bytes from the data register
         try:
             my_board.i2c_read(83, 50, 6, i2c_port=1,  callback=the_callback)
@@ -75,7 +74,7 @@ def adxl345(my_board):
             sys.exit(0)
 
 
-board = telemetrix_rpi_pico_w.TelemetrixRpiPicoW(ip_address='192.168.102')
+board = telemetrix_rpi_pico_w.TelemetrixRpiPicoW(ip_address='192.168.2.102')
 try:
     adxl345(board)
 except KeyboardInterrupt:

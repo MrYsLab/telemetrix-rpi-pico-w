@@ -591,7 +591,7 @@ class TelemetrixRpiPicoWAio:
         await self._send_command(command)
 
         if auto_show:
-            await self.shutdown()
+            await self.neopixel_show()
 
     async def neopixel_clear(self, auto_show=True):
         """
@@ -605,7 +605,7 @@ class TelemetrixRpiPicoWAio:
         command = [PrivateConstants.CLEAR_NEOPIXELS, auto_show]
         await self._send_command(command)
         if auto_show:
-            await self.shutdown()
+            await self.neopixel_show()
 
     async def neopixel_fill(self, r=0, g=0, b=0, auto_show=True):
         """
@@ -627,7 +627,7 @@ class TelemetrixRpiPicoWAio:
         await self._send_command(command)
 
         if auto_show:
-            await self.shutdown()
+            await self.neopixel_show()
 
     async def neopixel_show(self):
         """
@@ -688,7 +688,7 @@ class TelemetrixRpiPicoWAio:
         if not 0 <= adc_number < 4:
             raise RuntimeError('Invalid ADC Number')
         await self._set_pin_mode(adc_number, PrivateConstants.AT_ANALOG, differential,
-                           callback=callback)
+                                 callback=callback)
 
     async def get_cpu_temperature(self, threshold=1.0, polling_interval=1000,
                                   callback=None):
@@ -772,7 +772,7 @@ class TelemetrixRpiPicoWAio:
 
         """
         await self._set_pin_mode(pin_number, PrivateConstants.AT_INPUT_PULLUP,
-                           callback=callback)
+                                 callback=callback)
 
     async def set_pin_mode_digital_input_pull_down(self, pin_number, callback=None):
         """
@@ -791,7 +791,7 @@ class TelemetrixRpiPicoWAio:
 
         """
         await self._set_pin_mode(pin_number, PrivateConstants.AT_INPUT_PULL_DOWN,
-                           callback=callback)
+                                 callback=callback)
 
     async def set_pin_mode_digital_output(self, pin_number):
         """
@@ -886,9 +886,11 @@ class TelemetrixRpiPicoWAio:
             raise RuntimeError('i2c port must be either a 0 or 1')
         if sda_gpio or scl_gpio:
             if i2c_port == 0:
-                warnings.warn('SDA = 4, and SCL = 5. Ignoring pins specified')
+                if sda_gpio != 4 or scl_gpio != 5:
+                    warnings.warn('SDA = 4, and SCL = 5. Ignoring pins specified')
             else:
-                warnings.warn('SDA = 26, and SCL = 27. Ignoring pins specified')
+                if sda_gpio != 26 or scl_gpio != 27:
+                    warnings.warn('SDA = 26, and SCL = 27. Ignoring pins specified')
 
         # test for i2c port 0
         if not i2c_port:
@@ -961,7 +963,8 @@ class TelemetrixRpiPicoWAio:
 
             self.pwm_active_count += 1
 
-        await self._set_pin_mode(pin_number, PrivateConstants.AT_SERVO, min_pulse, max_pulse)
+        await self._set_pin_mode(pin_number, PrivateConstants.AT_SERVO, min_pulse,
+                                 max_pulse)
         self.pico_pins[pin_number] = PrivateConstants.AT_SERVO
 
     async def set_pin_mode_spi(self, spi_port=0, chip_select=None, speed_maximum=500000,
@@ -2005,8 +2008,9 @@ class TelemetrixRpiPicoWAio:
             await self._send_command(command)
             await asyncio.sleep(.1)
 
-            command = [PrivateConstants.RESET_BOARD, self.reset_board_on_shutdown]
-            await self._send_command(command)
+            if self.reset_board_on_shutdown:
+                command = [PrivateConstants.RESET_BOARD, self.reset_board_on_shutdown]
+                await self._send_command(command)
 
             await asyncio.sleep(1)
             try:
@@ -2093,7 +2097,8 @@ class TelemetrixRpiPicoWAio:
                data[7] = temperature fractional value
 
 
-                """
+        """
+        message = []
         if report[0]:  # DHT_ERROR
             # error report
             # data[0] = report sub type, data[1] = pin, data[2] = error message
@@ -2101,7 +2106,7 @@ class TelemetrixRpiPicoWAio:
                 # Callback 0=DHT REPORT, DHT_ERROR, PIN, Time
                 message = [PrivateConstants.DHT_REPORT, report[0], report[1], report[2],
                            time.time()]
-                self.dht_callbacks[report[1]](message)
+            await self.dht_callbacks[report[1]](message)
         else:
             # got valid data DHT_DATA
             f_humidity = float(report[4] + report[5] / 100)
@@ -2110,10 +2115,10 @@ class TelemetrixRpiPicoWAio:
             f_temperature = float(report[6] + report[7] / 100)
             if report[3]:
                 f_temperature *= -1.0
-            message = [PrivateConstants.DHT_REPORT, report[0], report[1], report[2],
+            message = [PrivateConstants.DHT_REPORT,  report[1],
                        f_humidity, f_temperature, time.time()]
 
-            self.dht_callbacks[report[1]](message)
+            await self.dht_callbacks[report[1]](message)
 
     async def _digital_message(self, data):
         """
@@ -2378,7 +2383,7 @@ class TelemetrixRpiPicoWAio:
             cb_list = [PrivateConstants.SONAR_DISTANCE, report[0],
                        (report[1] + (report[2] / 100)), time.time()]
 
-        cb(cb_list)
+        await cb(cb_list)
 
     async def _spi_report(self, report):
         """
@@ -2393,9 +2398,9 @@ class TelemetrixRpiPicoWAio:
         cb_list.append(time.time())
 
         if cb_list[1]:
-            self.spi_callback2(cb_list)
+            await self.spi_callback2(cb_list)
         else:
-            self.spi_callback(cb_list)
+            await self.spi_callback(cb_list)
 
     async def _arduino_report_dispatcher(self):
         """
@@ -2427,4 +2432,3 @@ class TelemetrixRpiPicoWAio:
 
             await self.report_dispatch[report](packet[1:])
             await asyncio.sleep(self.sleep_tune)
-

@@ -25,7 +25,7 @@ from telemetrix_rpi_pico_w import telemetrix_rpi_pico_w
 Monitor a potentiometer connected to ADC2 and the internal reference voltage
 """
 
-# Setup a pin for analog input and monitor its changes
+# Set up a pin for analog input and monitor its changes
 # adc numbers for sensors
 POTENTIOMETER = 2
 ADC_REF_VOLTAGE = 3
@@ -47,8 +47,6 @@ def the_callback(data):
     date = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(data[CB_TIME]))
     if data[CB_PIN] == POTENTIOMETER:
         print(f'Potentiometer value: {data[CB_VALUE]} at {date}')
-    if data[CB_PIN] == ADC_REF_VOLTAGE:
-        print(f'Reference voltage: {data[CB_VALUE]} at {date}')
 
 
 def analog_in(my_board):
@@ -63,20 +61,18 @@ def analog_in(my_board):
     # set the pin mode
 
     my_board.set_pin_mode_analog_input(POTENTIOMETER, differential=10,
-                                       callback=the_callback)
-    my_board.set_pin_mode_analog_input(ADC_REF_VOLTAGE, differential=10,
-                                       callback=the_callback)
+                                      callback=the_callback)
 
     print('Enter Control-C to quit.')
     try:
         while True:
-            time.sleep(5)
+            time.sleep(.1)
     except KeyboardInterrupt:
         board.shutdown()
         sys.exit(0)
 
 
-board = telemetrix_rpi_pico_w.TelemetrixRpiPicoW(ip_address='192.168.102')
+board = telemetrix_rpi_pico_w.TelemetrixRpiPicoW(ip_address='192.168.2.102')
 
 try:
     analog_in(board)

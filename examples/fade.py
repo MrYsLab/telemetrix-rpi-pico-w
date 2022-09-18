@@ -28,7 +28,7 @@ Setup a pin for output and fade its intensity
 
 # some globals
 # make sure to select a PWM pin
-DIGITAL_PIN = 32
+DIGITAL_PIN = 0
 
 # Create a Telemetrix instance.
 board = telemetrix_rpi_pico_w.TelemetrixRpiPicoW(ip_address='192.168.2.102')
@@ -42,15 +42,18 @@ board.set_pin_mode_pwm_output(DIGITAL_PIN)
 
 try:
     # use raw values for a fade
-    for level in range(0, 19999, 10):
+    for level in range(0, 19999, 1000):
         board.pwm_write(DIGITAL_PIN, level)
     # time.sleep(.01)
-    for level in range(19999, 0, -10):
+    for level in range(19999, 0, -1000):
         board.pwm_write(DIGITAL_PIN, level)
     # time.sleep(.05)
 
+    board.pwm_write(DIGITAL_PIN, 0)
 except KeyboardInterrupt:
+    board.pwm_write(DIGITAL_PIN, 0)
     board.shutdown()
+
     exit(0)
 
 board.shutdown()

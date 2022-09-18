@@ -36,6 +36,8 @@ CB_PIN = 1
 CB_VALUE = 2
 CB_TIME = 3
 
+DIGITAL_INPUT_PIN = 5
+
 
 def the_callback(data):
     """
@@ -50,20 +52,16 @@ def the_callback(data):
           f'Value: {data[CB_VALUE]} Time Stamp: {date}')
 
 
-board = telemetrix_rpi_pico_w.TelemetrixRpiPicoW(ip_address='192.168.102')
-board.set_pin_mode_digital_input_pullup(12, the_callback)
-board.set_pin_mode_digital_input_pullup(13, the_callback)
-board.set_pin_mode_digital_input_pullup(14, the_callback)
-board.set_pin_mode_digital_input_pullup(15, the_callback)
+board = telemetrix_rpi_pico_w.TelemetrixRpiPicoW(ip_address='192.168.2.102')
 
 try:
     print('Reporting enabled for 5 seconds.')
     time.sleep(5)
-    print('Disabling reporting for pin 12 3 seconds. All others enabled')
-    board.disable_digital_reporting(12)
+    print('Disabling reporting for DIGITAL_INPUT_PIN 3 seconds.')
+    board.disable_digital_reporting(DIGITAL_INPUT_PIN)
     time.sleep(3)
-    print('Re-enabling reporting for pin 12.')
-    board.enable_digital_reporting(12)
+    print('Re-enabling reporting for DIGITAL_INPUT_PIN.')
+    board.enable_digital_reporting(DIGITAL_INPUT_PIN)
     while True:
         time.sleep(5)
 
