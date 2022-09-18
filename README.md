@@ -6,8 +6,7 @@
 Interact and monitor a Raspberry Pi Pico W remotely from your PC using Python.
 It is similar to Arduino Firmata but explicitly written for the Raspberry Pi Pico W.
 
-You have a choice of two client APIs. One uses [Python threading](https://htmlpreview.
-github.io/?https://github.com/MrYsLab/telemetrix-rpi-pico-w/blob/master/html/telemetrix_rpi_pico_w/index.html) for concurrency, and the
+You have a choice of two client APIs. One uses [Python threading](https://htmlpreview.github.io/?https://github.com/MrYsLab/telemetrix-rpi-pico-w/blob/master/html/telemetrix_rpi_pico_w/index.html) for concurrency, and the
 other, uses [Python asyncio.](https://htmlpreview.github.io/?https://github.com/MrYsLab/telemetrix-rpi-pico-w/blob/master/html/telemetrix_rpi_pico_w_aio/index.html)
 
 ![](images/tmx.png)
