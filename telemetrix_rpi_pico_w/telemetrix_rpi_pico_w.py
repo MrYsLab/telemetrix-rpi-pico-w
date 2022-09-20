@@ -643,6 +643,10 @@ class TelemetrixRpiPicoW(threading.Thread):
         :param callback: Looped back character will appear in the callback method
 
         """
+        if not callback:
+            if self.shutdown_on_exception:
+                self.shutdown()
+            raise RuntimeError('A callback must be specified')
         command = [PrivateConstants.LOOP_COMMAND, ord(start_character)]
         self.loop_back_callback = callback
         self._send_command(command)
@@ -678,6 +682,8 @@ class TelemetrixRpiPicoW(threading.Thread):
 
         """
         if not callback:
+            if self.shutdown_on_exception:
+                self.shutdown()
             raise RuntimeError('A callback must be specified')
 
         # make sure adc number is in range
@@ -710,7 +716,10 @@ class TelemetrixRpiPicoW(threading.Thread):
         """
 
         if not callback:
-            raise RuntimeError('get_cpu_temperature: you must specify a callback')
+            if self.shutdown_on_exception:
+                self.shutdown()
+            raise RuntimeError('A callback must be specified')
+
         # convert the floating point threshold to bytes
 
         if 0.0 <= threshold < 30.0:
@@ -749,7 +758,10 @@ class TelemetrixRpiPicoW(threading.Thread):
 
         """
         if not callback:
+            if self.shutdown_on_exception:
+                self.shutdown()
             raise RuntimeError('A callback must be specified')
+
         self._set_pin_mode(pin_number, PrivateConstants.AT_INPUT, callback=callback)
 
     def set_pin_mode_digital_input_pullup(self, pin_number, callback=None):
@@ -769,7 +781,10 @@ class TelemetrixRpiPicoW(threading.Thread):
 
         """
         if not callback:
+            if self.shutdown_on_exception:
+                self.shutdown()
             raise RuntimeError('A callback must be specified')
+
         self._set_pin_mode(pin_number, PrivateConstants.AT_INPUT_PULLUP,
                            callback=callback)
 
@@ -790,7 +805,10 @@ class TelemetrixRpiPicoW(threading.Thread):
 
         """
         if not callback:
+            if self.shutdown_on_exception:
+                self.shutdown()
             raise RuntimeError('A callback must be specified')
+
         self._set_pin_mode(pin_number, PrivateConstants.AT_INPUT_PULL_DOWN,
                            callback=callback)
 
