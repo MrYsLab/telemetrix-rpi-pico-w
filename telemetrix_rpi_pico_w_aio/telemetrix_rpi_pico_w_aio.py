@@ -650,6 +650,10 @@ class TelemetrixRpiPicoWAio:
         :param callback: Looped back character will appear in the callback method
 
         """
+        if not callback:
+            if self.shutdown_on_exception:
+                await self.shutdown()
+            raise RuntimeError('A callback must be specified.')
         command = [PrivateConstants.LOOP_COMMAND, ord(start_character)]
         self.loop_back_callback = callback
         await self._send_command(command)
@@ -685,7 +689,9 @@ class TelemetrixRpiPicoWAio:
 
         """
         if not callback:
-            raise RuntimeError('A callback must be specified')
+            if self.shutdown_on_exception:
+                await self.shutdown()
+            raise RuntimeError('A callback must be specified.')
         # make sure adc number is in range
         if not 0 <= adc_number < 4:
             raise RuntimeError('Invalid ADC Number')
@@ -756,7 +762,10 @@ class TelemetrixRpiPicoWAio:
 
         """
         if not callback:
-            raise RuntimeError('A callback must be specified')
+            if self.shutdown_on_exception:
+                await self.shutdown()
+            raise RuntimeError('A callback must be specified.')
+
         await self._set_pin_mode(pin_number, PrivateConstants.AT_INPUT, callback=callback)
 
     async def set_pin_mode_digital_input_pullup(self, pin_number, callback=None):
@@ -776,7 +785,10 @@ class TelemetrixRpiPicoWAio:
 
         """
         if not callback:
-            raise RuntimeError('A callback must be specified')
+            if self.shutdown_on_exception:
+                await self.shutdown()
+            raise RuntimeError('A callback must be specified.')
+
         await self._set_pin_mode(pin_number, PrivateConstants.AT_INPUT_PULLUP,
                                  callback=callback)
 
@@ -797,7 +809,10 @@ class TelemetrixRpiPicoWAio:
 
         """
         if not callback:
-            raise RuntimeError('A callback must be specified')
+            if self.shutdown_on_exception:
+                await self.shutdown()
+            raise RuntimeError('A callback must be specified.')
+
         await self._set_pin_mode(pin_number, PrivateConstants.AT_INPUT_PULL_DOWN,
                                  callback=callback)
 
