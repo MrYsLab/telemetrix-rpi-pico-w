@@ -677,6 +677,9 @@ class TelemetrixRpiPicoW(threading.Thread):
         The ANALOG_REPORT  = 3
 
         """
+        if not callback:
+            raise RuntimeError('A callback must be specified')
+
         # make sure adc number is in range
         if not 0 <= adc_number < 4:
             raise RuntimeError('Invalid ADC Number')
@@ -745,6 +748,8 @@ class TelemetrixRpiPicoW(threading.Thread):
         DIGITAL_REPORT = 2
 
         """
+        if not callback:
+            raise RuntimeError('A callback must be specified')
         self._set_pin_mode(pin_number, PrivateConstants.AT_INPUT, callback=callback)
 
     def set_pin_mode_digital_input_pullup(self, pin_number, callback=None):
@@ -763,6 +768,8 @@ class TelemetrixRpiPicoW(threading.Thread):
         The DIGITAL_REPORT = 2
 
         """
+        if not callback:
+            raise RuntimeError('A callback must be specified')
         self._set_pin_mode(pin_number, PrivateConstants.AT_INPUT_PULLUP,
                            callback=callback)
 
@@ -782,6 +789,8 @@ class TelemetrixRpiPicoW(threading.Thread):
         DIGITAL_REPORT= 2
 
         """
+        if not callback:
+            raise RuntimeError('A callback must be specified')
         self._set_pin_mode(pin_number, PrivateConstants.AT_INPUT_PULL_DOWN,
                            callback=callback)
 

@@ -684,6 +684,8 @@ class TelemetrixRpiPicoWAio:
         The ANALOG_REPORT  = 3
 
         """
+        if not callback:
+            raise RuntimeError('A callback must be specified')
         # make sure adc number is in range
         if not 0 <= adc_number < 4:
             raise RuntimeError('Invalid ADC Number')
@@ -753,6 +755,8 @@ class TelemetrixRpiPicoWAio:
         DIGITAL_REPORT = 2
 
         """
+        if not callback:
+            raise RuntimeError('A callback must be specified')
         await self._set_pin_mode(pin_number, PrivateConstants.AT_INPUT, callback=callback)
 
     async def set_pin_mode_digital_input_pullup(self, pin_number, callback=None):
@@ -771,6 +775,8 @@ class TelemetrixRpiPicoWAio:
         The DIGITAL_REPORT = 2
 
         """
+        if not callback:
+            raise RuntimeError('A callback must be specified')
         await self._set_pin_mode(pin_number, PrivateConstants.AT_INPUT_PULLUP,
                                  callback=callback)
 
@@ -790,6 +796,8 @@ class TelemetrixRpiPicoWAio:
         DIGITAL_REPORT= 2
 
         """
+        if not callback:
+            raise RuntimeError('A callback must be specified')
         await self._set_pin_mode(pin_number, PrivateConstants.AT_INPUT_PULL_DOWN,
                                  callback=callback)
 
