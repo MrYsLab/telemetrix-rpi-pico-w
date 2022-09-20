@@ -5,9 +5,10 @@ nav:
     - Installation Procedures:
         - Installing And Upgrading The Client API On Your PC: install_telemetrix.md
         - Installing And Upgrading The Pico Server Application: install_pico_server.md
-    - Downloading And Running The Examples: examples.md
+    - Telemetrix Principles:
+        - Pin Modes: about_the_apis.md
+        - Callbacks: callbacks.md
     - The Telemetrix-RPi-Pico-W API:
-        - Design Notes: about_the_apis.md
         - Importing The Package And Instantiating The Library: importing.md
         - Analog Input Methods: analog_input.md
         - Digital Input Methods: digital_input.md
@@ -23,7 +24,6 @@ nav:
         - Shutting Down: management.md
         - Diagnostic Aids: debug.md
     - The Tmx-Pico-Aio API:
-          - Design Notes: about_the_apis2.md
           - Importing The Package And Instantiating The Library: importing2.md
           - Analog Input Methods: analog_input2.md
           - Digital Input Methods: digital_input2.md
@@ -37,6 +37,7 @@ nav:
           - SPI Methods: spi2.md
           - Shutting Down: management2.md
           - Diagnostic Aids: debug2.md
+    - Downloading And Running The Examples: examples.md
     - About: about.md
     - License: license.md
 # theme: windmill

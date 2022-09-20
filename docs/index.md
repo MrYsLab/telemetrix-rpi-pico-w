@@ -17,10 +17,10 @@ set its value to run a DC motor, perhaps select the pin as a control
 pin for a NeoPixel strip or communicate with your favorite i2c device. 
 All within a Python application.
 
-Telemetrix gives the appearance that the Pico is being _programmed_, but in fact, the 
+Telemetrix gives the appearance that the Pico W is being _programmed_, but in fact, the 
 Pico is running a fixed application and is not programmed in the 
 traditional sense. Instead, a Python application is written using a
-[Traditional Python API.](https://htmlpreview.github.io/?https://github.com/MrYsLab/telemetrix-rpi-pico-w/blob/master/html/telemetrix_rpi_pico_w/index.html)
+[Traditional Python API](https://htmlpreview.github.io/?https://github.com/MrYsLab/telemetrix-rpi-pico-w/blob/master/html/telemetrix_rpi_pico_w/index.html)
 or [Python asyncio API.](https://htmlpreview.github.io/?https://github.com/MrYsLab/telemetrix-rpi-pico-w/blob/master/html/telemetrix_rpi_pico_w_aio/index.html)
 and communicates with the Pico W over WIFI.
 

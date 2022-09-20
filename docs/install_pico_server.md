@@ -99,7 +99,8 @@ Telemetrix_pico_w.
 ![](./images/router.png)
 
 
-You may also the Arduino IDE Serial Monitor to the IP address assigned. Because the 
+You may also use the Arduino IDE Serial Monitor to view the IP address assigned. Because 
+the 
 Arduino IDE disconnects the USB port after an upload, we need to extend the startup 
 delay in Telemetrix4RpiPicoW from 0.5 seconds to a larger number to allow both the 
 selection of
