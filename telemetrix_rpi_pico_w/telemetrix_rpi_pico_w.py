@@ -655,15 +655,12 @@ class TelemetrixRpiPicoW(threading.Thread):
         """
         Set a pin as an analog input.
 
-        :param adc_number: ADC Number 0-4
+        :param adc_number: ADC Number 0-2
 
                            ADC numbers are mapped as following:
                            ADC0 = GPIO 26 (Physical Pin 31)
                            ADC1 = GPIO 27 (Physical Pin 32)
                            ADC2 = GPIO 28 (Physical Pin 34)
-
-                           Internal Mapping
-                           ADC3 = GPIO 29 (Physical Pin 35) ADC Reference Voltage
 
                            NOTE: This is different from telemetrix-rpi-pico
                            To get cpu temperature, call get_cpu_temperature.
