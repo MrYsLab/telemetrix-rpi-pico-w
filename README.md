@@ -54,7 +54,7 @@ Follow the instructions in the [User's Guide.](https://mryslab.github.io/telemet
    for [threaded examples](https://github.com/MrYsLab/telemetrix-rpi-pico-w/tree/master/examples)
    as well as [asyncio examples](https://github.com/MrYsLab/telemetrix-rpi-pico-w/tree/master/examples_aio).
    
-2. Open the _examples_ directory and run any of the examples. You may
+2. Open the _examples_ directory and run any of the examples using Python3. You may
 modify them to suit your needs.
 
 
