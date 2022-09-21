@@ -1,8 +1,6 @@
 
 # telemetrix-rpi-pico-w
 
-# THIS IS A WORK IN PROGRESS
-
 Interact and monitor a Raspberry Pi Pico W remotely from your PC using Python.
 It is similar to Arduino Firmata but explicitly written for the Raspberry Pi Pico W.
 
@@ -47,7 +45,7 @@ pip install telemetrix-rpi-pico-w --upgrade
 ```
 
 ## To Install The Pico-W Server Application
-TBD
+Follow the instructions in the [User's Guide.](https://mryslab.github.io/telemetrix-rpi-pico-w/install_pico_server/)
 
 ## Download And Run The Examples
    
