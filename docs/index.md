@@ -13,7 +13,7 @@ automatically transmitting the collected data back to local receiving equipment 
 processing. The Telemetrix Project for the Raspberry Pi Pico W does just that and more.
 
 With Telemetrix, you can do things such as establish a GPIO pin as a PWM output pin, and 
-set its value to run a DC motor, perhaps select the pin as a control
+set its value to run a DC motor, or perhaps select the pin as a control
 pin for a NeoPixel strip or communicate with your favorite i2c device. 
 All within a Python application.
 
@@ -24,7 +24,8 @@ traditional sense. Instead, a Python application is written using a
 or [Python asyncio API.](https://htmlpreview.github.io/?https://github.com/MrYsLab/telemetrix-rpi-pico-w/blob/master/html/telemetrix_rpi_pico_w_aio/index.html)
 and communicates with the Pico W over WIFI.
 
-Telemetrix automatically reports input data changes to the Python application using a 
+After setting a GPIO pin as a data input pin, Telemetrix automatically reports input data 
+changes to the Python application using a 
 callback mechanism, ensuring that the 
 application receives the latest data changes quickly and that no data changes are lost.
 
@@ -153,4 +154,4 @@ They both utilize the same server and support similar features.
 
 Copyright (C) 2022 Alan Yorinks. All Rights Reserved.
 
-**Last updated 15 September 2022**
+**Last updated 21 September 2022**
