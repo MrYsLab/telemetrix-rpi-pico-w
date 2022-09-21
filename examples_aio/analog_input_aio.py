@@ -26,7 +26,7 @@ This file demonstrates analog input using both callbacks and
 polling. Time stamps are provided in both "cooked" and raw form
 """
 
-# Setup a pin for analog input and monitor its changes
+# Set up a pin for analog input and monitor its changes
 ANALOG_PIN = 2  # adc port number
 
 # Callback data indices
@@ -55,9 +55,9 @@ async def analog_in(my_board, pin):
     analog input. Any changes on this pin will
     be reported through the call back function.
 
-    :param my_board: a tmx_nano2040_wifi_aio instance
+    :param my_board: a TelemetrixRpiPicoWAio instance
 
-    :param pin: Arduino pin number
+    :param pin: GPIO pin number
     """
     await my_board.set_pin_mode_analog_input(pin, differential=10, callback=the_callback)
 

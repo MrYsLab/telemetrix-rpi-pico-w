@@ -343,7 +343,7 @@ class TelemetrixRpiPicoWAio:
         self.sock = TelemetrixAioSocket(self.ip_address, self.ip_port, self.loop)
         await self.sock.start()
 
-        self.the_task = self.loop.create_task(self._arduino_report_dispatcher())
+        self.the_task = self.loop.create_task(self._report_dispatcher())
 
         # get telemetrix firmware version and print it
         print(&#39;\nRetrieving Telemetrix4RpiPicoW firmware ID...&#39;)
@@ -2445,10 +2445,10 @@ class TelemetrixRpiPicoWAio:
         else:
             await self.spi_callback(cb_list)
 
-    async def _arduino_report_dispatcher(self):
+    async def _report_dispatcher(self):
         &#34;&#34;&#34;
         This is a private method.
-        It continually accepts and interprets data coming from Telemetrix4Arduino,and then
+        It continually accepts and interprets data coming from Pico W Server,and then
         dispatches the correct handler to process the data.
 
         It first receives the length of the packet, and then reads in the rest of the
@@ -2783,7 +2783,7 @@ receiving a KeyboardInterrupt exception</p>
         self.sock = TelemetrixAioSocket(self.ip_address, self.ip_port, self.loop)
         await self.sock.start()
 
-        self.the_task = self.loop.create_task(self._arduino_report_dispatcher())
+        self.the_task = self.loop.create_task(self._report_dispatcher())
 
         # get telemetrix firmware version and print it
         print(&#39;\nRetrieving Telemetrix4RpiPicoW firmware ID...&#39;)
@@ -4885,10 +4885,10 @@ receiving a KeyboardInterrupt exception</p>
         else:
             await self.spi_callback(cb_list)
 
-    async def _arduino_report_dispatcher(self):
+    async def _report_dispatcher(self):
         &#34;&#34;&#34;
         This is a private method.
-        It continually accepts and interprets data coming from Telemetrix4Arduino,and then
+        It continually accepts and interprets data coming from the Pico W server,and then
         dispatches the correct handler to process the data.
 
         It first receives the length of the packet, and then reads in the rest of the
@@ -6515,7 +6515,7 @@ when to complete the instantiation.</p></div>
     self.sock = TelemetrixAioSocket(self.ip_address, self.ip_port, self.loop)
     await self.sock.start()
 
-    self.the_task = self.loop.create_task(self._arduino_report_dispatcher())
+    self.the_task = self.loop.create_task(self._report_dispatcher())
 
     # get telemetrix firmware version and print it
     print(&#39;\nRetrieving Telemetrix4RpiPicoW firmware ID...&#39;)

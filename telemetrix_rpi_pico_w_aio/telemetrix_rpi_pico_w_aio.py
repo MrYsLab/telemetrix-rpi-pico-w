@@ -300,7 +300,7 @@ class TelemetrixRpiPicoWAio:
         self.sock = TelemetrixAioSocket(self.ip_address, self.ip_port, self.loop)
         await self.sock.start()
 
-        self.the_task = self.loop.create_task(self._arduino_report_dispatcher())
+        self.the_task = self.loop.create_task(self._report_dispatcher())
 
         # get telemetrix firmware version and print it
         print('\nRetrieving Telemetrix4RpiPicoW firmware ID...')
@@ -2423,7 +2423,7 @@ class TelemetrixRpiPicoWAio:
         else:
             await self.spi_callback(cb_list)
 
-    async def _arduino_report_dispatcher(self):
+    async def _report_dispatcher(self):
         """
         This is a private method.
         It continually accepts and interprets data coming from Telemetrix4Arduino,and then

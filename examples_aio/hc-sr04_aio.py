@@ -24,7 +24,7 @@ from telemetrix_rpi_pico_w_aio import telemetrix_rpi_pico_w_aio
 This program continuously monitors an HC-SR04 Ultrasonic Sensor
 It reports changes to the distance sensed.
 """
-# IP address assigned to the ESP32
+# IP address assigned to the Pico W
 IP_ADDRESS = '192.168.2.102'
 
 TRIGGER_PIN = 4

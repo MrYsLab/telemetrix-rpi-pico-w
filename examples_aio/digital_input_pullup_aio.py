@@ -30,8 +30,8 @@ Monitor a digital input pin
 Setup a pin for digital input and monitor its changes
 """
 
-# Setup a pin for analog input and monitor its changes
-DIGITAL_PIN = 5  # arduino pin number
+# Set up a pin for analog input and monitor its changes
+DIGITAL_PIN = 5  # GPIO pin number
 
 # Callback data indices
 CB_PIN_MODE = 0
@@ -82,7 +82,7 @@ async def digital_in(my_board, pin):
 loop = asyncio.new_event_loop()
 asyncio.set_event_loop(loop)
 
-# instantiate tmx_nano2040_wifi_aio
+# instantiate TelemetrixRpiPicoWAio
 board = telemetrix_rpi_pico_w_aio.TelemetrixRpiPicoWAio(ip_address='192.168.2.102', loop=loop)
 
 try:

@@ -30,7 +30,7 @@ loop = asyncio.new_event_loop()
 asyncio.set_event_loop(loop)
 
 
-# instantiate tmx_nano2040_wifi_aio
+# instantiate TelemetrixRpiPicoWAio
 board = telemetrix_rpi_pico_w_aio.TelemetrixRpiPicoWAio(ip_address='192.168.2.102',
                                                         loop=loop)
 

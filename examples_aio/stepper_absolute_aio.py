@@ -33,10 +33,10 @@ VCC 12 VDC
 GND Power supply ground
 ENA- Not connected
 ENA+ Not connected
-DIR- ESP32 GND
+DIR- GND
 DIR+ GPIO Pin 1
-PUL- ESP32 GND
-PUL+ GPIO Pin 0 ESP32
+PUL- GND
+PUL+ GPIO Pin 0 
 A-, A+ Coil 1 stepper motor
 B-, B+ Coil 2 stepper motor
 
