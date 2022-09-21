@@ -7,11 +7,11 @@ with open('README.md') as f:
 
 
 setup(
-    name='telemetrix-rpi-pico',
+    name='telemetrix-rpi-pico-w',
     packages=['telemetrix_rpi_pico_w', 'telemetrix_rpi_pico_w_aio'],
     install_requires=['pyserial'],
 
-    version='1.2',
+    version='1.0',
     description="Remotely Control And Monitor A Raspberry Pi Pico W",
     long_description=long_description,
     long_description_content_type='text/markdown',
