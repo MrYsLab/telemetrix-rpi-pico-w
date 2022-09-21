@@ -36,6 +36,7 @@ nav:
             - PWM Methods: pwm2.md
             - Servo Methods: servo2.md
             - SPI Methods: spi2.md
+            - Stepper Motor Methods: stepper2.md
             - Shutting Down: management2.md
             - Diagnostic Aids: debug2.md
     - Downloading And Running The Examples: examples.md

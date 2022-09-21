@@ -3,7 +3,7 @@ The stepper motor support acts as a proxy for the AccelStepper Arduino library.
 ### stepper_is_running
 
 ```python
-def stepper_is_running(self, motor_id, callback)
+async def stepper_is_running(self, motor_id, callback)
 
     Checks to see if the motor is currently running to a target.
 
@@ -20,12 +20,12 @@ def stepper_is_running(self, motor_id, callback)
 
 **Examples:** 
 
-[stepper_absolute.py](https://github.com/MrYsLab/telemetrix-rpi-pico-w/blob/master/examples/stepper_absolute.py)
+[stepper_absolute_aio.py](https://github.com/MrYsLab/telemetrix-rpi-pico-w/blob/master/examples_aio/stepper_absolute_aio.py)
 
 ### stepper_move
 
 ```python
-def stepper_move(self, motor_id, relative_position)
+async def stepper_move(self, motor_id, relative_position)
 
     Set the target position relative to the current position.
 
@@ -40,12 +40,12 @@ def stepper_move(self, motor_id, relative_position)
 
 **Examples:** 
 
-[stepper_relative.py](https://github.com/MrYsLab/telemetrix-rpi-pico-w/blob/master/examples/stepper_relative.py)
+[stepper_relative_aio.py](https://github.com/MrYsLab/telemetrix-rpi-pico-w/blob/master/examples_aio/stepper_relative_aio.py)
 
 ### stepper_move_to
 
 ```python
-def stepper_move_to(self, motor_id, position)
+async def stepper_move_to(self, motor_id, position)
 
     Set an absolution target position. If position is positive, the movement is 
     clockwise, else it is counter-clockwise.
@@ -61,16 +61,14 @@ def stepper_move_to(self, motor_id, position)
 
     :param position: target position. Maximum value is 32 bits.
 ```
-
 **Examples:** 
 
-
-[stepper_run_speed_to_position.py](https://github.com/MrYsLab/telemetrix-rpi-pico-w/blob/master/examples/stepper_run_speed_to_position.py)
+[stepper_continuous_aio.py](https://github.com/MrYsLab/telemetrix-rpi-pico-w/blob/master/examples_aio/stepper_continuous_aio.py)
 
 ### stepper_run
 
 ```python
-def stepper_run(self, motor_id, completion_callback=None)
+async def stepper_run(self, motor_id, completion_callback=None)
 
     This method steps the selected motor based on the current speed.
 
@@ -89,12 +87,12 @@ def stepper_run(self, motor_id, completion_callback=None)
 ```
 **Examples:** 
 
-[stepper_absolute.py](https://github.com/MrYsLab/telemetrix-rpi-pico-w/blob/master/examples/stepper_absolute.py)
+[stepper_absolute_aio.py](https://github.com/MrYsLab/telemetrix-rpi-pico-w/blob/master/examples_aio/stepper_absolute_aio.py)
 
 ### stepper_run_speed
 
 ```python
-def stepper_run_speed(self, motor_id)
+async def stepper_run_speed(self, motor_id)
 
     This method steps the selected motor based at a constant speed as 
     set by the most recent call to stepper_set_max_speed(). 
@@ -107,13 +105,13 @@ def stepper_run_speed(self, motor_id)
 
 **Examples:** 
 
-[stepper_continuous.py](https://github.com/MrYsLab/telemetrix-rpi-pico-w/blob/master/examples/stepper_continuous.py)
+[stepper_continuous_aio.py](https://github.com/MrYsLab/telemetrix-rpi-pico-w/blob/master/examples_aio/stepper_continuous_aio.py)
 
 ### stepper_run_speed_to_position
 
 ```python
 
-def stepper_run_speed_to_position(self, motor_id, completion_callback=None)
+async def stepper_run_speed_to_position(self, motor_id, completion_callback=None)
 
     Runs the motor at the currently selected speed until the target
     position is reached.
@@ -134,12 +132,12 @@ def stepper_run_speed_to_position(self, motor_id, completion_callback=None)
 **Examples:** 
 
 
-[stepper_run_speed_to_position.py](https://github.com/MrYsLab/telemetrix-rpi-pico-w/blob/master/examples/stepper_run_speed_to_position.py)
+[stepper_continuous_aio.py](https://github.com/MrYsLab/telemetrix-rpi-pico-w/blob/master/examples_aio/stepper_continuous_aio.py)
 
 ### stepper_set_acceleration
 
 ```python
-def stepper_set_acceleration(self, motor_id, acceleration)
+async def stepper_set_acceleration(self, motor_id, acceleration)
 
     Sets the acceleration/deceleration rate.
 
@@ -153,14 +151,15 @@ def stepper_set_acceleration(self, motor_id, acceleration)
 ```
 **Examples:** 
 
-[stepper_absolute.py](https://github.com/MrYsLab/telemetrix-rpi-pico-w/blob/master/examples/stepper_absolute.py)
+[stepper_absolute_aio.py](https://github.com/MrYsLab/telemetrix-rpi-pico-w/blob/master/examples_aio/stepper_absolute_aio.py)
 
 
+```
 
 ### stepper_set_max_speed
 
 ```python
-def stepper_set_max_speed(self, motor_id, max_speed)
+async def stepper_set_max_speed(self, motor_id, max_speed)
 
     Sets the maximum permitted speed. The stepper_run() function will 
     accelerate up to the speed set by this function.
@@ -178,12 +177,12 @@ def stepper_set_max_speed(self, motor_id, max_speed)
 
 **Examples:** 
 
-[stepper_absolute.py](https://github.com/MrYsLab/telemetrix-rpi-pico-w/blob/master/examples/stepper_absolute.py)
+[stepper_absolute_aio.py](https://github.com/MrYsLab/telemetrix-rpi-pico-w/blob/master/examples_aio/stepper_absolute_aio.py)
 
 ### stepper_set_speed
 
 ```python
-def stepper_set_speed(self, motor_id, speed)
+async def stepper_set_speed(self, motor_id, speed)
 
     Sets the desired constant speed for use with stepper_run_speed().
 
@@ -202,7 +201,7 @@ def stepper_set_speed(self, motor_id, speed)
 **Examples:** 
 
 
-[stepper_run_speed_to_position.py](https://github.com/MrYsLab/telemetrix-rpi-pico-w/blob/master/examples/stepper_run_speed_to_position.py)
+[stepper_continuous_aio.py](https://github.com/MrYsLab/telemetrix-rpi-pico-w/blob/master/examples_aio/stepper_continuous_aio.py)
 
 ### Additional Methods
 
@@ -212,7 +211,7 @@ No examples are provided for these methods.**
 ### stepper_get_current_position
 
 ```python
-def stepper_get_current_position(self, motor_id, current_position_callback)
+async def stepper_get_current_position(self, motor_id, current_position_callback)
 
     Request the current motor position from the server.
 
@@ -226,9 +225,10 @@ def stepper_get_current_position(self, motor_id, current_position_callback)
 
     Positive is clockwise from the 0 position.
 ```
+
 ### stepper_set_current_position
 ```python
-def stepper_set_current_position(self, motor_id, position)
+async def stepper_set_current_position(self, motor_id, position)
 
     Resets the current position of the motor, so that wherever the motor happens 
     to be right now is considered to be the new 0 position. 
@@ -241,10 +241,11 @@ def stepper_set_current_position(self, motor_id, position)
 
     :param position: Position in steps. This is a 32 bit value
 ```
+
 ### stepper_get_distance_to_go
 
 ```python
-def stepper_get_distance_to_go(self, motor_id, distance_to_go_callback)
+async def stepper_get_distance_to_go(self, motor_id, distance_to_go_callback)
 
     Request the distance from the current position to the target 
     position from the server.
@@ -264,7 +265,7 @@ def stepper_get_distance_to_go(self, motor_id, distance_to_go_callback)
 ### stepper_get_target_position
 
 ```python
-def stepper_get_target_position(self, motor_id, target_callback)
+async def stepper_get_target_position(self, motor_id, target_callback)
 
     Request the most recently set target position from the server.
 
@@ -283,7 +284,7 @@ def stepper_get_target_position(self, motor_id, target_callback)
 ### stepper_disable_outputs
 
 ```python
-def stepper_disable_outputs(self, motor_id)
+async def stepper_disable_outputs(self, motor_id)
 
     Disable motor pin outputs by setting them all LOW.
 
@@ -303,7 +304,7 @@ def stepper_disable_outputs(self, motor_id)
 ### stepper_enable_outputs
 
 ```python
-def stepper_enable_outputs(self, motor_id)
+async def stepper_enable_outputs(self, motor_id)
 
     Enable motor pin outputs by setting the motor pins to OUTPUT mode.
 
@@ -316,7 +317,7 @@ def stepper_enable_outputs(self, motor_id)
 ### stepper_get_max_speed
 
 ```python
-def stepper_get_max_speed(self, motor_id)
+async def stepper_get_max_speed(self, motor_id)
 
     Returns the maximum speed configured for this stepper that was 
     previously set by stepper_set_max_speed()
@@ -331,7 +332,7 @@ def stepper_get_max_speed(self, motor_id)
 ### stepper_get_speed
 
 ```python
-def stepper_get_speed(self, motor_id)
+async def stepper_get_speed(self, motor_id)
 
     Returns the most recently set speed. that was previously set 
     by stepper_set_speed();
@@ -344,7 +345,7 @@ def stepper_get_speed(self, motor_id)
 ### stepper_set_3_pins_inverted
 
 ```python
-def stepper_set_3_pins_inverted(self, motor_id, direction=False, 
+async def stepper_set_3_pins_inverted(self, motor_id, direction=False, 
                                 step=False, enable=False)
 
     Sets the inversion for stepper driver pins.
@@ -361,7 +362,7 @@ def stepper_set_3_pins_inverted(self, motor_id, direction=False,
 ### stepper_set_4_pins_inverted
 
 ```python
-def stepper_set_4_pins_inverted(self, motor_id, pin1_invert=False, 
+async def stepper_set_4_pins_inverted(self, motor_id, pin1_invert=False, 
                                 pin2_invert=False, pin3_invert=False, 
                                 pin4_invert=False, enable=False)
 
@@ -383,7 +384,7 @@ def stepper_set_4_pins_inverted(self, motor_id, pin1_invert=False,
 ### stepper_set_enable_pin
 
 ```python
-def stepper_set_enable_pin(self, motor_id, pin=255)
+async def stepper_set_enable_pin(self, motor_id, pin=255)
 
     Sets the enable pin number for stepper drivers. 
     0xFF indicates unused (default).
@@ -398,7 +399,7 @@ def stepper_set_enable_pin(self, motor_id, pin=255)
 ### stepper_set_min_pulse_width
 
 ```python
-def stepper_set_min_pulse_width(self, motor_id, minimum_width)
+async def stepper_set_min_pulse_width(self, motor_id, minimum_width)
 
     Sets the minimum pulse width allowed by the stepper driver.
 
@@ -414,7 +415,7 @@ def stepper_set_min_pulse_width(self, motor_id, minimum_width)
 ### stepper_stop
 
 ```python
-def stepper_stop(self, motor_id)
+async def stepper_stop(self, motor_id)
 
     Sets a new target position that causes the stepper to stop as quickly as 
     possible, using the current speed and acceleration parameters.
