@@ -1,13 +1,15 @@
-# Telemetrix-RPi-Pico
 
-Interact and monitor  a Raspberry  Pi Pico remotely  from your PC using Python.
+# telemetrix-rpi-pico-w
 
+Interact and monitor a Raspberry Pi Pico W remotely from your PC using Python.
+It is similar to Arduino Firmata but explicitly written for the Raspberry Pi Pico W.
 
-A full User's Guide is [available online.](https://mryslab.github.io/telemetrix-rpi-pico/)
+You have a choice of two client APIs. One uses [Python threading](https://htmlpreview.github.io/?https://github.com/MrYsLab/telemetrix-rpi-pico-w/blob/master/html/telemetrix_rpi_pico_w/index.html) for concurrency, and the
+other uses [Python asyncio.](https://htmlpreview.github.io/?https://github.com/MrYsLab/telemetrix-rpi-pico-w/blob/master/html/telemetrix_rpi_pico_w_aio/index.html)
 
-Python API documentation may be found [here.](https://htmlpreview.github.io/?https://github.com/MrYsLab/telemetrix-rpi-pico/blob/master/html/telemetrix_rpi_pico/index.html) 
+A complete User's Guide is [available online.](https://mryslab.github.io/telemetrix-rpi-pico-w/)
 
-The Pico server code may be viewed [here.](https://github.com/MrYsLab/Telemetrix4RpiPico)
+The Pico W server code is available to be viewed [here.](https://github.com/MrYsLab/Telemetrix4RpiPicoW)
 
 The following functionality is implemented in this release:
 
@@ -16,67 +18,41 @@ The following functionality is implemented in this release:
 * PWM output
 * Loopback (for client/server link debugging)
 * I2C Support
+* SPI Support
 * NeoPixel Support
 * Servo Support
 * HC-SR04 Type Sonar Distance Sensor Support
+* Stepper Motor Support
 * DHT 11 and 22 Humidity/Temperature Sensor Support
-* Autodetect PICO device over USB Serial.
-* Automatic board reset of the PICO using the watchdog timer when application exits.
-    * Board will blink twice upon reset.
-* Retrieval of the PICO's unique ID.
+* Automatic board reset of the PICO W using the watchdog timer when an 
+  application exits.
 
 
 ## To install The Client Library:
 
-**Linux/macOS:**
-
-```bash
-sudo pip3 install telemetrix-rpi-pico
-```
-
-
-**Windows:**
 
 
 ```bash
-pip install telemetrix-rpi-pico 
+pip install telemetrix-rpi-pico-w 
 ```
 
 ### If you are upgrading from a previously installed version:
 
-**Linux/macOS:**
-
 ```bash
-sudo pip3 install telemetrix-rpi-pico --upgrade
+pip install telemetrix-rpi-pico-w --upgrade
 ```
 
-
-**Windows:**
-
-
-```bash
-pip install telemetrix-rpi-pico --upgrade
-```
-
-## To Install The Pico Server Application
-1. [Download](https://github.com/MrYsLab/Telemetrix4RpiPico/raw/master/cmake-build-release/Telemetrix4RpiPico.uf2) 
-   and save the .uf2 file.
-2. Place the Pico in file upload mode:
-   
-   A. Press and hold the BOOTSEL button while applying power. 
-   
-   B. Release the BOOTSEL button.
-   
-   C. In your file explorer, you should see a new folder appear called: RPI-RP2.
-   
-   D. Drag the .uf2 file into this folder to upload the code.
+## To Install The Pico-W Server Application
+Follow the instructions in the [User's Guide.](https://mryslab.github.io/telemetrix-rpi-pico-w/install_pico_server/)
 
 ## Download And Run The Examples
    
-1. [Download,](https://github.com/MrYsLab/telemetrix-rpi-pico/archive/master.zip) 
-   save, and uncompress the teletmetrix-rpi-pico Github repository.
+1. [Download,](https://github.com/MrYsLab/telemetrix-rpi-pico-w/archive/master.zip) 
+   save, and uncompress the telemetrix-rpi-pico-w Github repository. There is a directory 
+   for [threaded examples](https://github.com/MrYsLab/telemetrix-rpi-pico-w/tree/master/examples)
+   as well as [asyncio examples](https://github.com/MrYsLab/telemetrix-rpi-pico-w/tree/master/examples_aio).
    
-2. Open the _examples_ directory and run any of the examples. You may
+2. Open the _examples_ directory and run any of the examples using Python3. You may
 modify them to suit your needs.
 
 
