@@ -58,4 +58,5 @@ Follow the instructions in the [User's Guide.](https://mryslab.github.io/telemet
 modify them to suit your needs.
 
 
+This project was developed with [Pycharm](https://www.jetbrains.com/pycharm/?from=telemetrix-rpi-pico-w)![logo](https://github.com/MrYsLab/python_banyan/blob/master/images/icon_PyCharm.png)
 
