@@ -270,7 +270,7 @@ class TelemetrixRpiPicoWAio:
         self.stepper_info_list = []
         # a list of dictionaries to hold stepper information
         for motor in range(self.max_number_of_steppers):
-            self.stepper_info_list.append(self.stepper_info)
+            self.stepper_info_list.append(self.stepper_info.copy())
 
         # self.the_reporter_thread.start()
         # self.the_data_receive_thread.start()
@@ -552,7 +552,7 @@ class TelemetrixRpiPicoWAio:
                 raise RuntimeError(
                     'I2C Write: set_pin_mode i2c never called for i2c port 2.')
 
-        if type(args) != list:
+        if type(args) is not list:
             raise RuntimeError('args must be in the form of a list')
 
         command = [PrivateConstants.I2C_WRITE, i2c_port, address, len(args)]
@@ -700,7 +700,7 @@ class TelemetrixRpiPicoWAio:
                                   callback=None):
         """
         Request the CPU temperature. This will continuously monitor the temperature
-        and report it back in degrees celsius. Call only once, unless you wish to
+        and report it back in degrees Celsius. Call only once, unless you wish to
         modify the polling interval.
 
         :param threshold:    The threshold value is used to determine when a
@@ -938,7 +938,7 @@ class TelemetrixRpiPicoWAio:
 
       callback returns a data list:
 
-    DHT REPORT, DHT_DATA=1, PIN, Humidity,  Temperature (c),Time]
+    [DHT REPORT, DHT_DATA=1, PIN, Humidity,  Temperature (c),Time]
 
     DHT_REPORT =  12
 
