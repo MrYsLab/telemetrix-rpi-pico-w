@@ -99,7 +99,8 @@ class TelemetrixRpiPicoWAio:
             if python_version[1] >= 7:
                 pass
             else:
-                raise RuntimeError("ERROR: Python 3.7 or greater is "
+                if self.shutdown_on_exception:
+                    raise RuntimeError("ERROR: Python 3.7 or greater is "
                                    "required for use of this program.")
 
         # The report_dispatch dictionary is used to process
@@ -336,10 +337,14 @@ class TelemetrixRpiPicoWAio:
         """
         if self.pico_pins[pin] != PrivateConstants.AT_PWM_OUTPUT \
                 and self.pico_pins[pin] != PrivateConstants.AT_SERVO:
+            if self.shutdown_on_exception:
+                await self.shutdown()
             raise RuntimeError('pwm_write: You must set the pin mode before '
                                'performing an pwm write.')
 
         if not (0 <= duty_cycle <= self.maximum_pwm_duty_cycle):
+            if self.shutdown_on_exception:
+                await self.shutdown()
             raise RuntimeError('Raw PWM duty cycle out of range')
 
         value = duty_cycle.to_bytes(2, byteorder='big')
@@ -359,6 +364,8 @@ class TelemetrixRpiPicoWAio:
             command = [PrivateConstants.SET_PWM_FREQ, freq[0], freq[1], freq[2], freq[3]]
             await self._send_command(command)
         else:
+            if self.shutdown_on_exception:
+                await self.shutdown()
             raise RuntimeError('pwm_frequency is out of range')
 
     async def pwm_range(self, range_pwm):
@@ -377,6 +384,8 @@ class TelemetrixRpiPicoWAio:
                        data[2], data[3]]
             await self._send_command(command)
         else:
+            if self.shutdown_on_exception:
+                await self.shutdown()
             raise RuntimeError('pwm_range is out of range')
 
     async def digital_write(self, pin, value):
@@ -389,6 +398,8 @@ class TelemetrixRpiPicoWAio:
 
         """
         if self.pico_pins[pin] != PrivateConstants.AT_OUTPUT:
+            if self.shutdown_on_exception:
+                await self.shutdown()
             raise RuntimeError('digital_write: You must set the pin mode before '
                                'performing a digital write.')
         command = [PrivateConstants.DIGITAL_WRITE, pin, value]
@@ -553,6 +564,8 @@ class TelemetrixRpiPicoWAio:
                     'I2C Write: set_pin_mode i2c never called for i2c port 2.')
 
         if type(args) is not list:
+            if self.shutdown_on_exception:
+                await self.shutdown()
             raise RuntimeError('args must be in the form of a list')
 
         command = [PrivateConstants.I2C_WRITE, i2c_port, address, len(args)]
@@ -579,13 +592,19 @@ class TelemetrixRpiPicoWAio:
 
         """
         if not self.neopixels_initiated:
+            if self.shutdown_on_exception:
+                await self.shutdown()
             raise RuntimeError('You must call set_pin_mode_neopixel first')
 
         if pixel_number > self.number_of_pixels:
+            if self.shutdown_on_exception:
+                await self.shutdown()
             raise RuntimeError('Pixel number is out of legal range')
 
         for color in [r, g, b]:
             if not 0 <= color <= 255:
+                if self.shutdown_on_exception:
+                    await self.shutdown()
                 raise RuntimeError('RGB values must be in the range of 0-255')
 
         command = [PrivateConstants.SET_NEOPIXEL, pixel_number, r, g, b, auto_show]
@@ -602,6 +621,8 @@ class TelemetrixRpiPicoWAio:
 
         """
         if not self.neopixels_initiated:
+            if self.shutdown_on_exception:
+                await self.shutdown()
             raise RuntimeError('You must call set_pin_mode_neopixel first')
         command = [PrivateConstants.CLEAR_NEOPIXELS, auto_show]
         await self._send_command(command)
@@ -621,9 +642,13 @@ class TelemetrixRpiPicoWAio:
         :param auto_show: call show automatically
         """
         if not self.neopixels_initiated:
+            if self.shutdown_on_exception:
+                await self.shutdown()
             raise RuntimeError('You must call set_pin_mode_neopixel first')
         for color in [r, g, b]:
             if not 0 <= color <= 255:
+                if self.shutdown_on_exception:
+                    await self.shutdown()
                 raise RuntimeError('RGB values must be in the range of 0-255')
         command = [PrivateConstants.FILL_NEOPIXELS, r, g, b, auto_show]
         await self._send_command(command)
@@ -637,6 +662,8 @@ class TelemetrixRpiPicoWAio:
 
         """
         if not self.neopixels_initiated:
+            if self.shutdown_on_exception:
+                await self.shutdown()
             raise RuntimeError('You must call set_pin_mode_neopixel first')
         command = [PrivateConstants.SHOW_NEOPIXELS]
         await self._send_command(command)
@@ -694,6 +721,9 @@ class TelemetrixRpiPicoWAio:
             raise RuntimeError('A callback must be specified.')
         # make sure adc number is in range
         if not 0 <= adc_number < 4:
+            if self.shutdown_on_exception:
+                await self.shutdown()
+                await asyncio.sleep(.3)
             raise RuntimeError('Invalid ADC Number')
         await self._set_pin_mode(adc_number, PrivateConstants.AT_ANALOG, differential,
                                  callback=callback)
@@ -723,6 +753,8 @@ class TelemetrixRpiPicoWAio:
         """
 
         if not callback:
+            if self.shutdown_on_exception:
+                await self.shutdown()
             raise RuntimeError('get_cpu_temperature: you must specify a callback')
         # convert the floating point threshold to bytes
 
@@ -741,8 +773,12 @@ class TelemetrixRpiPicoWAio:
 
                 await self._send_command(command)
             else:
+                if self.shutdown_on_exception:
+                    await self.shutdown()
                 raise RuntimeError('get_cpu_temperature: polling interval out of range.')
         else:
+            if self.shutdown_on_exception:
+                await self.shutdown()
             raise RuntimeError('get_cpu_temperature: threshold out of range.')
 
     async def set_pin_mode_digital_input(self, pin_number, callback=None):
@@ -846,6 +882,8 @@ class TelemetrixRpiPicoWAio:
         """
         for color in [fill_r, fill_g, fiil_b]:
             if not 0 <= color <= 255:
+                if self.shutdown_on_exception:
+                    await self.shutdown()
                 raise RuntimeError('RGB values must be in the range of 0-255')
 
         self.number_of_pixels = num_pixels
@@ -873,6 +911,8 @@ class TelemetrixRpiPicoWAio:
         if pin_number in self.pico_pins:
             self.pico_pins[pin_number] = PrivateConstants.AT_PWM_OUTPUT
             if self.pwm_active_count >= 15:
+                if self.shutdown_on_exception:
+                    await self.shutdown()
                 raise RuntimeError(
                     'pwm or servo set mode: number of active PWM pins is at maximum')
 
@@ -880,6 +920,8 @@ class TelemetrixRpiPicoWAio:
 
             await self._set_pin_mode(pin_number, PrivateConstants.AT_PWM_OUTPUT)
         else:
+            if self.shutdown_on_exception:
+                await self.shutdown()
             raise RuntimeError('Gpio Pin Number is invalid')
 
     async def set_pin_mode_i2c(self, i2c_port=0, sda_gpio=None, scl_gpio=None):
@@ -907,6 +949,8 @@ class TelemetrixRpiPicoWAio:
 
         # determine if the i2c port is specified correctly
         if i2c_port not in [0, 1]:
+            if self.shutdown_on_exception:
+                await self.shutdown()
             raise RuntimeError('i2c port must be either a 0 or 1')
         if sda_gpio or scl_gpio:
             if i2c_port == 0:
@@ -982,6 +1026,8 @@ class TelemetrixRpiPicoWAio:
         if pin_number in self.pico_pins:
             self.pico_pins[pin_number] = PrivateConstants.AT_PWM_OUTPUT
             if self.pwm_active_count >= 15:
+                if self.shutdown_on_exception:
+                    await self.shutdown()
                 raise RuntimeError(
                     'pwm or servo set mode: number of active PWM pins is at maximum')
 
@@ -1154,6 +1200,8 @@ class TelemetrixRpiPicoWAio:
         """
 
         if self.pico_pins[pin_number] != PrivateConstants.AT_SERVO:
+            if self.shutdown_on_exception:
+                await self.shutdown()
             raise RuntimeError('You must call set_pin_mode_servo before trying to '
                                'write a value to a servo or servo was detached.')
 
@@ -1948,6 +1996,8 @@ class TelemetrixRpiPicoWAio:
             if pin_number in self.pico_pins:
                 self.pico_pins[pin_number] = pin_state
             else:
+                if self.shutdown_on_exception:
+                    await self.shutdown()
                 raise RuntimeError('Gpio Pin Number is invalid')
 
         if callback:
