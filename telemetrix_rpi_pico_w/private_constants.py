@@ -1,5 +1,5 @@
 """
- Copyright (c) 2022 Alan Yorinks All rights reserved.
+ Copyright (c) 2022-2025 Alan Yorinks All rights reserved.
 
  This program is free software; you can redistribute it and/or
  modify it under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE
@@ -46,7 +46,7 @@ class PrivateConstants:
     SPI_READ_BLOCKING = 20
     SPI_SET_FORMAT = 21
     SPI_CS_CONTROL = 22
-    ONE_WIRE_INIT = 23 # NOTE onewire is currently not supported
+    ONE_WIRE_INIT = 23  # NOTE onewire is currently not supported
     ONE_WIRE_RESET = 24
     ONE_WIRE_SELECT = 25
     ONE_WIRE_SKIP = 26
@@ -106,7 +106,7 @@ class PrivateConstants:
 
     DEBUG_PRINT = 99
 
-    TELEMETRIX_VERSION = "1.20"
+    TELEMETRIX_VERSION = "1.50"
 
     # reporting control
     REPORTING_DISABLE_ALL = 0

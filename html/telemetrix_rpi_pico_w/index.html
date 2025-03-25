@@ -2,18 +2,32 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-<meta name="generator" content="pdoc 0.10.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
 <title>telemetrix_rpi_pico_w.telemetrix_rpi_pico_w API documentation</title>
-<meta name="description" content="Copyright (c) 2022 Alan Yorinks All rights reserved …" />
-<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
-<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
-<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
-<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
-<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<meta name="description" content="Copyright (c) 2022-2025 Alan Yorinks All rights reserved …">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
 <style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
-<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
 </head>
 <body>
 <main>
@@ -22,7 +36,7 @@
 <h1 class="title">Module <code>telemetrix_rpi_pico_w.telemetrix_rpi_pico_w</code></h1>
 </header>
 <section id="section-intro">
-<p>Copyright (c) 2022 Alan Yorinks All rights reserved.</p>
+<p>Copyright (c) 2022-2025 Alan Yorinks All rights reserved.</p>
 <p>This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE
 Version 3 as published by the Free Software Foundation; either
@@ -37,2479 +51,6 @@ along with this library; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
 02110-1301
 USA</p>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">&#34;&#34;&#34;
- Copyright (c) 2022 Alan Yorinks All rights reserved.
-
- This program is free software; you can redistribute it and/or
- modify it under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE
- Version 3 as published by the Free Software Foundation; either
- or (at your option) any later version.
- This library is distributed in the hope that it will be useful,f
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- General Public License for more details.
-
- You should have received a copy of the GNU AFFERO GENERAL PUBLIC LICENSE
- along with this library; if not, write to the Free Software
- Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
-&#34;&#34;&#34;
-from collections import deque
-import socket
-import struct
-import sys
-import threading
-import time
-import warnings
-
-from telemetrix_rpi_pico_w.private_constants import PrivateConstants
-
-
-# noinspection PyMethodMayBeStatic
-
-
-class TelemetrixRpiPicoW(threading.Thread):
-    &#34;&#34;&#34;
-    This class exposes and implements a Telemetrix type
-    API for the Raspberry Pi Pico W.
-    It uses threading to accommodate concurrency.
-    It includes the public API methods as well as
-    a set of private methods.
-
-    All pin numbers are specified using PICO GPIO pin numbering.
-
-    &#34;&#34;&#34;
-
-    def __init__(self, ip_address=None,
-                 ip_port=31335,
-                 sleep_tune=0.000001,
-                 shutdown_on_exception=True,
-                 reset_on_shutdown=True):
-
-        &#34;&#34;&#34;
-
-        :param ip_address: IP address assigned to the Pico W
-
-        :param ip_port: IP Port number.
-
-        :param sleep_tune: A tuning parameter (typically not changed by user)
-
-        :param shutdown_on_exception: call shutdown before raising
-                                      a RunTimeError exception, or
-                                      receiving a KeyboardInterrupt exception
-
-        :param reset_on_shutdown: Reset the board upon shutdown
-        &#34;&#34;&#34;
-
-        # initialize threading parent
-        threading.Thread.__init__(self)
-
-        # create the threads and set them as daemons so
-        # that they stop when the program is closed
-
-        # create a thread to interpret received serial data
-        self.the_reporter_thread = threading.Thread(target=self._reporter)
-        self.the_reporter_thread.daemon = True
-
-        self.the_data_receive_thread = threading.Thread(target=self._tcp_receiver)
-
-        # flag to allow the reporter and receive threads to run.
-        self.run_event = threading.Event()
-
-        # check to make sure that Python interpreter is version 3.7 or greater
-        python_version = sys.version_info
-        if python_version[0] &gt;= 3:
-            if python_version[1] &gt;= 7:
-                pass
-            else:
-                raise RuntimeError(&#34;ERROR: Python 3.7 or greater is &#34;
-                                   &#34;required for use of this program.&#34;)
-
-        # save input parameters as instance variables
-        self.ip_address = ip_address
-        self.ip_port = ip_port
-        self.sleep_tune = sleep_tune
-        self.shutdown_on_exception = shutdown_on_exception
-        self.reset_on_shutdown = reset_on_shutdown
-
-        # create a deque to receive and process data from the pico
-        self.the_deque = deque()
-
-        # The report_dispatch dictionary is used to process
-        # incoming report messages by looking up the report message
-        # and executing its associated processing method.
-
-        self.report_dispatch = {}
-
-        # To add a command to the command dispatch table, append here.
-        self.report_dispatch.update(
-            {PrivateConstants.LOOP_COMMAND: self._report_loop_data})
-        self.report_dispatch.update(
-            {PrivateConstants.DEBUG_PRINT: self._report_debug_data})
-        self.report_dispatch.update(
-            {PrivateConstants.DIGITAL_REPORT: self._digital_message})
-        self.report_dispatch.update(
-            {PrivateConstants.ANALOG_REPORT: self._analog_message})
-        self.report_dispatch.update(
-            {PrivateConstants.CPU_TEMP_REPORT: self._cpu_temp_message})
-        self.report_dispatch.update(
-            {PrivateConstants.FIRMWARE_REPORT: self._firmware_message})
-        self.report_dispatch.update(
-            {PrivateConstants.SERVO_UNAVAILABLE: self._servo_unavailable})
-        self.report_dispatch.update(
-            {PrivateConstants.I2C_READ_REPORT: self._i2c_read_report})
-        self.report_dispatch.update(
-            {
-                PrivateConstants.I2C_TOO_FEW_BYTES_RECEIVED: self._i2c_too_few_bytes_received})
-        self.report_dispatch.update(
-            {
-                PrivateConstants.I2C_TOO_MANY_BYTES_RECEIVED: self._i2c_too_many_bytes_received})
-        self.report_dispatch.update(
-            {PrivateConstants.SONAR_DISTANCE: self._sonar_distance_report})
-        self.report_dispatch.update({PrivateConstants.DHT_REPORT: self._dht_report})
-        self.report_dispatch.update({PrivateConstants.SPI_REPORT: self._spi_report})
-        # self.report_dispatch.update(
-        #     {PrivateConstants.ONE_WIRE_REPORT: self._onewire_report})
-        self.report_dispatch.update(
-            {PrivateConstants.STEPPER_DISTANCE_TO_GO:
-                 self._stepper_distance_to_go_report})
-        self.report_dispatch.update(
-            {PrivateConstants.STEPPER_TARGET_POSITION:
-                 self._stepper_target_position_report})
-        self.report_dispatch.update(
-            {PrivateConstants.STEPPER_CURRENT_POSITION:
-                 self._stepper_current_position_report})
-        self.report_dispatch.update(
-            {PrivateConstants.STEPPER_RUNNING_REPORT:
-                 self._stepper_is_running_report})
-        self.report_dispatch.update(
-            {PrivateConstants.STEPPER_RUN_COMPLETE_REPORT:
-                 self._stepper_run_complete_report})
-        self.report_dispatch.update(
-            {PrivateConstants.STEPPER_DISTANCE_TO_GO:
-                 self._stepper_distance_to_go_report})
-        self.report_dispatch.update(
-            {PrivateConstants.STEPPER_TARGET_POSITION:
-                 self._stepper_target_position_report})
-
-        # up to 16 pwm/servo pins may be simultaneously active
-        self.pwm_active_count = 0
-
-        # maximum pwm duty cycle - 20000
-        self.maximum_pwm_duty_cycle = PrivateConstants.MAX_PWM_DUTY_CYCLE
-
-        # dictionaries to store the callbacks for each pin
-        self.analog_callbacks = {}
-
-        self.digital_callbacks = {}
-
-        self.cpu_temp_active = False
-        self.cpu_temp_callback = None
-
-        # there are 2 i2c ports available
-        # these values help support both
-        self.i2c_callback = None
-        self.i2c_callback2 = None
-
-        self.i2c_0_active = False
-        self.i2c_1_active = False
-
-        # there are 2 spi ports available
-        # these values help support both
-        self.spi_callback = None
-        self.spi_callback2 = None
-
-        self.spi_0_active = False
-        self.spi_1_active = False
-
-        self.spi0_chip_select = 17
-        self.spi1_chip_select = 13
-
-        # the trigger pin will be the key to retrieve
-        # the callback for a specific HC-SR04
-        self.sonar_callbacks = {}
-
-        self.sonar_count = 0
-
-        self.dht_callbacks = {}
-
-        self.dht_count = 0
-
-        # socket for tcp/ip communications
-        self.sock = None
-
-        # flag to indicate we are in shutdown mode
-        self.shutdown_flag = False
-
-        # debug loopback callback method
-        self.loop_back_callback = None
-
-        # flag to indicate the start of a new report
-        # self.new_report_start = True
-
-        # firmware version to be stored here
-        self.firmware_version = []
-
-        # reported pico_id
-        self.reported_pico_id = []
-
-        # Create a dictionary to store the pins in use.
-        # Notice that gpio pins 23, 24 and 25 are not included
-        # because the Pico does not support these GPIOs.
-
-        # This dictionary is a list of gpio pins updated with the pin mode when a pin mode
-        # is set.
-        # It is created initially using a dictionary comprehension.
-        self.pico_pins = {gpio_pin: PrivateConstants.AT_MODE_NOT_SET for gpio_pin in
-                          range(23)}
-
-        # skip over unavailable pins
-        for pin in range(25, 29):
-            self.pico_pins[pin] = PrivateConstants.AT_MODE_NOT_SET
-
-        self.pico_pins[32] = PrivateConstants.AT_MODE_NOT_SET
-
-        # create a dictionary that holds all the servo ranges
-        self.servo_ranges = {gpio_pin: [1000, 2000] for gpio_pin in
-                             range(23)}
-
-        # skip over unavailable pins
-        for gpio_pin in range(25, 29):
-            self.servo_ranges[gpio_pin] = [1000, 2000]
-
-        # updated when a new motor is added
-        self.next_stepper_assigned = 0
-
-        # valid list of stepper motor interface types
-        self.valid_stepper_interfaces = [1, 2, 3, 4, 6, 8]
-
-        # maximum number of steppers supported
-        self.max_number_of_steppers = 4
-
-        # number of steppers created - not to exceed the maximum
-        self.number_of_steppers = 0
-
-        # dictionary to hold stepper motor information
-        self.stepper_info = {&#39;instance&#39;: False, &#39;is_running&#39;: None,
-                             &#39;maximum_speed&#39;: 1, &#39;speed&#39;: 0, &#39;acceleration&#39;: 0,
-                             &#39;distance_to_go_callback&#39;: None,
-                             &#39;target_position_callback&#39;: None,
-                             &#39;current_position_callback&#39;: None,
-                             &#39;is_running_callback&#39;: None,
-                             &#39;motion_complete_callback&#39;: None,
-                             &#39;acceleration_callback&#39;: None}
-
-        # build a list of stepper motor info items
-        self.stepper_info_list = []
-        # a list of dictionaries to hold stepper information
-        for motor in range(self.max_number_of_steppers):
-            self.stepper_info_list.append(self.stepper_info)
-
-        self.the_reporter_thread.start()
-        self.the_data_receive_thread.start()
-
-        # neopixel data
-        self.number_of_pixels = None
-
-        self.neopixels_initiated = False
-
-        print(f&#34;TelemetrixRpiPicoW:  Version {PrivateConstants.TELEMETRIX_VERSION}\n\n&#34;
-              f&#34;Copyright (c) 2022 Alan Yorinks All Rights Reserved.\n&#34;)
-
-        print(&#39;Establishing IP connection...&#39;)
-        self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, True)
-        try:
-            self.sock.settimeout(8)
-            self.sock.connect((self.ip_address, self.ip_port))
-        except (socket.timeout, OSError):
-            print(f&#39;Could not establish a connection to {self.ip_address}:{self.ip_port}&#39;)
-            try:
-                self.sock.shutdown(socket.SHUT_RDWR)
-                self.sock.close()
-            except Exception:
-                pass
-            raise
-
-        print(f&#39;Successfully connected to: {self.ip_address}:{self.ip_port}&#39;)
-
-        # allow the threads to run
-        self._run_threads()
-
-        # get pico firmware version and print it
-        print(&#39;\nRetrieving Telemetrix4picoW firmware ID...&#39;)
-        self._get_firmware_version()
-        time.sleep(.3)
-        if not self.firmware_version:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError(f&#39;Telemetrix4picoW firmware version&#39;)
-
-        else:
-            print(f&#39;Telemetrix4picoW firmware version: {self.firmware_version[0]}.&#39;
-                  f&#39;{self.firmware_version[1]}.{self.firmware_version[2]}&#39;)
-        command = [PrivateConstants.ENABLE_ALL_REPORTS]
-        self._send_command(command)
-
-        # Have the server reset its data structures
-        command = [PrivateConstants.RESET_DATA]
-        self._send_command(command)
-
-    def pwm_write(self, pin, duty_cycle=0):
-        &#34;&#34;&#34;
-        Set the specified pin to the specified value.
-        This is a PWM write.
-
-        :param pin: pico GPIO pin number
-
-        :param duty_cycle: output value - This is dependent upon
-                           the PWM range. Default is 20000, but it
-                           may be modified by calling pwm_range
-
-
-        &#34;&#34;&#34;
-        if self.pico_pins[pin] != PrivateConstants.AT_PWM_OUTPUT \
-                and self.pico_pins[pin] != PrivateConstants.AT_SERVO:
-            raise RuntimeError(&#39;pwm_write: You must set the pin mode before &#39;
-                               &#39;performing an pwm write.&#39;)
-
-        if not (0 &lt;= duty_cycle &lt;= self.maximum_pwm_duty_cycle):
-            raise RuntimeError(&#39;Raw PWM duty cycle out of range&#39;)
-
-        value = duty_cycle.to_bytes(2, byteorder=&#39;big&#39;)
-
-        command = [PrivateConstants.ANALOG_WRITE, pin, value[0], value[1]]
-        self._send_command(command)
-
-    def pwm_frequency(self, frequency):
-        &#34;&#34;&#34;
-        Modify the pwm frequency. Valid values are in the range of 100Hz to 1MHz
-
-        :param frequency: desired PWM write frequency
-        &#34;&#34;&#34;
-        if 100 &lt;= frequency &lt;= 1000000000:
-            freq = frequency.to_bytes(4, byteorder=&#39;big&#39;)
-
-            command = [PrivateConstants.SET_PWM_FREQ, freq[0], freq[1], freq[2], freq[3]]
-            self._send_command(command)
-        else:
-            raise RuntimeError(&#39;pwm_frequency is out of range&#39;)
-
-    def pwm_range(self, range_pwm):
-        &#34;&#34;&#34;
-        Set the duty cycle range.
-        The range of values is 16 to 65535
-
-        :param range_pwm: range value
-        &#34;&#34;&#34;
-
-        if 16 &lt;= range_pwm &lt;= 65535:
-            data = range_pwm.to_bytes(4, byteorder=&#39;big&#39;)
-            self.maximum_pwm_duty_cycle = range_pwm
-
-            command = [PrivateConstants.SET_PWM_RANGE, data[0], data[1],
-                       data[2], data[3]]
-            self._send_command(command)
-        else:
-            raise RuntimeError(&#39;pwm_range is out of range&#39;)
-
-    def digital_write(self, pin, value):
-        &#34;&#34;&#34;
-        Set the specified pin to the specified value.
-
-        :param pin: pico GPIO pin number
-
-        :param value: pin value (1 or 0)
-
-        &#34;&#34;&#34;
-        if self.pico_pins[pin] != PrivateConstants.AT_OUTPUT:
-            raise RuntimeError(&#39;digital_write: You must set the pin mode before &#39;
-                               &#39;performing a digital write.&#39;)
-        command = [PrivateConstants.DIGITAL_WRITE, pin, value]
-        self._send_command(command)
-
-    def disable_all_reporting(self):
-        &#34;&#34;&#34;
-        Disable reporting for all digital and analog input pins
-        &#34;&#34;&#34;
-        command = [PrivateConstants.MODIFY_REPORTING,
-                   PrivateConstants.REPORTING_DISABLE_ALL, 0]
-        self._send_command(command)
-
-    def disable_analog_reporting(self, pin):
-        &#34;&#34;&#34;
-        Disables analog reporting for a single analog pin.
-
-        :param pin: Analog pin number. For example for ADC0, the number is 0.
-
-        &#34;&#34;&#34;
-        command = [PrivateConstants.MODIFY_REPORTING,
-                   PrivateConstants.REPORTING_ANALOG_DISABLE, pin]
-        self._send_command(command)
-
-    def disable_digital_reporting(self, pin):
-        &#34;&#34;&#34;
-        Disables digital reporting for a single digital input.
-
-        :param pin: GPIO Pin number.
-
-        &#34;&#34;&#34;
-        command = [PrivateConstants.MODIFY_REPORTING,
-                   PrivateConstants.REPORTING_DIGITAL_DISABLE, pin]
-        self._send_command(command)
-
-    def enable_analog_reporting(self, pin):
-        &#34;&#34;&#34;
-        Enables analog reporting for the specified pin.
-
-        :param pin: Analog pin number. For example for ADC0, the number is 0.
-
-
-        &#34;&#34;&#34;
-        command = [PrivateConstants.MODIFY_REPORTING,
-                   PrivateConstants.REPORTING_ANALOG_ENABLE, pin]
-        self._send_command(command)
-
-    def enable_digital_reporting(self, pin):
-        &#34;&#34;&#34;
-        Enable reporting on the specified digital pin.
-
-        :param pin: GPIO Pin number.
-        &#34;&#34;&#34;
-
-        command = [PrivateConstants.MODIFY_REPORTING,
-                   PrivateConstants.REPORTING_DIGITAL_ENABLE, pin]
-        self._send_command(command)
-
-    def _get_firmware_version(self):
-        &#34;&#34;&#34;
-        This method retrieves the
-        pico-telemetrix firmware version
-
-        &#34;&#34;&#34;
-        command = [PrivateConstants.GET_FIRMWARE_VERSION]
-        self._send_command(command)
-        # provide time for the reply
-        time.sleep(.5)
-
-    def i2c_read(self, address, register, number_of_bytes,
-                 callback=None, i2c_port=0, send_stop=True):
-        &#34;&#34;&#34;
-        Read the specified number of bytes from the specified register for
-        the i2c device.
-
-
-        :param address: i2c device address
-
-        :param register: i2c register (or None if no register selection is needed)
-
-        :param number_of_bytes: number of bytes to be read
-
-        :param callback: Required callback function to report i2c data as a
-                   result of read command
-
-       :param i2c_port: 0 = port 0, 1 = port 1
-
-       :param send_stop: If False, master retains control of the bus at the end of the
-                       transfer (no Stop is issued), and the next transfer will
-                       begin with a Restart rather than a Start.
-
-
-        callback returns a data list:
-        [I2C_READ_REPORT, i2c_port, i2c_device_address, count of data bytes,
-        data bytes, time-stamp]
-
-        I2C_READ_REPORT = 10
-
-        &#34;&#34;&#34;
-
-        if not callback:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError(&#39;I2C Read: A callback function must be specified.&#39;)
-
-        # i2c_port = 0 for port 0
-        if i2c_port == 0:
-            if not self.i2c_0_active:
-                if self.shutdown_on_exception:
-                    self.shutdown()
-                raise RuntimeError(
-                    &#39;I2C Read: set_pin_mode_i2c never called for i2c port 0.&#39;)
-            else:
-                self.i2c_callback = callback
-
-        else:
-            if i2c_port == 1:
-                if not self.i2c_1_active:
-                    if self.shutdown_on_exception:
-                        self.shutdown()
-                    raise RuntimeError(
-                        &#39;I2C READ: set_pin_mode_i2c never called for i2c port 1.&#39;)
-                else:
-                    self.i2c_callback2 = callback
-
-        command = [PrivateConstants.I2C_READ, i2c_port, address, register,
-                   number_of_bytes, send_stop]
-
-        # no register specified
-        if not register:
-            command[3] = PrivateConstants.I2C_NO_REGISTER
-
-        self._send_command(command)
-
-    def i2c_write(self, address, args, i2c_port=0):
-        &#34;&#34;&#34;
-        Write data to an i2c device.
-
-        :param address: i2c device address
-
-        :param args: A variable number of bytes to be sent to the device
-                     passed in as a list.
-                     NOTE: THIS MUST BE IN THE FORM OF A LIST.
-
-        :param i2c_port: 0= port 0, 1 = port 1
-
-        &#34;&#34;&#34;
-        if not i2c_port:
-            if not self.i2c_0_active:
-                if self.shutdown_on_exception:
-                    self.shutdown()
-                raise RuntimeError(
-                    &#39;I2C Write: set_pin_mode i2c never called for i2c port 0.&#39;)
-
-        elif i2c_port:
-            if not self.i2c_1_active:
-                if self.shutdown_on_exception:
-                    self.shutdown()
-                raise RuntimeError(
-                    &#39;I2C Write: set_pin_mode i2c never called for i2c port 2.&#39;)
-
-        if type(args) != list:
-            raise RuntimeError(&#39;args must be in the form of a list&#39;)
-
-        command = [PrivateConstants.I2C_WRITE, i2c_port, address, len(args)]
-
-        for item in args:
-            command.append(item)
-
-        self._send_command(command)
-
-    def neo_pixel_set_value(self, pixel_number, r=0, g=0, b=0, auto_show=False):
-        &#34;&#34;&#34;
-        Set the selected pixel in the pixel array on the Pico to
-        the value provided.
-
-        :param pixel_number: pixel number
-
-        :param r: red value 0-255
-
-        :param g: green value 0-255
-
-        :param b: blue value 0-255
-
-        :param auto_show: call show automatically
-
-        &#34;&#34;&#34;
-        if not self.neopixels_initiated:
-            raise RuntimeError(&#39;You must call set_pin_mode_neopixel first&#39;)
-
-        if pixel_number &gt; self.number_of_pixels:
-            raise RuntimeError(&#39;Pixel number is out of legal range&#39;)
-
-        if r and g and b not in range(256):
-            raise RuntimeError(&#39;Pixel value must be in the range of 0-255&#39;)
-
-        command = [PrivateConstants.SET_NEOPIXEL, pixel_number, r, g, b, auto_show]
-        self._send_command(command)
-
-        if auto_show:
-            self.neopixel_show()
-
-    def neopixel_clear(self, auto_show=True):
-        &#34;&#34;&#34;
-        Clear all pixels
-
-        :param auto_show: call show automatically
-
-        &#34;&#34;&#34;
-        if not self.neopixels_initiated:
-            raise RuntimeError(&#39;You must call set_pin_mode_neopixel first&#39;)
-        command = [PrivateConstants.CLEAR_NEOPIXELS, auto_show]
-        self._send_command(command)
-        if auto_show:
-            self.neopixel_show()
-
-    def neopixel_fill(self, r=0, g=0, b=0, auto_show=True):
-        &#34;&#34;&#34;
-        Fill all pixels with specified value
-
-        :param r: 0-255
-
-        :param g: 0-255
-
-        :param b: 0-255
-
-        :param auto_show: call show automatically
-        &#34;&#34;&#34;
-        if not self.neopixels_initiated:
-            raise RuntimeError(&#39;You must call set_pin_mode_neopixel first&#39;)
-        if r and g and b not in range(256):
-            raise RuntimeError(&#39;Pixel value must be in the range of 0-255&#39;)
-        command = [PrivateConstants.FILL_NEOPIXELS, r, g, b, auto_show]
-        self._send_command(command)
-
-        if auto_show:
-            self.neopixel_show()
-
-    def neopixel_show(self):
-        &#34;&#34;&#34;
-        Write the NeoPixel buffer stored in the Pico to the NeoPixel strip.
-
-        &#34;&#34;&#34;
-        if not self.neopixels_initiated:
-            raise RuntimeError(&#39;You must call set_pin_mode_neopixel first&#39;)
-        command = [PrivateConstants.SHOW_NEOPIXELS]
-        self._send_command(command)
-
-    def loop_back(self, start_character, callback=None):
-        &#34;&#34;&#34;
-        This is a debugging method to send a character to the
-        pico device, and have the device loop it back.
-
-        :param start_character: The character to loop back. It should be
-                                an integer.
-
-        :param callback: Looped back character will appear in the callback method
-
-        &#34;&#34;&#34;
-        command = [PrivateConstants.LOOP_COMMAND, ord(start_character)]
-        self.loop_back_callback = callback
-        self._send_command(command)
-
-    def set_pin_mode_analog_input(self, adc_number, differential=0, callback=None):
-        &#34;&#34;&#34;
-        Set a pin as an analog input.
-
-        :param adc_number: ADC Number 0-4
-
-                           ADC numbers are mapped as following:
-                           ADC0 = GPIO 26 (Physical Pin 31)
-                           ADC1 = GPIO 27 (Physical Pin 32)
-                           ADC2 = GPIO 28 (Physical Pin 34)
-
-                           Internal Mapping
-                           ADC3 = GPIO 29 (Physical Pin 35) ADC Reference Voltage
-
-                           NOTE: This is different from telemetrix-rpi-pico
-                           To get cpu temperature, call get_cpu_temperature.
-
-        :param differential: difference in previous to current value before
-                             report will be generated
-
-        :param callback: callback function
-
-
-        callback returns a data list:
-
-        [ANALOG_REPORT, pin_number, pin_value, raw_time_stamp]
-
-        The ANALOG_REPORT  = 3
-
-        &#34;&#34;&#34;
-        # make sure adc number is in range
-        if not 0 &lt;= adc_number &lt; 4:
-            raise RuntimeError(&#39;Invalid ADC Number&#39;)
-        self._set_pin_mode(adc_number, PrivateConstants.AT_ANALOG, differential,
-                           callback=callback)
-
-    def get_cpu_temperature(self, threshold=1.0, polling_interval=1000, callback=None):
-        &#34;&#34;&#34;
-        Request the CPU temperature. This will continuously monitor the temperature
-        and report it back in degrees celsius. Call only once, unless you wish to
-        modify the polling interval.
-
-        :param threshold:    The threshold value is used to determine when a
-        temperature report is generated. The current temperature is compared to
-        plus and minus the threshold value and if the value is exceeded, a report is
-        generated. To receive continuous reports, set the threshold to 0. A maximum of
-        5.0 degrees is allowed.
-
-        :param polling_interval: number of milliseconds between temperature reads.
-                                 Maximum of 60 seconds (6000 ms.)
-
-        :param callback: callback function
-
-        callback returns a list:
-        [CPU_TEMPERATURE_REPORT, degrees_celsius, raw_time_stamp]
-
-        CPU_TEMPERATURE_REPORT = 20
-        &#34;&#34;&#34;
-
-        if not callback:
-            raise RuntimeError(&#39;get_cpu_temperature: you must specify a callback&#39;)
-        # convert the floating point threshold to bytes
-
-        if 0.0 &lt;= threshold &lt; 30.0:
-            if 0 &lt;= polling_interval &lt; 60000:
-                thresh_list = list(struct.pack(&#34;f&#34;, threshold))
-                polling_list = polling_interval.to_bytes(2, byteorder=&#39;big&#39;)
-                self.cpu_temp_callback = callback
-
-                self.cpu_temp_active = True
-
-                command = [PrivateConstants.GET_CPU_TEMPERATURE, thresh_list[0],
-                           thresh_list[1],
-                           thresh_list[2], thresh_list[3], polling_list[0],
-                           polling_list[1]]
-
-                self._send_command(command)
-            else:
-                raise RuntimeError(&#39;get_cpu_temperature: polling interval out of range.&#39;)
-        else:
-            raise RuntimeError(&#39;get_cpu_temperature: threshold out of range.&#39;)
-
-    def set_pin_mode_digital_input(self, pin_number, callback=None):
-        &#34;&#34;&#34;
-        Set a pin as a digital input.
-
-        :param pin_number: pico GPIO pin number
-
-        :param callback: callback function
-
-
-        callback returns a data list:
-
-        [DIGITAL_REPORT, pin_number, pin_value, raw_time_stamp]
-
-        DIGITAL_REPORT = 2
-
-        &#34;&#34;&#34;
-        self._set_pin_mode(pin_number, PrivateConstants.AT_INPUT, callback=callback)
-
-    def set_pin_mode_digital_input_pullup(self, pin_number, callback=None):
-        &#34;&#34;&#34;
-        Set a pin as a digital input with pullup enabled.
-
-        :param pin_number: pico GPIO pin number
-
-        :param callback: callback function
-
-
-        callback returns a data list:
-
-        [DIGITAL_REPORT, pin_number, pin_value, raw_time_stamp]
-
-        The DIGITAL_REPORT = 2
-
-        &#34;&#34;&#34;
-        self._set_pin_mode(pin_number, PrivateConstants.AT_INPUT_PULLUP,
-                           callback=callback)
-
-    def set_pin_mode_digital_input_pull_down(self, pin_number, callback=None):
-        &#34;&#34;&#34;
-        Set a pin as a digital input with pull down enabled.
-
-        :param pin_number: pico GPIO pin number
-
-        :param callback: callback function
-
-
-        callback returns a data list:
-
-        [DIGITAL_REPORT, pin_number, pin_value, raw_time_stamp]
-
-        DIGITAL_REPORT= 2
-
-        &#34;&#34;&#34;
-        self._set_pin_mode(pin_number, PrivateConstants.AT_INPUT_PULL_DOWN,
-                           callback=callback)
-
-    def set_pin_mode_digital_output(self, pin_number):
-        &#34;&#34;&#34;
-        Set a pin as a digital output pin.
-
-        :param pin_number: pico GPIO pin number
-        &#34;&#34;&#34;
-
-        self._set_pin_mode(pin_number, PrivateConstants.AT_OUTPUT)
-
-    def set_pin_mode_neopixel(self, pin_number=28, num_pixels=8,
-                              fill_r=0, fill_g=0, fill_b=0):
-        &#34;&#34;&#34;
-        Initialize the pico for NeoPixel control. Fill with rgb values specified.
-
-        Default: Set all the pixels to off.
-
-        :param pin_number: neopixel GPIO control pin
-
-        :param num_pixels: number of pixels in the strip
-
-        :param fill_r: initial red fill value 0-255
-
-        :param fill_g: initial green fill value 0-255
-
-        :param fill_b: initial blue fill value 0-255
-
-
-        &#34;&#34;&#34;
-        if fill_r or fill_g or fill_g not in range(256):
-            raise RuntimeError(&#39;Pixel value must be in the range of 0-255&#39;)
-
-        self.number_of_pixels = num_pixels
-
-        command = [PrivateConstants.INIT_NEOPIXELS, pin_number,
-                   self.number_of_pixels, fill_r, fill_g, fill_b]
-
-        self._send_command(command)
-
-        self.pico_pins[pin_number] = PrivateConstants.AT_NEO_PIXEL
-
-        self.neopixels_initiated = True
-
-    def set_pin_mode_pwm_output(self, pin_number):
-        &#34;&#34;&#34;
-        Enable a pin as a PWM pin. Maximum number of PWMs is 16.
-
-        Note: There are up to 16 pins that can be assigned as
-        PWM. Servo pins share the 16 PWM pins.
-
-        :param pin_number: pico GPIO pin number
-
-        &#34;&#34;&#34;
-
-        if pin_number in self.pico_pins:
-            self.pico_pins[pin_number] = PrivateConstants.AT_PWM_OUTPUT
-            if self.pwm_active_count &gt;= 15:
-                raise RuntimeError(
-                    &#39;pwm or servo set mode: number of active PWM pins is at maximum&#39;)
-
-            self.pwm_active_count += 1
-
-            self._set_pin_mode(pin_number, PrivateConstants.AT_PWM_OUTPUT)
-        else:
-            raise RuntimeError(&#39;Gpio Pin Number is invalid&#39;)
-
-    def set_pin_mode_i2c(self, i2c_port=0, sda_gpio=None, scl_gpio=None):
-        &#34;&#34;&#34;
-        Establish the standard pico i2c pins for i2c utilization.
-
-        SDA pins: port 0 = 4   port 1 = 26
-        SCL pins: port 0 = 5   port 1 = 27
-
-        :param i2c_port: 0 = i2c0, 1 = i2c1
-
-        :param sda_gpio: gpio pin assigned to SDA
-
-        :param scl_gpio: gpio pin assigned to SCL
-
-
-        NOTES:
-               1. THIS METHOD MUST BE CALLED BEFORE ANY I2C REQUEST IS MADE &lt;br&gt;
-               2. Callbacks are set within the individual i2c read methods of this
-              API.
-
-              See i2c_read, and i2c_write
-
-        &#34;&#34;&#34;
-
-        # determine if the i2c port is specified correctly
-        if i2c_port not in [0, 1]:
-            raise RuntimeError(&#39;i2c port must be either a 0 or 1&#39;)
-        if sda_gpio or scl_gpio:
-            if i2c_port == 0:
-                if sda_gpio != 4 or scl_gpio != 5:
-                    warnings.warn(&#39;SDA = 4, and SCL = 5. Ignoring pins specified&#39;)
-            else:
-                if sda_gpio != 26 or scl_gpio != 27:
-                    warnings.warn(&#39;SDA = 26, and SCL = 27. Ignoring pins specified&#39;)
-
-        # test for i2c port 0
-        if i2c_port == 0:
-            self.i2c_0_active = True
-            sda_gpio = 4
-            scl_gpio = 5
-        # port 1
-        else:
-            self.i2c_1_active = True
-            sda_gpio = 26
-            scl_gpio = 27
-
-        self.pico_pins[sda_gpio] = self.pico_pins[scl_gpio] = PrivateConstants.AT_I2C
-
-        command = [PrivateConstants.I2C_BEGIN, i2c_port]
-        self._send_command(command)
-
-    def set_pin_mode_dht(self, pin, callback=None):
-        &#34;&#34;&#34;
-
-      :param pin: connection pin
-
-      :param callback: callback function
-
-      callback returns a data list:
-
-    DHT REPORT, DHT_DATA=1, PIN, Humidity,  Temperature (c),Time]
-
-    DHT_REPORT =  12
-
-        &#34;&#34;&#34;
-
-        if not callback:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError(&#39;set_pin_mode_dht: A Callback must be specified&#39;)
-
-        if self.dht_count &lt; PrivateConstants.MAX_DHTS:
-            self.dht_callbacks[pin] = callback
-            self.dht_count += 1
-            self.pico_pins[pin] = PrivateConstants.AT_DHT
-            command = [PrivateConstants.DHT_NEW, pin]
-            self._send_command(command)
-        else:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError(
-                f&#39;Maximum Number Of DHTs Exceeded - set_pin_mode_dht fails for pin {pin}&#39;)
-
-    def set_pin_mode_servo(self, pin_number, min_pulse=1000, max_pulse=2000):
-        &#34;&#34;&#34;
-
-        Attach a pin to a servo motor
-
-        There are 16 PWM pins shared between the Servo and PWM Output modes.
-
-        :param pin_number: pin
-
-        :param min_pulse: minimum pulse width in microseconds
-
-        :param max_pulse: maximum pulse width in microseconds
-
-        &#34;&#34;&#34;
-
-        if pin_number in self.pico_pins:
-            self.pico_pins[pin_number] = PrivateConstants.AT_PWM_OUTPUT
-            if self.pwm_active_count &gt;= 15:
-                raise RuntimeError(
-                    &#39;pwm or servo set mode: number of active PWM pins is at maximum&#39;)
-
-            self.pwm_active_count += 1
-
-        self._set_pin_mode(pin_number, PrivateConstants.AT_SERVO, min_pulse, max_pulse)
-        self.pico_pins[pin_number] = PrivateConstants.AT_SERVO
-
-    def set_pin_mode_spi(self, spi_port=0, chip_select=None, speed_maximum=500000,
-                         data_order=1, data_mode=0):
-
-        &#34;&#34;&#34;
-        Specify the SPI port. The SPI port is configured as a &#34;master&#34;.
-        Optionally specify the chip select pin.
-
-        This command also specifies the SPISettings for the selected SPI port.
-
-        This method sets the SPISettings structure based on parameter values
-        provided.
-
-        SPI support is provided as an abstraction. It is intended that
-        only a single device is connected to an SPI port.
-
-        :param spi_port: 0 = spi0, 1 = spi1
-
-        :param chip_select:  spi0 = 17  spi1 = 13 or select another pin
-
-        :param speed_maximum: The maximum speed of communication. Maximum is 50000000
-
-        :param data_order: 1=MSBFIRST,  0=LSBFIRST,
-
-        :param data_mode: 0=MODE0, 1=MODE1, 2=MODE2 3=MODE3
-
-        miso: SPI data receive pin   spi0 = 16  spi1 = 12
-
-        mosi: SPI data transmit pin  spi0 = 19  spi1 = 15
-
-        clock_pin: clock pin         spi0 = 18  spi1 = 14
-
-
-        command message: [command, spi, chip_select, speed, data_order, data_mode]
-        &#34;&#34;&#34;
-        # determine if the spi port is specified correctly
-        if spi_port not in [0, 1]:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError(&#39;spi port must be either a 0 or 1&#39;)
-
-        if not (0 &lt; speed_maximum &lt; 50000000):
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError(&#39;spi port speed maximum is out of range&#39;)
-
-        if data_order not in [0, 1]:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError(&#39;spi data order must be 0 or 1&#39;)
-
-        if data_mode not in [0, 1, 2, 3]:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError(&#39;spi data data mode must be 0, 1, 3 or 3&#39;)
-
-        if spi_port == 0:
-            self.spi_0_active = True
-            miso = 16
-            mosi = 19
-            if chip_select:
-                self.spi0_chip_select = chip_select
-            else:
-                chip_select = 17
-            clock_pin = 18
-
-        else:
-            self.spi_1_active = True
-            miso = 12
-            mosi = 15
-            if chip_select:
-                self.spi1_chip_select = chip_select
-            else:
-                chip_select = 13
-            clock_pin = 14
-
-        freq_bytes = speed_maximum.to_bytes(4, byteorder=&#39;big&#39;)
-
-        self.pico_pins[mosi] = PrivateConstants.AT_SPI
-        self.pico_pins[miso] = PrivateConstants.AT_SPI
-        self.pico_pins[clock_pin] = PrivateConstants.AT_SPI
-        self.pico_pins[chip_select] = PrivateConstants.AT_SPI
-
-        command = [PrivateConstants.SPI_INIT, spi_port, chip_select, freq_bytes[0],
-                   freq_bytes[1], freq_bytes[2], freq_bytes[3], data_order, data_mode]
-        self._send_command(command)
-
-    def set_pin_mode_stepper(self, interface=1, pin1=2, pin2=3, pin3=4,
-                             pin4=5, enable=True):
-        &#34;&#34;&#34;
-        Stepper motor support is implemented as a proxy for
-        the AccelStepper library.
-
-        https://github.com/waspinator/AccelStepper
-
-        Instantiate a stepper motor.
-
-        Initialize the interface and pins for a stepper motor.
-
-        :param interface: Motor Interface Type:
-
-                1 = Stepper Driver, 2 driver pins required
-
-                2 = FULL2WIRE  2 wire stepper, 2 motor pins required
-
-                3 = FULL3WIRE 3 wire stepper, such as HDD spindle,
-                    3 motor pins required
-
-                4 = FULL4WIRE, 4 wire full stepper, 4 motor pins
-                    required
-
-                6 = HALF3WIRE, 3 wire half stepper, such as HDD spindle,
-                    3 motor pins required
-
-                8 = HALF4WIRE, 4 wire half stepper, 4 motor pins required
-
-        :param pin1: Pico digital pin number for motor pin 1
-
-        :param pin2: Pico digital pin number for motor pin 2
-
-        :param pin3: Pico digital pin number for motor pin 3
-
-        :param pin4: Pico digital pin number for motor pin 4
-
-        :param enable: If this is true, the output pins are enabled at construction time.
-
-        :return: Motor Reference number
-        &#34;&#34;&#34;
-
-        if self.number_of_steppers == self.max_number_of_steppers:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError(&#39;Maximum number of steppers has already been assigned&#39;)
-
-        if interface not in self.valid_stepper_interfaces:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError(&#39;Invalid stepper interface&#39;)
-
-        self.number_of_steppers += 1
-
-        motor_id = self.next_stepper_assigned
-        self.next_stepper_assigned += 1
-        self.stepper_info_list[motor_id][&#39;instance&#39;] = True
-
-        # build message and send message to server
-        command = [PrivateConstants.SET_PIN_MODE_STEPPER, motor_id, interface, pin1,
-                   pin2, pin3, pin4, enable]
-        self._send_command(command)
-
-        # return motor id
-        return motor_id
-
-    def servo_write(self, pin_number, value):
-        &#34;&#34;&#34;
-        Write the value to the specified servo
-
-        :param pin_number: GPIO pin number
-
-        :param value: value between 0 and 180
-
-        &#34;&#34;&#34;
-
-        if self.pico_pins[pin_number] != PrivateConstants.AT_SERVO:
-            raise RuntimeError(&#39;You must call set_pin_mode_servo before trying to &#39;
-                               &#39;write a value to a servo or servo was detached.&#39;)
-
-        # get the min and max for the servo and calculate the duty-cycle
-        min_duty = self.servo_ranges[pin_number][PrivateConstants.MIN_SERVO_DUTY_CYCLE]
-        max_duty = self.servo_ranges[pin_number][PrivateConstants.MAX_SERVO_DUTY_CYCLE]
-
-        mm = min_duty.to_bytes(2, byteorder=&#39;big&#39;)
-        mx = max_duty.to_bytes(2, byteorder=&#39;big&#39;)
-
-        command = [PrivateConstants.SERVO_WRITE, pin_number, value, mm[0], mm[1],
-                   mx[0], mx[1]]
-        self._send_command(command)
-
-    def set_pin_mode_sonar(self, trigger_pin, echo_pin, callback=None):
-        &#34;&#34;&#34;
-        :param trigger_pin:  Sensor trigger gpio pin
-
-        :param echo_pin: Sensor echo gpio pin
-
-        :param callback: callback
-
-       callback returns a data list:
-
-       [ SONAR_DISTANCE, trigger_pin, distance_value, time_stamp]
-
-       SONAR_DISTANCE =  11
-
-        &#34;&#34;&#34;
-
-        if not callback:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError(&#39;set_pin_mode_sonar: A Callback must be specified&#39;)
-
-        if self.sonar_count &lt; PrivateConstants.MAX_SONARS:
-            self.sonar_callbacks[trigger_pin] = callback
-            self.sonar_count += 1
-            self.pico_pins[trigger_pin] = self.pico_pins[echo_pin] = \
-                PrivateConstants.AT_SONAR
-
-            command = [PrivateConstants.SONAR_NEW, trigger_pin, echo_pin]
-            self._send_command(command)
-        else:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError(&#39;Maximum number of supported sonar devices exceeded.&#39;)
-
-    def spi_read_blocking(self, register, number_of_bytes, spi_port=0, call_back=None):
-        &#34;&#34;&#34;
-        Read the specified number of bytes from the specified SPI port and
-        call the callback function with the reported data.
-
-        On the server side, this command incorporates SPI.beginTransaction
-        and chip select control.
-
-        :param register: Register to be selected
-
-        :param number_of_bytes: Number of bytes to read
-
-        :param spi_port: SPI port 0 or 1
-
-        :param call_back: Required callback function to report spi data as a
-                   result of read command
-
-
-        callback returns a data list:
-        [SPI_READ_REPORT, spi_port, count of data bytes, data bytes, time-stamp]
-
-        SPI_READ_REPORT = 13
-
-        &#34;&#34;&#34;
-        if spi_port == 0:
-            if not self.spi_0_active:
-                if self.shutdown_on_exception:
-                    self.shutdown()
-                raise RuntimeError(
-                    &#39;spi_read_blocking: set_pin_mode_spi never called for spi port 0.&#39;)
-
-        elif spi_port == 1:
-            if not self.spi_1_active:
-                if self.shutdown_on_exception:
-                    self.shutdown()
-                raise RuntimeError(
-                    &#39;spi_read_blocking: set_pin_mode_spi never called for spi port 1.&#39;)
-
-        if not call_back:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError(&#39;spi_read_blocking: A Callback must be specified&#39;)
-        if spi_port == 0:
-            self.spi_callback = call_back
-        else:
-            self.spi_callback2 = call_back
-
-        command = [PrivateConstants.SPI_READ_BLOCKING, spi_port, register,
-                   number_of_bytes]
-        self._send_command(command)
-
-    def spi_write_blocking(self, bytes_to_write, spi_port=0):
-        &#34;&#34;&#34;
-        Write a list of bytes to the SPI device.
-
-        On the server side, this command incorporates SPI.beginTransaction
-        and chip select control.
-
-        :param bytes_to_write: A list of bytes to write. This must be in the form of a
-        list.
-
-        :param spi_port: SPI port 0 or 1
-
-        &#34;&#34;&#34;
-        if spi_port == 0:
-            if not self.spi_0_active:
-                if self.shutdown_on_exception:
-                    self.shutdown()
-                raise RuntimeError(
-                    &#39;spi_write_blocking: set_pin_mode_spi never called for spi port 0.&#39;)
-
-        elif spi_port:
-            if not self.spi_1_active:
-                if self.shutdown_on_exception:
-                    self.shutdown()
-                raise RuntimeError(
-                    &#39;spi_write_blocking: set_pin_mode_spi never called for spi port 1.&#39;)
-        command = [PrivateConstants.SPI_WRITE_BLOCKING, spi_port,
-                   len(bytes_to_write)]
-
-        for data in bytes_to_write:
-            command.append(data)
-
-        self._send_command(command)
-
-    def get_pico_pins(self):
-        &#34;&#34;&#34;
-        This method returns the pico_pins dictionary
-
-        Pin Modes MAP:
-
-            DIGITAL_INPUT = 0
-
-            DIGITAL_OUTPUT = 1
-
-            PWM_OUTPUT = 2
-
-            DIGITAL_INPUT_PULLUP = 3
-
-            DIGITAL_INPUT_PULL_DOWN = 4
-
-            ANALOG_INPUT = 5
-
-            SERVO = 6
-
-            SONAR = 7
-
-            DHT = 8
-
-            I2C = 9
-
-            NEO_PIXEL = 10
-
-            AT_MODE_NOT_SET = 255
-
-        :return: pico_pins
-        &#34;&#34;&#34;
-        return self.pico_pins
-
-    def stepper_move_to(self, motor_id, position):
-        &#34;&#34;&#34;
-        Set an absolution target position. If position is positive, the movement is
-        clockwise, else it is counter-clockwise.
-
-        The run() function (below) will try to move the motor (at most one step per call)
-        from the current position to the target position set by the most
-        recent call to this function. Caution: moveTo() also recalculates the
-        speed for the next step.
-        If you are trying to use constant speed movements, you should call setSpeed()
-        after calling moveTo().
-
-        :param motor_id: motor id: 0 - 3
-
-        :param position: target position. Maximum value is 32 bits.
-        &#34;&#34;&#34;
-        if position &lt; 0:
-            polarity = 1
-        else:
-            polarity = 0
-        position = abs(position)
-        if not self.stepper_info_list[motor_id][&#39;instance&#39;]:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError(&#39;stepper_move_to: Invalid motor_id.&#39;)
-
-        position_bytes = list(position.to_bytes(4, &#39;big&#39;, signed=True))
-
-        command = [PrivateConstants.STEPPER_MOVE_TO, motor_id]
-        for value in position_bytes:
-            command.append(value)
-        command.append(polarity)
-        self._send_command(command)
-
-    def stepper_move(self, motor_id, relative_position):
-        &#34;&#34;&#34;
-        Set the target position relative to the current position.
-
-        :param motor_id: motor id: 0 - 3
-
-        :param relative_position: The desired position relative to the current
-                                  position. Negative is anticlockwise from
-                                  the current position. Maximum value is 32 bits.
-        &#34;&#34;&#34;
-        if relative_position &lt; 0:
-            polarity = 1
-        else:
-            polarity = 0
-
-        relative_position = abs(relative_position)
-        if not self.stepper_info_list[motor_id][&#39;instance&#39;]:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError(&#39;stepper_move: Invalid motor_id.&#39;)
-
-        position_bytes = list(relative_position.to_bytes(4, &#39;big&#39;, signed=True))
-
-        command = [PrivateConstants.STEPPER_MOVE, motor_id]
-        for value in position_bytes:
-            command.append(value)
-        command.append(polarity)
-        self._send_command(command)
-
-    def stepper_run(self, motor_id, completion_callback=None):
-        &#34;&#34;&#34;
-        This method steps the selected motor based on the current speed.
-
-        Once called, the server will continuously attempt to step the motor.
-
-        :param motor_id: 0 - 3
-
-        :param completion_callback: call back function to receive motion complete
-                                    notification
-
-        callback returns a data list:
-
-        [report_type, motor_id, raw_time_stamp]
-
-        The report_type = 19
-        &#34;&#34;&#34;
-        if not completion_callback:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError(&#39;stepper_run: A motion complete callback must be &#39;
-                               &#39;specified.&#39;)
-
-        if not self.stepper_info_list[motor_id][&#39;instance&#39;]:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError(&#39;stepper_run: Invalid motor_id.&#39;)
-
-        self.stepper_info_list[motor_id][&#39;motion_complete_callback&#39;] = completion_callback
-        command = [PrivateConstants.STEPPER_RUN, motor_id]
-        self._send_command(command)
-
-    def stepper_run_speed(self, motor_id):
-        &#34;&#34;&#34;
-        This method steps the selected motor based at a constant speed as set by the most
-        recent call to stepper_set_max_speed(). The motor will run continuously.
-
-        Once called, the server will continuously attempt to step the motor.
-
-        :param motor_id: 0 - 3
-
-        &#34;&#34;&#34;
-        if not self.stepper_info_list[motor_id][&#39;instance&#39;]:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError(&#39;stepper_run_speed: Invalid motor_id.&#39;)
-
-        command = [PrivateConstants.STEPPER_RUN_SPEED, motor_id]
-        self._send_command(command)
-
-    def stepper_set_max_speed(self, motor_id, max_speed):
-        &#34;&#34;&#34;
-        Sets the maximum permitted speed. The stepper_run() function will accelerate
-        up to the speed set by this function.
-
-        Caution: the maximum speed achievable depends on your processor and clock speed.
-        The default maxSpeed is 1 step per second.
-
-         Caution: Speeds that exceed the maximum speed supported by the processor may
-                  result in non-linear accelerations and decelerations.
-
-        :param motor_id: 0 - 3
-
-        :param max_speed: 1 - 1000
-        &#34;&#34;&#34;
-
-        if not self.stepper_info_list[motor_id][&#39;instance&#39;]:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError(&#39;stepper_set_max_speed: Invalid motor_id.&#39;)
-
-        if not 1 &lt; max_speed &lt;= 1000:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError(&#39;stepper_set_max_speed: Speed range is 1 - 1000.&#39;)
-
-        self.stepper_info_list[motor_id][&#39;max_speed&#39;] = max_speed
-        max_speed_msb = (max_speed &amp; 0xff00) &gt;&gt; 8
-        max_speed_lsb = max_speed &amp; 0xff
-
-        command = [PrivateConstants.STEPPER_SET_MAX_SPEED, motor_id, max_speed_msb,
-                   max_speed_lsb]
-        self._send_command(command)
-
-    def stepper_get_max_speed(self, motor_id):
-        &#34;&#34;&#34;
-        Returns the maximum speed configured for this stepper
-        that was previously set by stepper_set_max_speed()
-
-        Value is stored in the client, so no callback is required.
-
-        :param motor_id: 0 - 3
-
-        :return: The currently configured maximum speed.
-        &#34;&#34;&#34;
-        if not self.stepper_info_list[motor_id][&#39;instance&#39;]:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError(&#39;stepper_max_speed: Invalid motor_id.&#39;)
-
-        return self.stepper_info_list[motor_id][&#39;max_speed&#39;]
-
-    def stepper_set_acceleration(self, motor_id, acceleration):
-        &#34;&#34;&#34;
-        Sets the acceleration/deceleration rate.
-
-        :param motor_id: 0 - 3
-
-        :param acceleration: The desired acceleration in steps
-                             per second. Must be &gt; 0.0. This is an
-                             expensive call since it requires a square
-                             root to be calculated on the server.
-                             Don&#39;t call more often than needed.
-
-        &#34;&#34;&#34;
-        if not self.stepper_info_list[motor_id][&#39;instance&#39;]:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError(&#39;stepper_set_acceleration: Invalid motor_id.&#39;)
-
-        if not 1 &lt; acceleration &lt;= 1000:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError(&#39;stepper_set_acceleration: Acceleration range is 1 - &#39;
-                               &#39;1000.&#39;)
-
-        self.stepper_info_list[motor_id][&#39;acceleration&#39;] = acceleration
-
-        max_accel_msb = acceleration &gt;&gt; 8
-        max_accel_lsb = acceleration &amp; 0xff
-
-        command = [PrivateConstants.STEPPER_SET_ACCELERATION, motor_id, max_accel_msb,
-                   max_accel_lsb]
-        self._send_command(command)
-
-    def stepper_set_speed(self, motor_id, speed):
-        &#34;&#34;&#34;
-        Sets the desired constant speed for use with stepper_run_speed().
-
-        :param motor_id: 0 - 3
-
-        :param speed: 0 - 1000 The desired constant speed in steps per
-                      second. Positive is clockwise. Speeds of more than 1000 steps per
-                      second are unreliable. Speed accuracy depends on the board
-                      crystal. Jitter depends on how frequently you call the
-                      stepper_run_speed() method.
-                      The speed will be limited by the current value of
-                      stepper_set_max_speed().
-        &#34;&#34;&#34;
-        if not self.stepper_info_list[motor_id][&#39;instance&#39;]:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError(&#39;stepper_set_speed: Invalid motor_id.&#39;)
-
-        if not 0 &lt; speed &lt;= 1000:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError(&#39;stepper_set_speed: Speed range is 0 - &#39;
-                               &#39;1000.&#39;)
-
-        self.stepper_info_list[motor_id][&#39;speed&#39;] = speed
-
-        speed_msb = speed &gt;&gt; 8
-        speed_lsb = speed &amp; 0xff
-
-        command = [PrivateConstants.STEPPER_SET_SPEED, motor_id, speed_msb, speed_lsb]
-        self._send_command(command)
-
-    def stepper_get_speed(self, motor_id):
-        &#34;&#34;&#34;
-        Returns the  most recently set speed.
-        that was previously set by stepper_set_speed();
-
-        Value is stored in the client, so no callback is required.
-
-        :param motor_id:  0 - 3
-
-        &#34;&#34;&#34;
-        if not self.stepper_info_list[motor_id][&#39;instance&#39;]:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError(&#39;stepper_get_speed: Invalid motor_id.&#39;)
-
-        return self.stepper_info_list[motor_id][&#39;speed&#39;]
-
-    def stepper_get_distance_to_go(self, motor_id, distance_to_go_callback):
-        &#34;&#34;&#34;
-        Request the distance from the current position to the target position
-        from the server.
-
-        :param motor_id: 0 - 3
-
-        :param distance_to_go_callback: required callback function to receive report
-
-        :return: The distance to go is returned via the callback as a list:
-
-        [REPORT_TYPE=15, motor_id, distance in steps, time_stamp]
-
-        A positive distance is clockwise from the current position.
-
-        &#34;&#34;&#34;
-        if not distance_to_go_callback:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError(
-                &#39;stepper_get_distance_to_go Read: A callback function must be specified.&#39;)
-
-        if not self.stepper_info_list[motor_id][&#39;instance&#39;]:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError(&#39;stepper_get_distance_to_go: Invalid motor_id.&#39;)
-        self.stepper_info_list[motor_id][
-            &#39;distance_to_go_callback&#39;] = distance_to_go_callback
-        command = [PrivateConstants.STEPPER_GET_DISTANCE_TO_GO, motor_id]
-        self._send_command(command)
-
-    def stepper_get_target_position(self, motor_id, target_callback):
-        &#34;&#34;&#34;
-        Request the most recently set target position from the server.
-
-        :param motor_id: 0 - 3
-
-        :param target_callback: required callback function to receive report
-
-        :return: The distance to go is returned via the callback as a list:
-
-        [REPORT_TYPE=16, motor_id, target position in steps, time_stamp]
-
-        Positive is clockwise from the 0 position.
-
-        &#34;&#34;&#34;
-        if not target_callback:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError(
-                &#39;stepper_get_target_position Read: A callback function must be specified.&#39;)
-
-        if not self.stepper_info_list[motor_id][&#39;instance&#39;]:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError(&#39;stepper_get_target_position: Invalid motor_id.&#39;)
-
-        self.stepper_info_list[motor_id][
-            &#39;target_position_callback&#39;] = target_callback
-
-        command = [PrivateConstants.STEPPER_GET_TARGET_POSITION, motor_id]
-        self._send_command(command)
-
-    def stepper_get_current_position(self, motor_id, current_position_callback):
-        &#34;&#34;&#34;
-        Request the current motor position from the server.
-
-        :param motor_id: 0 - 3
-
-        :param current_position_callback: required callback function to receive report
-
-        :return: The current motor position returned via the callback as a list:
-
-        [REPORT_TYPE=17, motor_id, current position in steps, time_stamp]
-
-        Positive is clockwise from the 0 position.
-        &#34;&#34;&#34;
-        if not current_position_callback:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError(
-                &#39;stepper_get_current_position Read: A callback function must be specified.&#39;)
-
-        if not self.stepper_info_list[motor_id][&#39;instance&#39;]:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError(&#39;stepper_get_current_position: Invalid motor_id.&#39;)
-
-        self.stepper_info_list[motor_id][
-            &#39;current_position_callback&#39;] = current_position_callback
-
-        command = [PrivateConstants.STEPPER_GET_CURRENT_POSITION, motor_id]
-        self._send_command(command)
-
-    def stepper_set_current_position(self, motor_id, position):
-        &#34;&#34;&#34;
-        Resets the current position of the motor, so that wherever the motor
-        happens to be right now is considered to be the new 0 position. Useful
-        for setting a zero position on a stepper after an initial hardware
-        positioning move.
-
-        Has the side effect of setting the current motor speed to 0.
-
-        :param motor_id:  0 - 3
-
-        :param position: Position in steps. This is a 32 bit value
-        &#34;&#34;&#34;
-
-        if not self.stepper_info_list[motor_id][&#39;instance&#39;]:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError(&#39;stepper_set_current_position: Invalid motor_id.&#39;)
-        position_bytes = list(position.to_bytes(4, &#39;big&#39;, signed=True))
-
-        command = [PrivateConstants.STEPPER_SET_CURRENT_POSITION, motor_id]
-        for value in position_bytes:
-            command.append(value)
-        self._send_command(command)
-
-    def stepper_run_speed_to_position(self, motor_id, completion_callback=None):
-        &#34;&#34;&#34;
-        Runs the motor at the currently selected speed until the target position is
-        reached.
-
-        Does not implement accelerations.
-
-        :param motor_id: 0 - 3
-
-        :param completion_callback: call back function to receive motion complete
-                                    notification
-
-        callback returns a data list:
-
-        [report_type, motor_id, raw_time_stamp]
-
-        The report_type = 19
-        &#34;&#34;&#34;
-        if not completion_callback:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError(&#39;stepper_run_speed_to_position: A motion complete &#39;
-                               &#39;callback must be &#39;
-                               &#39;specified.&#39;)
-        if not self.stepper_info_list[motor_id][&#39;instance&#39;]:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError(&#39;stepper_run_speed_to_position: Invalid motor_id.&#39;)
-
-        self.stepper_info_list[motor_id][&#39;motion_complete_callback&#39;] = completion_callback
-        command = [PrivateConstants.STEPPER_RUN_SPEED_TO_POSITION, motor_id]
-        self._send_command(command)
-
-    def stepper_stop(self, motor_id):
-        &#34;&#34;&#34;
-        Sets a new target position that causes the stepper
-        to stop as quickly as possible, using the current speed and
-        acceleration parameters.
-
-        :param motor_id:  0 - 3
-        &#34;&#34;&#34;
-        if not self.stepper_info_list[motor_id][&#39;instance&#39;]:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError(&#39;stepper_stop: Invalid motor_id.&#39;)
-
-        command = [PrivateConstants.STEPPER_STOP, motor_id]
-        self._send_command(command)
-
-    def stepper_disable_outputs(self, motor_id):
-        &#34;&#34;&#34;
-        Disable motor pin outputs by setting them all LOW.
-
-        Depending on the design of your electronics this may turn off
-        the power to the motor coils, saving power.
-
-        This is useful to support low power modes: disable the outputs
-        during sleep and then re-enable with enableOutputs() before stepping
-        again.
-
-        If the enable Pin is defined, sets the pin to OUTPUT mode and clears
-        the pin to be disabled.
-
-        :param motor_id: 0 - 3
-        &#34;&#34;&#34;
-        if not self.stepper_info_list[motor_id][&#39;instance&#39;]:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError(&#39;stepper_disable_outputs: Invalid motor_id.&#39;)
-
-        command = [PrivateConstants.STEPPER_DISABLE_OUTPUTS, motor_id]
-        self._send_command(command)
-
-    def stepper_enable_outputs(self, motor_id):
-        &#34;&#34;&#34;
-        Enable motor pin outputs by setting the motor pins to OUTPUT
-        mode.
-
-        If the enable Pin is defined, sets it to OUTPUT mode and sets
-        the pin to be enabled.
-
-        :param motor_id: 0 - 3
-        &#34;&#34;&#34;
-        if not self.stepper_info_list[motor_id][&#39;instance&#39;]:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError(&#39;stepper_enable_outputs: Invalid motor_id.&#39;)
-
-        command = [PrivateConstants.STEPPER_ENABLE_OUTPUTS, motor_id]
-        self._send_command(command)
-
-    def stepper_set_min_pulse_width(self, motor_id, minimum_width):
-        &#34;&#34;&#34;
-        Sets the minimum pulse width allowed by the stepper driver.
-
-        The minimum practical pulse width is approximately 20 microseconds.
-
-        Times less than 20 microseconds will usually result in 20 microseconds or so.
-
-        :param motor_id: 0 -3
-
-        :param minimum_width: A 16 bit unsigned value expressed in microseconds.
-        &#34;&#34;&#34;
-        if not self.stepper_info_list[motor_id][&#39;instance&#39;]:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError(&#39;stepper_set_min_pulse_width: Invalid motor_id.&#39;)
-
-        if not 0 &lt; minimum_width &lt;= 0xff:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError(&#39;stepper_set_min_pulse_width: Pulse width range = &#39;
-                               &#39;0-0xffff.&#39;)
-
-        width_msb = minimum_width &gt;&gt; 8
-        width_lsb = minimum_width &amp; 0xff
-
-        command = [PrivateConstants.STEPPER_SET_MINIMUM_PULSE_WIDTH, motor_id, width_msb,
-                   width_lsb]
-        self._send_command(command)
-
-    def stepper_set_enable_pin(self, motor_id, pin=0xff):
-        &#34;&#34;&#34;
-        Sets the enable-pin number for stepper drivers.
-        0xFF indicates unused (default).
-
-        Otherwise, if a pin is set, the pin will be turned on when
-        enableOutputs() is called and switched off when disableOutputs()
-        is called.
-
-        :param motor_id: 0 - 4
-        :param pin: 0-0xff
-        &#34;&#34;&#34;
-        if not self.stepper_info_list[motor_id][&#39;instance&#39;]:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError(&#39;stepper_set_enable_pin: Invalid motor_id.&#39;)
-
-        if not 0 &lt; pin &lt;= 0xff:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError(&#39;stepper_set_enable_pin: Pulse width range = &#39;
-                               &#39;0-0xff.&#39;)
-        command = [PrivateConstants.STEPPER_SET_ENABLE_PIN, motor_id, pin]
-
-        self._send_command(command)
-
-    def stepper_set_3_pins_inverted(self, motor_id, direction=False, step=False,
-                                    enable=False):
-        &#34;&#34;&#34;
-        Sets the inversion for stepper driver pins.
-
-        :param motor_id: 0 - 3
-
-        :param direction: True=inverted or False
-
-        :param step: True=inverted or False
-
-        :param enable: True=inverted or False
-        &#34;&#34;&#34;
-        if not self.stepper_info_list[motor_id][&#39;instance&#39;]:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError(&#39;stepper_set_3_pins_inverted: Invalid motor_id.&#39;)
-
-        command = [PrivateConstants.STEPPER_SET_3_PINS_INVERTED, motor_id, direction,
-                   step, enable]
-
-        self._send_command(command)
-
-    def stepper_set_4_pins_inverted(self, motor_id, pin1_invert=False, pin2_invert=False,
-                                    pin3_invert=False, pin4_invert=False, enable=False):
-        &#34;&#34;&#34;
-        Sets the inversion for 2, 3 and 4 wire stepper pins
-
-        :param motor_id: 0 - 3
-
-        :param pin1_invert: True=inverted or False
-
-        :param pin2_invert: True=inverted or False
-
-        :param pin3_invert: True=inverted or False
-
-        :param pin4_invert: True=inverted or False
-
-        :param enable: True=inverted or False
-        &#34;&#34;&#34;
-        if not self.stepper_info_list[motor_id][&#39;instance&#39;]:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError(&#39;stepper_set_4_pins_inverted: Invalid motor_id.&#39;)
-
-        command = [PrivateConstants.STEPPER_SET_4_PINS_INVERTED, motor_id, pin1_invert,
-                   pin2_invert, pin3_invert, pin4_invert, enable]
-
-        self._send_command(command)
-
-    def stepper_is_running(self, motor_id, callback):
-        &#34;&#34;&#34;
-        Checks to see if the motor is currently running to a target.
-
-        Callback return True if the speed is not zero or not at the target position.
-
-        :param motor_id: 0-4
-
-        :param callback: required callback function to receive report
-
-        :return: The current running state returned via the callback as a list:
-
-        [REPORT_TYPE=18, motor_id, True or False for running state, time_stamp]
-        &#34;&#34;&#34;
-        if not callback:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError(
-                &#39;stepper_is_running: A callback function must be specified.&#39;)
-
-        if not self.stepper_info_list[motor_id][&#39;instance&#39;]:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError(&#39;stepper_is_running: Invalid motor_id.&#39;)
-
-        self.stepper_info_list[motor_id][&#39;is_running_callback&#39;] = callback
-
-        command = [PrivateConstants.STEPPER_IS_RUNNING, motor_id]
-        self._send_command(command)
-
-    def _set_pin_mode(self, pin_number, pin_state, differential=0, value_range=0,
-                      callback=None):
-
-        &#34;&#34;&#34;
-        A private method to set the various pin modes.
-
-        :param pin_number: pico pin number
-
-        :param pin_state: INPUT/OUTPUT/ANALOG/PWM
-
-        :param differential: for analog inputs - threshold
-                             value to be achieved for report to
-                             be generated
-
-                           : for servo we overload this variable to mean the minimum
-                             duty cycle
-
-        :param value_range: for servo this is the maximum duty cycle
-
-        :param callback: A reference to a call back function to be
-                         called when pin data value changes
-
-        &#34;&#34;&#34;
-        # Map ADC to GPIO pin numbers
-        if pin_state == PrivateConstants.AT_ANALOG:
-            self.pico_pins[26 + pin_number] = PrivateConstants.AT_ANALOG
-        else:
-            if pin_number in self.pico_pins:
-                self.pico_pins[pin_number] = pin_state
-            else:
-                raise RuntimeError(&#39;Gpio Pin Number is invalid&#39;)
-
-        if callback:
-            if pin_state == PrivateConstants.AT_INPUT:
-                self.digital_callbacks[pin_number] = callback
-            elif pin_state == PrivateConstants.AT_INPUT_PULLUP:
-                self.digital_callbacks[pin_number] = callback
-            elif pin_state == PrivateConstants.AT_INPUT_PULL_DOWN:
-                self.digital_callbacks[pin_number] = callback
-            elif pin_state == PrivateConstants.AT_ANALOG:
-                self.analog_callbacks[pin_number] = callback
-
-            else:
-                print(&#39;{} {}&#39;.format(&#39;set_pin_mode: callback ignored for &#39;
-                                     &#39;pin state:&#39;, pin_state))
-
-        if pin_state == PrivateConstants.AT_INPUT:
-            command = [PrivateConstants.SET_PIN_MODE, pin_number,
-                       PrivateConstants.AT_INPUT, 1]
-
-        elif pin_state == PrivateConstants.AT_INPUT_PULLUP:
-            command = [PrivateConstants.SET_PIN_MODE, pin_number,
-                       PrivateConstants.AT_INPUT_PULLUP, 1]
-
-        elif pin_state == PrivateConstants.AT_INPUT_PULL_DOWN:
-            command = [PrivateConstants.SET_PIN_MODE, pin_number,
-                       PrivateConstants.AT_INPUT_PULL_DOWN, 1]
-
-        elif pin_state == PrivateConstants.AT_OUTPUT:
-            command = [PrivateConstants.SET_PIN_MODE, pin_number,
-                       PrivateConstants.AT_OUTPUT]
-
-        elif pin_state == PrivateConstants.AT_ANALOG:
-            df = differential.to_bytes(2, byteorder=&#39;big&#39;)
-
-            # last parameter enable reporting
-            command = [PrivateConstants.SET_PIN_MODE, pin_number,
-                       PrivateConstants.AT_ANALOG, df[0], df[1], 1]
-
-        elif pin_state == PrivateConstants.AT_PWM_OUTPUT:
-            command = [PrivateConstants.SET_PIN_MODE, pin_number,
-                       PrivateConstants.AT_OUTPUT]
-
-        elif pin_state == PrivateConstants.AT_SERVO:
-            # differential is being used for the min
-            # value range is being used for the max value
-            df = differential.to_bytes(2, byteorder=&#39;big&#39;)
-            vr = value_range.to_bytes(2, byteorder=&#39;big&#39;)
-            command = [PrivateConstants.SERVO_ATTACH, pin_number, df[0], df[1], vr[0],
-                       vr[1]]
-
-            self.servo_ranges[pin_number] = [differential, value_range]
-
-        else:
-            if self.shutdown_on_exception:
-                self.shutdown()
-            raise RuntimeError(&#39;Unknown pin state&#39;)
-
-        if pin_state == PrivateConstants.AT_ANALOG:
-            if pin_number == 0:
-                self.pico_pins[26] = PrivateConstants.AT_ANALOG
-            elif pin_number == 1:
-                self.pico_pins[27] = PrivateConstants.AT_ANALOG
-            elif pin_number == 2:
-                self.pico_pins[28] = PrivateConstants.AT_ANALOG
-
-        else:
-            self.pico_pins[pin_number] = pin_state
-
-        if command:
-            self._send_command(command)
-
-    def shutdown(self):
-        &#34;&#34;&#34;
-        This method attempts to perform an orderly shutdown.
-        If any exceptions are thrown, they are ignored.
-        &#34;&#34;&#34;
-        self.shutdown_flag = True
-
-        self._stop_threads()
-
-        try:
-            command = [PrivateConstants.STOP_ALL_REPORTS]
-            self._send_command(command)
-            time.sleep(.1)
-
-            if self.reset_on_shutdown:
-                command = [PrivateConstants.RESET_BOARD, self.reset_on_shutdown]
-                self._send_command(command)
-
-            time.sleep(.2)
-            try:
-                self.sock.shutdown(socket.SHUT_RDWR)
-                self.sock.close()
-            except Exception:
-                pass
-
-        except Exception:
-            raise RuntimeError(&#39;Shutdown failed - could not send stop streaming message&#39;)
-
-    &#39;&#39;&#39;
-    report message handlers
-    &#39;&#39;&#39;
-
-    def _analog_message(self, data):
-        &#34;&#34;&#34;
-        This is a private message handler method.
-        It is a message handler for analog messages.
-
-        :param data: message data
-
-        &#34;&#34;&#34;
-        pin = data[0]
-        value = (data[1] &lt;&lt; 8) + data[2]
-        # set the current value in the pin structure
-        time_stamp = time.time()
-        # self.digital_pins[pin].event_time = time_stamp
-        if self.analog_callbacks[pin]:
-            message = [PrivateConstants.ANALOG_REPORT, pin, value, time_stamp]
-            self.analog_callbacks[pin](message)
-
-    def _cpu_temp_message(self, data):
-        &#34;&#34;&#34;
-        This is a private message handler method.
-        It is a message handler for cpu temperature messages.
-
-        :param data: message data
-
-        &#34;&#34;&#34;
-
-        temperature = struct.unpack(&#39;&lt;f&#39;, bytes(data))
-        temperature = round(temperature[0], 2)
-        time_stamp = time.time()
-        # self.digital_pins[pin].event_time = time_stamp
-        if self.cpu_temp_callback:
-            message = [PrivateConstants.CPU_TEMP_REPORT, temperature, time_stamp]
-            self.cpu_temp_callback(message)
-
-    def _dht_report(self, report):
-        &#34;&#34;&#34;
-        This is a private utility method.
-
-        This is the dht report handler method.
-
-        :param report:
-               data[0] = report error return
-                                No Errors = 0
-
-                                Checksum Error = 1
-
-                                Timeout Error = 2
-
-                                Invalid Value = 999
-
-               data[1] = pin number
-
-               data[2] = humidity positivity flag
-
-               data[3] = temperature positivity value
-
-               data[4] = humidity integer
-
-               data[5] = humidity fractional value
-
-               data[6] = temperature integer
-
-               data[7] = temperature fractional value
-
-
-                &#34;&#34;&#34;
-        if report[0]:  # DHT_ERROR
-            # error report
-            # data[0] = report sub type, data[1] = pin, data[2] = error message
-            if self.dht_callbacks[report[1]]:
-                # Callback 0=DHT REPORT, DHT_ERROR, PIN, Time
-                message = [PrivateConstants.DHT_REPORT, report[0], report[1],
-                           time.time()]
-                self.dht_callbacks[report[1]](message)
-        else:
-            # got valid data DHT_DATA
-            f_humidity = float(report[4] + report[5] / 100)
-            if report[2]:
-                f_humidity *= -1.0
-            f_temperature = float(report[6] + report[7] / 100)
-            if report[3]:
-                f_temperature *= -1.0
-            message = [PrivateConstants.DHT_REPORT, report[1],
-                       f_humidity, f_temperature, time.time()]
-
-            try:
-                self.dht_callbacks[report[1]](message)
-                time.sleep(.3)
-            except KeyError:
-                print(&#39;a&#39;)
-
-    def _digital_message(self, data):
-        &#34;&#34;&#34;
-        This is a private message handler method.
-        It is a message handler for Digital Messages.
-
-        :param data: digital message
-
-        &#34;&#34;&#34;
-        pin = data[0]
-        value = data[1]
-
-        time_stamp = time.time()
-        if self.digital_callbacks[pin]:
-            message = [PrivateConstants.DIGITAL_REPORT, pin, value, time_stamp]
-            self.digital_callbacks[pin](message)
-
-    def _firmware_message(self, data):
-        &#34;&#34;&#34;
-        Telemetrix4pico firmware version message
-        :param data: data[0] = major number, data[1] = minor number
-        &#34;&#34;&#34;
-
-        self.firmware_version = [data[0], data[1], data[2]]
-
-    def _i2c_read_report(self, data):
-        &#34;&#34;&#34;
-        Execute callback for i2c reads.
-
-        :param data: [I2C_READ_REPORT, i2c_port, i2c_address,
-        register, number of bytes read, bytes read..., time-stamp]
-        &#34;&#34;&#34;
-
-        cb_list = [PrivateConstants.I2C_READ_REPORT, data[0], data[1]] + data[2:]
-
-        cb_list.append(time.time())
-
-        if cb_list[1]:
-            self.i2c_callback2(cb_list)
-        else:
-            self.i2c_callback(cb_list)
-
-    def _i2c_too_few_bytes_received(self, data):
-        &#34;&#34;&#34;
-        I2c write attempt failed
-
-        :param data: data[0] = i2c_device
-        &#34;&#34;&#34;
-        if self.shutdown_on_exception:
-            self.shutdown()
-        raise RuntimeError(
-            f&#39;i2c Too few bytes received for I2C port {data[0]}&#39;)
-        while True:
-            time.sleep(1)
-
-    def _i2c_too_many_bytes_received(self, data):
-        &#34;&#34;&#34;
-        I2c read failed
-
-        :param data: data[0] = i2c device
-        &#34;&#34;&#34;
-        if self.shutdown_on_exception:
-            self.shutdown()
-        raise RuntimeError(
-            f&#39;i2c too many bytes received for I2C port {data[0]}&#39;)
-        while True:
-            time.sleep(.1)
-
-    def _report_unique_id(self, data):
-        &#34;&#34;&#34;
-        Reply to are_u_there message
-        :param data: pico id
-        &#34;&#34;&#34;
-
-        for i in range(len(data)):
-            self.reported_pico_id.append(data[i])
-
-    def _report_debug_data(self, data):
-        &#34;&#34;&#34;
-        Print debug data sent from pico
-        :param data: data[0] is a byte followed by 2
-                     bytes that comprise an integer
-        :return:
-        &#34;&#34;&#34;
-        value = (data[1] &lt;&lt; 8) + data[2]
-        print(f&#39;DEBUG ID: {data[0]} Value: {value}&#39;)
-
-    def _report_loop_data(self, data):
-        &#34;&#34;&#34;
-        Print data that was looped back
-        :param data: byte of loop back data
-        :return:
-        &#34;&#34;&#34;
-        if self.loop_back_callback:
-            self.loop_back_callback(data)
-
-    # onewire is not available for the pico
-    # def _onewire_report(self, report):
-    #     cb_list = [PrivateConstants.ONE_WIRE_REPORT, report[0]] + report[1:]
-    #     cb_list.append(time.time())
-    #     self.onewire_callback(cb_list)
-
-    def _stepper_distance_to_go_report(self, report):
-        &#34;&#34;&#34;
-        Report stepper distance to go.
-
-        :param report: data[0] = motor_id, data[1] = steps MSB, data[2] = steps byte 1,
-                                 data[3] = steps bytes 2, data[4] = steps LSB
-
-        callback report format: [PrivateConstants.STEPPER_DISTANCE_TO_GO, motor_id
-                                 steps, time_stamp]
-        &#34;&#34;&#34;
-
-        # get callback
-        cb = self.stepper_info_list[report[0]][&#39;distance_to_go_callback&#39;]
-
-        # isolate the steps bytes and covert list to bytes
-        steps = bytes(report[1:])
-
-        # get value from steps
-        num_steps = int.from_bytes(steps, byteorder=&#39;big&#39;, signed=True)
-
-        cb_list = [PrivateConstants.STEPPER_DISTANCE_TO_GO, report[0], num_steps,
-                   time.time()]
-
-        cb(cb_list)
-
-    def _stepper_target_position_report(self, report):
-        &#34;&#34;&#34;
-        Report stepper target position to go.
-
-        :param report: data[0] = motor_id, data[1] = target position MSB,
-                       data[2] = target position byte MSB+1
-                       data[3] = target position byte MSB+2
-                       data[4] = target position LSB
-
-        callback report format: [PrivateConstants.STEPPER_TARGET_POSITION, motor_id
-                                 target_position, time_stamp]
-        &#34;&#34;&#34;
-
-        # get callback
-        cb = self.stepper_info_list[report[0]][&#39;target_position_callback&#39;]
-
-        # isolate the steps bytes and covert list to bytes
-        target = bytes(report[1:])
-
-        # get value from steps
-        target_position = int.from_bytes(target, byteorder=&#39;big&#39;, signed=True)
-
-        cb_list = [PrivateConstants.STEPPER_TARGET_POSITION, report[0], target_position,
-                   time.time()]
-
-        cb(cb_list)
-
-    def _stepper_current_position_report(self, report):
-        &#34;&#34;&#34;
-        Report stepper current position.
-
-        :param report: data[0] = motor_id, data[1] = current position MSB,
-                       data[2] = current position byte MSB+1
-                       data[3] = current position byte MSB+2
-                       data[4] = current position LSB
-
-        callback report format: [PrivateConstants.STEPPER_CURRENT_POSITION, motor_id
-                                 current_position, time_stamp]
-        &#34;&#34;&#34;
-
-        # get callback
-        cb = self.stepper_info_list[report[0]][&#39;current_position_callback&#39;]
-
-        # isolate the steps bytes and covert list to bytes
-        position = bytes(report[1:])
-
-        # get value from steps
-        current_position = int.from_bytes(position, byteorder=&#39;big&#39;, signed=True)
-
-        cb_list = [PrivateConstants.STEPPER_CURRENT_POSITION, report[0], current_position,
-                   time.time()]
-
-        cb(cb_list)
-
-    def _stepper_is_running_report(self, report):
-        &#34;&#34;&#34;
-        Report if the motor is currently running
-
-        :param report: data[0] = motor_id, True if motor is running or False if it is not.
-
-        callback report format: [18, motor_id,
-                                 running_state, time_stamp]
-        &#34;&#34;&#34;
-
-        # get callback
-        cb = self.stepper_info_list[report[0]][&#39;is_running_callback&#39;]
-
-        cb_list = [PrivateConstants.STEPPER_RUNNING_REPORT, report[0], time.time()]
-
-        cb(cb_list)
-
-    def _stepper_run_complete_report(self, report):
-        &#34;&#34;&#34;
-        The motor completed it motion
-
-        :param report: data[0] = motor_id
-
-        callback report format: [PrivateConstants.STEPPER_RUN_COMPLETE_REPORT, motor_id,
-                                 time_stamp]
-        &#34;&#34;&#34;
-
-        # get callback
-        cb = self.stepper_info_list[report[0]][&#39;motion_complete_callback&#39;]
-
-        cb_list = [PrivateConstants.STEPPER_RUN_COMPLETE_REPORT, report[0],
-                   time.time()]
-
-        cb(cb_list)
-
-    def _features_report(self, report):
-        self.reported_features = report[0]
-
-    def _send_command(self, command):
-        &#34;&#34;&#34;
-        This is a private utility method.
-
-
-        :param command:  command data in the form of a list
-
-        &#34;&#34;&#34;
-        # the length of the list is added at the head
-        command.insert(0, len(command))
-        # print(command)
-        send_message = bytes(command)
-
-        try:
-            self.sock.sendall(send_message)
-        except OSError:
-            pass
-        time.sleep(.1)
-
-    def _servo_unavailable(self, report):
-        &#34;&#34;&#34;
-        Message if no servos are available for use.
-        :param report: pin number
-        &#34;&#34;&#34;
-        if self.shutdown_on_exception:
-            self.shutdown()
-        raise RuntimeError(
-            f&#39;Servo Attach For Pin {report[0]} Failed: No Available Servos&#39;)
-
-    def _sonar_distance_report(self, report):
-        &#34;&#34;&#34;
-
-        :param report: data[0] = trigger pin, data[1] and data[2] = distance
-
-        callback report format: [PrivateConstants.SONAR_DISTANCE, trigger_pin,
-        distance  in centimeters, time_stamp]
-        &#34;&#34;&#34;
-
-        # get callback from pin number
-        cb = self.sonar_callbacks[report[0]]
-
-        # build report data
-        if report[1] == 0 and report[2] == 0:
-            cb_list = [PrivateConstants.SONAR_DISTANCE, report[0],
-                       0, time.time()]
-        else:
-            cb_list = [PrivateConstants.SONAR_DISTANCE, report[0],
-                       (report[1] + (report[2] / 100)), time.time()]
-
-        cb(cb_list)
-
-    def _spi_report(self, report):
-        &#34;&#34;&#34;
-        Execute callback for spi reads.
-
-        :param report: [spi_port, number of bytes read, data]
-
-        &#34;&#34;&#34;
-
-        cb_list = [PrivateConstants.SPI_REPORT, report[0], report[1]] + report[2:]
-
-        cb_list.append(time.time())
-
-        if cb_list[1]:
-            self.spi_callback2(cb_list)
-        else:
-            self.spi_callback(cb_list)
-
-    def _run_threads(self):
-        self.run_event.set()
-
-    def _is_running(self):
-        return self.run_event.is_set()
-
-    def _stop_threads(self):
-        self.run_event.clear()
-
-    def _reporter(self):
-        &#34;&#34;&#34;
-        This is the reporter thread. It continuously pulls data from
-        the deque. When a full message is detected, that message is
-        processed.
-        &#34;&#34;&#34;
-        self.run_event.wait()
-
-        while self._is_running() and not self.shutdown_flag:
-            if len(self.the_deque):
-                # response_data will be populated with the received data for the report
-                response_data = []
-                packet_length = self.the_deque.popleft()
-
-                if packet_length:
-                    # get all the data for the report and place it into response_data
-                    for i in range(packet_length):
-                        while not len(self.the_deque):
-                            time.sleep(self.sleep_tune)
-                        data = self.the_deque.popleft()
-                        response_data.append(data)
-
-                    # get the report type and look up its dispatch method
-                    # here we pop the report type off of response_data
-                    report_type = response_data.pop(0)
-
-                    # retrieve the report handler from the dispatch table
-                    dispatch_entry = self.report_dispatch.get(report_type)
-
-                    # if there is additional data for the report,
-                    # it will be contained in response_data
-                    # noinspection PyArgumentList
-                    dispatch_entry(response_data)
-                    continue
-
-                else:
-                    if self.shutdown_on_exception:
-                        self.shutdown()
-                    raise RuntimeError(
-                        &#39;A report with a packet length of zero was received.&#39;)
-            else:
-                time.sleep(self.sleep_tune)
-
-    def _tcp_receiver(self):
-        &#34;&#34;&#34;
-        This is a private utility method.
-
-        Thread to continuously check for incoming data.
-        When a byte comes in, place it onto the deque.
-        &#34;&#34;&#34;
-        self.run_event.wait()
-
-        # Start this thread only if ip_address is set
-
-        if self.ip_address:
-
-            while self._is_running() and not self.shutdown_flag:
-                try:
-                    payload = self.sock.recv(1)
-                    self.the_deque.append(ord(payload))
-                except Exception:
-                    pass
-        else:
-            return</code></pre>
-</details>
 </section>
 <section>
 </section>
@@ -2522,22 +63,9 @@ class TelemetrixRpiPicoW(threading.Thread):
 <dl>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW"><code class="flex name class">
 <span>class <span class="ident">TelemetrixRpiPicoW</span></span>
-<span>(</span><span>ip_address=None, ip_port=31335, sleep_tune=1e-06, shutdown_on_exception=True, reset_on_shutdown=True)</span>
+<span>(</span><span>ip_address=None,<br>ip_port=31335,<br>sleep_tune=1e-06,<br>shutdown_on_exception=True,<br>reset_on_shutdown=True)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>This class exposes and implements a Telemetrix type
-API for the Raspberry Pi Pico W.
-It uses threading to accommodate concurrency.
-It includes the public API methods as well as
-a set of private methods.</p>
-<p>All pin numbers are specified using PICO GPIO pin numbering.</p>
-<p>:param ip_address: IP address assigned to the Pico W</p>
-<p>:param ip_port: IP Port number.</p>
-<p>:param sleep_tune: A tuning parameter (typically not changed by user)</p>
-<p>:param shutdown_on_exception: call shutdown before raising
-a RunTimeError exception, or
-receiving a KeyboardInterrupt exception</p>
-<p>:param reset_on_shutdown: Reset the board upon shutdown</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -2777,7 +305,7 @@ receiving a KeyboardInterrupt exception</p>
         self.stepper_info_list = []
         # a list of dictionaries to hold stepper information
         for motor in range(self.max_number_of_steppers):
-            self.stepper_info_list.append(self.stepper_info)
+            self.stepper_info_list.append(self.stepper_info.copy())
 
         self.the_reporter_thread.start()
         self.the_data_receive_thread.start()
@@ -3058,7 +586,7 @@ receiving a KeyboardInterrupt exception</p>
                 raise RuntimeError(
                     &#39;I2C Write: set_pin_mode i2c never called for i2c port 2.&#39;)
 
-        if type(args) != list:
+        if type(args) is not list:
             raise RuntimeError(&#39;args must be in the form of a list&#39;)
 
         command = [PrivateConstants.I2C_WRITE, i2c_port, address, len(args)]
@@ -3090,8 +618,9 @@ receiving a KeyboardInterrupt exception</p>
         if pixel_number &gt; self.number_of_pixels:
             raise RuntimeError(&#39;Pixel number is out of legal range&#39;)
 
-        if r and g and b not in range(256):
-            raise RuntimeError(&#39;Pixel value must be in the range of 0-255&#39;)
+        for color in [r, g, b]:
+            if not 0 &lt;= color &lt;= 255:
+                raise RuntimeError(&#39;RGB values must be in the range of 0-255&#39;)
 
         command = [PrivateConstants.SET_NEOPIXEL, pixel_number, r, g, b, auto_show]
         self._send_command(command)
@@ -3127,8 +656,9 @@ receiving a KeyboardInterrupt exception</p>
         &#34;&#34;&#34;
         if not self.neopixels_initiated:
             raise RuntimeError(&#39;You must call set_pin_mode_neopixel first&#39;)
-        if r and g and b not in range(256):
-            raise RuntimeError(&#39;Pixel value must be in the range of 0-255&#39;)
+        for color in [r, g, b]:
+            if not 0 &lt;= color &lt;= 255:
+                raise RuntimeError(&#39;RGB values must be in the range of 0-255&#39;)
         command = [PrivateConstants.FILL_NEOPIXELS, r, g, b, auto_show]
         self._send_command(command)
 
@@ -3156,6 +686,10 @@ receiving a KeyboardInterrupt exception</p>
         :param callback: Looped back character will appear in the callback method
 
         &#34;&#34;&#34;
+        if not callback:
+            if self.shutdown_on_exception:
+                self.shutdown()
+            raise RuntimeError(&#39;A callback must be specified&#39;)
         command = [PrivateConstants.LOOP_COMMAND, ord(start_character)]
         self.loop_back_callback = callback
         self._send_command(command)
@@ -3164,15 +698,12 @@ receiving a KeyboardInterrupt exception</p>
         &#34;&#34;&#34;
         Set a pin as an analog input.
 
-        :param adc_number: ADC Number 0-4
+        :param adc_number: ADC Number 0-2
 
                            ADC numbers are mapped as following:
                            ADC0 = GPIO 26 (Physical Pin 31)
                            ADC1 = GPIO 27 (Physical Pin 32)
                            ADC2 = GPIO 28 (Physical Pin 34)
-
-                           Internal Mapping
-                           ADC3 = GPIO 29 (Physical Pin 35) ADC Reference Voltage
 
                            NOTE: This is different from telemetrix-rpi-pico
                            To get cpu temperature, call get_cpu_temperature.
@@ -3190,6 +721,11 @@ receiving a KeyboardInterrupt exception</p>
         The ANALOG_REPORT  = 3
 
         &#34;&#34;&#34;
+        if not callback:
+            if self.shutdown_on_exception:
+                self.shutdown()
+            raise RuntimeError(&#39;A callback must be specified&#39;)
+
         # make sure adc number is in range
         if not 0 &lt;= adc_number &lt; 4:
             raise RuntimeError(&#39;Invalid ADC Number&#39;)
@@ -3199,14 +735,14 @@ receiving a KeyboardInterrupt exception</p>
     def get_cpu_temperature(self, threshold=1.0, polling_interval=1000, callback=None):
         &#34;&#34;&#34;
         Request the CPU temperature. This will continuously monitor the temperature
-        and report it back in degrees celsius. Call only once, unless you wish to
+        and report it back in degrees Celsius. Call only once, unless you wish to
         modify the polling interval.
 
         :param threshold:    The threshold value is used to determine when a
         temperature report is generated. The current temperature is compared to
-        plus and minus the threshold value and if the value is exceeded, a report is
-        generated. To receive continuous reports, set the threshold to 0. A maximum of
-        5.0 degrees is allowed.
+        plus and minus the threshold value and if the value is exceeded, a report
+        will be generated. To receive continuous reports, set the threshold to 0.
+        The maximum of 5.0 degrees.
 
         :param polling_interval: number of milliseconds between temperature reads.
                                  Maximum of 60 seconds (6000 ms.)
@@ -3220,7 +756,10 @@ receiving a KeyboardInterrupt exception</p>
         &#34;&#34;&#34;
 
         if not callback:
-            raise RuntimeError(&#39;get_cpu_temperature: you must specify a callback&#39;)
+            if self.shutdown_on_exception:
+                self.shutdown()
+            raise RuntimeError(&#39;A callback must be specified&#39;)
+
         # convert the floating point threshold to bytes
 
         if 0.0 &lt;= threshold &lt; 30.0:
@@ -3258,6 +797,11 @@ receiving a KeyboardInterrupt exception</p>
         DIGITAL_REPORT = 2
 
         &#34;&#34;&#34;
+        if not callback:
+            if self.shutdown_on_exception:
+                self.shutdown()
+            raise RuntimeError(&#39;A callback must be specified&#39;)
+
         self._set_pin_mode(pin_number, PrivateConstants.AT_INPUT, callback=callback)
 
     def set_pin_mode_digital_input_pullup(self, pin_number, callback=None):
@@ -3276,6 +820,11 @@ receiving a KeyboardInterrupt exception</p>
         The DIGITAL_REPORT = 2
 
         &#34;&#34;&#34;
+        if not callback:
+            if self.shutdown_on_exception:
+                self.shutdown()
+            raise RuntimeError(&#39;A callback must be specified&#39;)
+
         self._set_pin_mode(pin_number, PrivateConstants.AT_INPUT_PULLUP,
                            callback=callback)
 
@@ -3295,6 +844,11 @@ receiving a KeyboardInterrupt exception</p>
         DIGITAL_REPORT= 2
 
         &#34;&#34;&#34;
+        if not callback:
+            if self.shutdown_on_exception:
+                self.shutdown()
+            raise RuntimeError(&#39;A callback must be specified&#39;)
+
         self._set_pin_mode(pin_number, PrivateConstants.AT_INPUT_PULL_DOWN,
                            callback=callback)
 
@@ -3326,8 +880,9 @@ receiving a KeyboardInterrupt exception</p>
 
 
         &#34;&#34;&#34;
-        if fill_r or fill_g or fill_g not in range(256):
-            raise RuntimeError(&#39;Pixel value must be in the range of 0-255&#39;)
+        for color in [fill_r, fill_g, fill_b]:
+            if not 0 &lt;= color &lt;= 255:
+                raise RuntimeError(&#39;RGB values must be in the range of 0-255&#39;)
 
         self.number_of_pixels = num_pixels
 
@@ -3422,7 +977,7 @@ receiving a KeyboardInterrupt exception</p>
 
       callback returns a data list:
 
-    DHT REPORT, DHT_DATA=1, PIN, Humidity,  Temperature (c),Time]
+        [DHT REPORT, DHT_DATA=1, PIN, Humidity,  Temperature (c),Time]
 
     DHT_REPORT =  12
 
@@ -4980,6 +2535,19 @@ receiving a KeyboardInterrupt exception</p>
         else:
             return</code></pre>
 </details>
+<div class="desc"><p>This class exposes and implements a Telemetrix type
+API for the Raspberry Pi Pico W.
+It uses threading to accommodate concurrency.
+It includes the public API methods as well as
+a set of private methods.</p>
+<p>All pin numbers are specified using PICO GPIO pin numbering.</p>
+<p>:param ip_address: IP address assigned to the Pico W</p>
+<p>:param ip_port: IP Port number.</p>
+<p>:param sleep_tune: A tuning parameter (typically not changed by user)</p>
+<p>:param shutdown_on_exception: call shutdown before raising
+a RunTimeError exception, or
+receiving a KeyboardInterrupt exception</p>
+<p>:param reset_on_shutdown: Reset the board upon shutdown</p></div>
 <h3>Ancestors</h3>
 <ul class="hlist">
 <li>threading.Thread</li>
@@ -4990,9 +2558,6 @@ receiving a KeyboardInterrupt exception</p>
 <span>def <span class="ident">digital_write</span></span>(<span>self, pin, value)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Set the specified pin to the specified value.</p>
-<p>:param pin: pico GPIO pin number</p>
-<p>:param value: pin value (1 or 0)</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -5012,12 +2577,14 @@ receiving a KeyboardInterrupt exception</p>
     command = [PrivateConstants.DIGITAL_WRITE, pin, value]
     self._send_command(command)</code></pre>
 </details>
+<div class="desc"><p>Set the specified pin to the specified value.</p>
+<p>:param pin: pico GPIO pin number</p>
+<p>:param value: pin value (1 or 0)</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.disable_all_reporting"><code class="name flex">
 <span>def <span class="ident">disable_all_reporting</span></span>(<span>self)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Disable reporting for all digital and analog input pins</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -5030,13 +2597,12 @@ receiving a KeyboardInterrupt exception</p>
                PrivateConstants.REPORTING_DISABLE_ALL, 0]
     self._send_command(command)</code></pre>
 </details>
+<div class="desc"><p>Disable reporting for all digital and analog input pins</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.disable_analog_reporting"><code class="name flex">
 <span>def <span class="ident">disable_analog_reporting</span></span>(<span>self, pin)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Disables analog reporting for a single analog pin.</p>
-<p>:param pin: Analog pin number. For example for ADC0, the number is 0.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -5052,13 +2618,13 @@ receiving a KeyboardInterrupt exception</p>
                PrivateConstants.REPORTING_ANALOG_DISABLE, pin]
     self._send_command(command)</code></pre>
 </details>
+<div class="desc"><p>Disables analog reporting for a single analog pin.</p>
+<p>:param pin: Analog pin number. For example for ADC0, the number is 0.</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.disable_digital_reporting"><code class="name flex">
 <span>def <span class="ident">disable_digital_reporting</span></span>(<span>self, pin)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Disables digital reporting for a single digital input.</p>
-<p>:param pin: GPIO Pin number.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -5074,13 +2640,13 @@ receiving a KeyboardInterrupt exception</p>
                PrivateConstants.REPORTING_DIGITAL_DISABLE, pin]
     self._send_command(command)</code></pre>
 </details>
+<div class="desc"><p>Disables digital reporting for a single digital input.</p>
+<p>:param pin: GPIO Pin number.</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.enable_analog_reporting"><code class="name flex">
 <span>def <span class="ident">enable_analog_reporting</span></span>(<span>self, pin)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Enables analog reporting for the specified pin.</p>
-<p>:param pin: Analog pin number. For example for ADC0, the number is 0.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -5097,13 +2663,13 @@ receiving a KeyboardInterrupt exception</p>
                PrivateConstants.REPORTING_ANALOG_ENABLE, pin]
     self._send_command(command)</code></pre>
 </details>
+<div class="desc"><p>Enables analog reporting for the specified pin.</p>
+<p>:param pin: Analog pin number. For example for ADC0, the number is 0.</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.enable_digital_reporting"><code class="name flex">
 <span>def <span class="ident">enable_digital_reporting</span></span>(<span>self, pin)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Enable reporting on the specified digital pin.</p>
-<p>:param pin: GPIO Pin number.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -5119,26 +2685,13 @@ receiving a KeyboardInterrupt exception</p>
                PrivateConstants.REPORTING_DIGITAL_ENABLE, pin]
     self._send_command(command)</code></pre>
 </details>
+<div class="desc"><p>Enable reporting on the specified digital pin.</p>
+<p>:param pin: GPIO Pin number.</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.get_cpu_temperature"><code class="name flex">
 <span>def <span class="ident">get_cpu_temperature</span></span>(<span>self, threshold=1.0, polling_interval=1000, callback=None)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Request the CPU temperature. This will continuously monitor the temperature
-and report it back in degrees celsius. Call only once, unless you wish to
-modify the polling interval.</p>
-<p>:param threshold:
-The threshold value is used to determine when a
-temperature report is generated. The current temperature is compared to
-plus and minus the threshold value and if the value is exceeded, a report is
-generated. To receive continuous reports, set the threshold to 0. A maximum of
-5.0 degrees is allowed.</p>
-<p>:param polling_interval: number of milliseconds between temperature reads.
-Maximum of 60 seconds (6000 ms.)</p>
-<p>:param callback: callback function</p>
-<p>callback returns a list:
-[CPU_TEMPERATURE_REPORT, degrees_celsius, raw_time_stamp]</p>
-<p>CPU_TEMPERATURE_REPORT = 20</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -5146,14 +2699,14 @@ Maximum of 60 seconds (6000 ms.)</p>
 <pre><code class="python">def get_cpu_temperature(self, threshold=1.0, polling_interval=1000, callback=None):
     &#34;&#34;&#34;
     Request the CPU temperature. This will continuously monitor the temperature
-    and report it back in degrees celsius. Call only once, unless you wish to
+    and report it back in degrees Celsius. Call only once, unless you wish to
     modify the polling interval.
 
     :param threshold:    The threshold value is used to determine when a
     temperature report is generated. The current temperature is compared to
-    plus and minus the threshold value and if the value is exceeded, a report is
-    generated. To receive continuous reports, set the threshold to 0. A maximum of
-    5.0 degrees is allowed.
+    plus and minus the threshold value and if the value is exceeded, a report
+    will be generated. To receive continuous reports, set the threshold to 0.
+    The maximum of 5.0 degrees.
 
     :param polling_interval: number of milliseconds between temperature reads.
                              Maximum of 60 seconds (6000 ms.)
@@ -5167,7 +2720,10 @@ Maximum of 60 seconds (6000 ms.)</p>
     &#34;&#34;&#34;
 
     if not callback:
-        raise RuntimeError(&#39;get_cpu_temperature: you must specify a callback&#39;)
+        if self.shutdown_on_exception:
+            self.shutdown()
+        raise RuntimeError(&#39;A callback must be specified&#39;)
+
     # convert the floating point threshold to bytes
 
     if 0.0 &lt;= threshold &lt; 30.0:
@@ -5189,38 +2745,26 @@ Maximum of 60 seconds (6000 ms.)</p>
     else:
         raise RuntimeError(&#39;get_cpu_temperature: threshold out of range.&#39;)</code></pre>
 </details>
+<div class="desc"><p>Request the CPU temperature. This will continuously monitor the temperature
+and report it back in degrees Celsius. Call only once, unless you wish to
+modify the polling interval.</p>
+<p>:param threshold:
+The threshold value is used to determine when a
+temperature report is generated. The current temperature is compared to
+plus and minus the threshold value and if the value is exceeded, a report
+will be generated. To receive continuous reports, set the threshold to 0.
+The maximum of 5.0 degrees.</p>
+<p>:param polling_interval: number of milliseconds between temperature reads.
+Maximum of 60 seconds (6000 ms.)</p>
+<p>:param callback: callback function</p>
+<p>callback returns a list:
+[CPU_TEMPERATURE_REPORT, degrees_celsius, raw_time_stamp]</p>
+<p>CPU_TEMPERATURE_REPORT = 20</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.get_pico_pins"><code class="name flex">
 <span>def <span class="ident">get_pico_pins</span></span>(<span>self)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>This method returns the pico_pins dictionary</p>
-<p>Pin Modes MAP:</p>
-<pre><code>DIGITAL_INPUT = 0
-
-DIGITAL_OUTPUT = 1
-
-PWM_OUTPUT = 2
-
-DIGITAL_INPUT_PULLUP = 3
-
-DIGITAL_INPUT_PULL_DOWN = 4
-
-ANALOG_INPUT = 5
-
-SERVO = 6
-
-SONAR = 7
-
-DHT = 8
-
-I2C = 9
-
-NEO_PIXEL = 10
-
-AT_MODE_NOT_SET = 255
-</code></pre>
-<p>:return: pico_pins</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -5259,26 +2803,38 @@ AT_MODE_NOT_SET = 255
     &#34;&#34;&#34;
     return self.pico_pins</code></pre>
 </details>
+<div class="desc"><p>This method returns the pico_pins dictionary</p>
+<p>Pin Modes MAP:</p>
+<pre><code>DIGITAL_INPUT = 0
+
+DIGITAL_OUTPUT = 1
+
+PWM_OUTPUT = 2
+
+DIGITAL_INPUT_PULLUP = 3
+
+DIGITAL_INPUT_PULL_DOWN = 4
+
+ANALOG_INPUT = 5
+
+SERVO = 6
+
+SONAR = 7
+
+DHT = 8
+
+I2C = 9
+
+NEO_PIXEL = 10
+
+AT_MODE_NOT_SET = 255
+</code></pre>
+<p>:return: pico_pins</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.i2c_read"><code class="name flex">
 <span>def <span class="ident">i2c_read</span></span>(<span>self, address, register, number_of_bytes, callback=None, i2c_port=0, send_stop=True)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Read the specified number of bytes from the specified register for
-the i2c device.</p>
-<p>:param address: i2c device address</p>
-<p>:param register: i2c register (or None if no register selection is needed)</p>
-<p>:param number_of_bytes: number of bytes to be read</p>
-<p>:param callback: Required callback function to report i2c data as a
-result of read command</p>
-<p>:param i2c_port: 0 = port 0, 1 = port 1</p>
-<p>:param send_stop: If False, master retains control of the bus at the end of the
-transfer (no Stop is issued), and the next transfer will
-begin with a Restart rather than a Start.</p>
-<p>callback returns a data list:
-[I2C_READ_REPORT, i2c_port, i2c_device_address, count of data bytes,
-data bytes, time-stamp]</p>
-<p>I2C_READ_REPORT = 10</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -5348,17 +2904,26 @@ data bytes, time-stamp]</p>
 
     self._send_command(command)</code></pre>
 </details>
+<div class="desc"><p>Read the specified number of bytes from the specified register for
+the i2c device.</p>
+<p>:param address: i2c device address</p>
+<p>:param register: i2c register (or None if no register selection is needed)</p>
+<p>:param number_of_bytes: number of bytes to be read</p>
+<p>:param callback: Required callback function to report i2c data as a
+result of read command</p>
+<p>:param i2c_port: 0 = port 0, 1 = port 1</p>
+<p>:param send_stop: If False, master retains control of the bus at the end of the
+transfer (no Stop is issued), and the next transfer will
+begin with a Restart rather than a Start.</p>
+<p>callback returns a data list:
+[I2C_READ_REPORT, i2c_port, i2c_device_address, count of data bytes,
+data bytes, time-stamp]</p>
+<p>I2C_READ_REPORT = 10</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.i2c_write"><code class="name flex">
 <span>def <span class="ident">i2c_write</span></span>(<span>self, address, args, i2c_port=0)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Write data to an i2c device.</p>
-<p>:param address: i2c device address</p>
-<p>:param args: A variable number of bytes to be sent to the device
-passed in as a list.
-NOTE: THIS MUST BE IN THE FORM OF A LIST.</p>
-<p>:param i2c_port: 0= port 0, 1 = port 1</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -5390,7 +2955,7 @@ NOTE: THIS MUST BE IN THE FORM OF A LIST.</p>
             raise RuntimeError(
                 &#39;I2C Write: set_pin_mode i2c never called for i2c port 2.&#39;)
 
-    if type(args) != list:
+    if type(args) is not list:
         raise RuntimeError(&#39;args must be in the form of a list&#39;)
 
     command = [PrivateConstants.I2C_WRITE, i2c_port, address, len(args)]
@@ -5400,16 +2965,17 @@ NOTE: THIS MUST BE IN THE FORM OF A LIST.</p>
 
     self._send_command(command)</code></pre>
 </details>
+<div class="desc"><p>Write data to an i2c device.</p>
+<p>:param address: i2c device address</p>
+<p>:param args: A variable number of bytes to be sent to the device
+passed in as a list.
+NOTE: THIS MUST BE IN THE FORM OF A LIST.</p>
+<p>:param i2c_port: 0= port 0, 1 = port 1</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.loop_back"><code class="name flex">
 <span>def <span class="ident">loop_back</span></span>(<span>self, start_character, callback=None)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>This is a debugging method to send a character to the
-pico device, and have the device loop it back.</p>
-<p>:param start_character: The character to loop back. It should be
-an integer.</p>
-<p>:param callback: Looped back character will appear in the callback method</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -5425,22 +2991,24 @@ an integer.</p>
     :param callback: Looped back character will appear in the callback method
 
     &#34;&#34;&#34;
+    if not callback:
+        if self.shutdown_on_exception:
+            self.shutdown()
+        raise RuntimeError(&#39;A callback must be specified&#39;)
     command = [PrivateConstants.LOOP_COMMAND, ord(start_character)]
     self.loop_back_callback = callback
     self._send_command(command)</code></pre>
 </details>
+<div class="desc"><p>This is a debugging method to send a character to the
+pico device, and have the device loop it back.</p>
+<p>:param start_character: The character to loop back. It should be
+an integer.</p>
+<p>:param callback: Looped back character will appear in the callback method</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.neo_pixel_set_value"><code class="name flex">
 <span>def <span class="ident">neo_pixel_set_value</span></span>(<span>self, pixel_number, r=0, g=0, b=0, auto_show=False)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Set the selected pixel in the pixel array on the Pico to
-the value provided.</p>
-<p>:param pixel_number: pixel number</p>
-<p>:param r: red value 0-255</p>
-<p>:param g: green value 0-255</p>
-<p>:param b: blue value 0-255</p>
-<p>:param auto_show: call show automatically</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -5467,8 +3035,9 @@ the value provided.</p>
     if pixel_number &gt; self.number_of_pixels:
         raise RuntimeError(&#39;Pixel number is out of legal range&#39;)
 
-    if r and g and b not in range(256):
-        raise RuntimeError(&#39;Pixel value must be in the range of 0-255&#39;)
+    for color in [r, g, b]:
+        if not 0 &lt;= color &lt;= 255:
+            raise RuntimeError(&#39;RGB values must be in the range of 0-255&#39;)
 
     command = [PrivateConstants.SET_NEOPIXEL, pixel_number, r, g, b, auto_show]
     self._send_command(command)
@@ -5476,13 +3045,18 @@ the value provided.</p>
     if auto_show:
         self.neopixel_show()</code></pre>
 </details>
+<div class="desc"><p>Set the selected pixel in the pixel array on the Pico to
+the value provided.</p>
+<p>:param pixel_number: pixel number</p>
+<p>:param r: red value 0-255</p>
+<p>:param g: green value 0-255</p>
+<p>:param b: blue value 0-255</p>
+<p>:param auto_show: call show automatically</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.neopixel_clear"><code class="name flex">
 <span>def <span class="ident">neopixel_clear</span></span>(<span>self, auto_show=True)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Clear all pixels</p>
-<p>:param auto_show: call show automatically</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -5501,16 +3075,13 @@ the value provided.</p>
     if auto_show:
         self.neopixel_show()</code></pre>
 </details>
+<div class="desc"><p>Clear all pixels</p>
+<p>:param auto_show: call show automatically</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.neopixel_fill"><code class="name flex">
 <span>def <span class="ident">neopixel_fill</span></span>(<span>self, r=0, g=0, b=0, auto_show=True)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Fill all pixels with specified value</p>
-<p>:param r: 0-255</p>
-<p>:param g: 0-255</p>
-<p>:param b: 0-255</p>
-<p>:param auto_show: call show automatically</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -5529,20 +3100,25 @@ the value provided.</p>
     &#34;&#34;&#34;
     if not self.neopixels_initiated:
         raise RuntimeError(&#39;You must call set_pin_mode_neopixel first&#39;)
-    if r and g and b not in range(256):
-        raise RuntimeError(&#39;Pixel value must be in the range of 0-255&#39;)
+    for color in [r, g, b]:
+        if not 0 &lt;= color &lt;= 255:
+            raise RuntimeError(&#39;RGB values must be in the range of 0-255&#39;)
     command = [PrivateConstants.FILL_NEOPIXELS, r, g, b, auto_show]
     self._send_command(command)
 
     if auto_show:
         self.neopixel_show()</code></pre>
 </details>
+<div class="desc"><p>Fill all pixels with specified value</p>
+<p>:param r: 0-255</p>
+<p>:param g: 0-255</p>
+<p>:param b: 0-255</p>
+<p>:param auto_show: call show automatically</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.neopixel_show"><code class="name flex">
 <span>def <span class="ident">neopixel_show</span></span>(<span>self)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Write the NeoPixel buffer stored in the Pico to the NeoPixel strip.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -5557,13 +3133,12 @@ the value provided.</p>
     command = [PrivateConstants.SHOW_NEOPIXELS]
     self._send_command(command)</code></pre>
 </details>
+<div class="desc"><p>Write the NeoPixel buffer stored in the Pico to the NeoPixel strip.</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.pwm_frequency"><code class="name flex">
 <span>def <span class="ident">pwm_frequency</span></span>(<span>self, frequency)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Modify the pwm frequency. Valid values are in the range of 100Hz to 1MHz</p>
-<p>:param frequency: desired PWM write frequency</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -5582,14 +3157,13 @@ the value provided.</p>
     else:
         raise RuntimeError(&#39;pwm_frequency is out of range&#39;)</code></pre>
 </details>
+<div class="desc"><p>Modify the pwm frequency. Valid values are in the range of 100Hz to 1MHz</p>
+<p>:param frequency: desired PWM write frequency</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.pwm_range"><code class="name flex">
 <span>def <span class="ident">pwm_range</span></span>(<span>self, range_pwm)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Set the duty cycle range.
-The range of values is 16 to 65535</p>
-<p>:param range_pwm: range value</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -5612,17 +3186,14 @@ The range of values is 16 to 65535</p>
     else:
         raise RuntimeError(&#39;pwm_range is out of range&#39;)</code></pre>
 </details>
+<div class="desc"><p>Set the duty cycle range.
+The range of values is 16 to 65535</p>
+<p>:param range_pwm: range value</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.pwm_write"><code class="name flex">
 <span>def <span class="ident">pwm_write</span></span>(<span>self, pin, duty_cycle=0)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Set the specified pin to the specified value.
-This is a PWM write.</p>
-<p>:param pin: pico GPIO pin number</p>
-<p>:param duty_cycle: output value - This is dependent upon
-the PWM range. Default is 20000, but it
-may be modified by calling pwm_range</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -5653,14 +3224,17 @@ may be modified by calling pwm_range</p></div>
     command = [PrivateConstants.ANALOG_WRITE, pin, value[0], value[1]]
     self._send_command(command)</code></pre>
 </details>
+<div class="desc"><p>Set the specified pin to the specified value.
+This is a PWM write.</p>
+<p>:param pin: pico GPIO pin number</p>
+<p>:param duty_cycle: output value - This is dependent upon
+the PWM range. Default is 20000, but it
+may be modified by calling pwm_range</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.servo_write"><code class="name flex">
 <span>def <span class="ident">servo_write</span></span>(<span>self, pin_number, value)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Write the value to the specified servo</p>
-<p>:param pin_number: GPIO pin number</p>
-<p>:param value: value between 0 and 180</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -5690,31 +3264,14 @@ may be modified by calling pwm_range</p></div>
                mx[0], mx[1]]
     self._send_command(command)</code></pre>
 </details>
+<div class="desc"><p>Write the value to the specified servo</p>
+<p>:param pin_number: GPIO pin number</p>
+<p>:param value: value between 0 and 180</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.set_pin_mode_analog_input"><code class="name flex">
 <span>def <span class="ident">set_pin_mode_analog_input</span></span>(<span>self, adc_number, differential=0, callback=None)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Set a pin as an analog input.</p>
-<p>:param adc_number: ADC Number 0-4</p>
-<pre><code>               ADC numbers are mapped as following:
-               ADC0 = GPIO 26 (Physical Pin 31)
-               ADC1 = GPIO 27 (Physical Pin 32)
-               ADC2 = GPIO 28 (Physical Pin 34)
-
-               Internal Mapping
-               ADC3 = GPIO 29 (Physical Pin 35) ADC Reference Voltage
-
-               NOTE: This is different from telemetrix-rpi-pico
-               To get cpu temperature, call get_cpu_temperature.
-</code></pre>
-<p>:param differential: difference in previous to current value before
-report will be generated</p>
-<p>:param callback: callback function</p>
-<p>callback returns a data list:</p>
-<p>[ANALOG_REPORT, pin_number, pin_value, raw_time_stamp]</p>
-<p>The ANALOG_REPORT
-= 3</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -5723,15 +3280,12 @@ report will be generated</p>
     &#34;&#34;&#34;
     Set a pin as an analog input.
 
-    :param adc_number: ADC Number 0-4
+    :param adc_number: ADC Number 0-2
 
                        ADC numbers are mapped as following:
                        ADC0 = GPIO 26 (Physical Pin 31)
                        ADC1 = GPIO 27 (Physical Pin 32)
                        ADC2 = GPIO 28 (Physical Pin 34)
-
-                       Internal Mapping
-                       ADC3 = GPIO 29 (Physical Pin 35) ADC Reference Voltage
 
                        NOTE: This is different from telemetrix-rpi-pico
                        To get cpu temperature, call get_cpu_temperature.
@@ -5749,24 +3303,39 @@ report will be generated</p>
     The ANALOG_REPORT  = 3
 
     &#34;&#34;&#34;
+    if not callback:
+        if self.shutdown_on_exception:
+            self.shutdown()
+        raise RuntimeError(&#39;A callback must be specified&#39;)
+
     # make sure adc number is in range
     if not 0 &lt;= adc_number &lt; 4:
         raise RuntimeError(&#39;Invalid ADC Number&#39;)
     self._set_pin_mode(adc_number, PrivateConstants.AT_ANALOG, differential,
                        callback=callback)</code></pre>
 </details>
+<div class="desc"><p>Set a pin as an analog input.</p>
+<p>:param adc_number: ADC Number 0-2</p>
+<pre><code>               ADC numbers are mapped as following:
+               ADC0 = GPIO 26 (Physical Pin 31)
+               ADC1 = GPIO 27 (Physical Pin 32)
+               ADC2 = GPIO 28 (Physical Pin 34)
+
+               NOTE: This is different from telemetrix-rpi-pico
+               To get cpu temperature, call get_cpu_temperature.
+</code></pre>
+<p>:param differential: difference in previous to current value before
+report will be generated</p>
+<p>:param callback: callback function</p>
+<p>callback returns a data list:</p>
+<p>[ANALOG_REPORT, pin_number, pin_value, raw_time_stamp]</p>
+<p>The ANALOG_REPORT
+= 3</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.set_pin_mode_dht"><code class="name flex">
 <span>def <span class="ident">set_pin_mode_dht</span></span>(<span>self, pin, callback=None)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>:param pin: connection pin</p>
-<p>:param callback: callback function</p>
-<p>callback returns a data list:</p>
-<p>DHT REPORT, DHT_DATA=1, PIN, Humidity,
-Temperature (c),Time]</p>
-<p>DHT_REPORT =
-12</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -5780,7 +3349,7 @@ Temperature (c),Time]</p>
 
   callback returns a data list:
 
-DHT REPORT, DHT_DATA=1, PIN, Humidity,  Temperature (c),Time]
+    [DHT REPORT, DHT_DATA=1, PIN, Humidity,  Temperature (c),Time]
 
 DHT_REPORT =  12
 
@@ -5803,17 +3372,18 @@ DHT_REPORT =  12
         raise RuntimeError(
             f&#39;Maximum Number Of DHTs Exceeded - set_pin_mode_dht fails for pin {pin}&#39;)</code></pre>
 </details>
+<div class="desc"><p>:param pin: connection pin</p>
+<p>:param callback: callback function</p>
+<p>callback returns a data list:</p>
+<pre><code>[DHT REPORT, DHT_DATA=1, PIN, Humidity,  Temperature (c),Time]
+</code></pre>
+<p>DHT_REPORT =
+12</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.set_pin_mode_digital_input"><code class="name flex">
 <span>def <span class="ident">set_pin_mode_digital_input</span></span>(<span>self, pin_number, callback=None)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Set a pin as a digital input.</p>
-<p>:param pin_number: pico GPIO pin number</p>
-<p>:param callback: callback function</p>
-<p>callback returns a data list:</p>
-<p>[DIGITAL_REPORT, pin_number, pin_value, raw_time_stamp]</p>
-<p>DIGITAL_REPORT = 2</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -5834,19 +3404,24 @@ DHT_REPORT =  12
     DIGITAL_REPORT = 2
 
     &#34;&#34;&#34;
+    if not callback:
+        if self.shutdown_on_exception:
+            self.shutdown()
+        raise RuntimeError(&#39;A callback must be specified&#39;)
+
     self._set_pin_mode(pin_number, PrivateConstants.AT_INPUT, callback=callback)</code></pre>
 </details>
+<div class="desc"><p>Set a pin as a digital input.</p>
+<p>:param pin_number: pico GPIO pin number</p>
+<p>:param callback: callback function</p>
+<p>callback returns a data list:</p>
+<p>[DIGITAL_REPORT, pin_number, pin_value, raw_time_stamp]</p>
+<p>DIGITAL_REPORT = 2</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.set_pin_mode_digital_input_pull_down"><code class="name flex">
 <span>def <span class="ident">set_pin_mode_digital_input_pull_down</span></span>(<span>self, pin_number, callback=None)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Set a pin as a digital input with pull down enabled.</p>
-<p>:param pin_number: pico GPIO pin number</p>
-<p>:param callback: callback function</p>
-<p>callback returns a data list:</p>
-<p>[DIGITAL_REPORT, pin_number, pin_value, raw_time_stamp]</p>
-<p>DIGITAL_REPORT= 2</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -5867,20 +3442,25 @@ DHT_REPORT =  12
     DIGITAL_REPORT= 2
 
     &#34;&#34;&#34;
+    if not callback:
+        if self.shutdown_on_exception:
+            self.shutdown()
+        raise RuntimeError(&#39;A callback must be specified&#39;)
+
     self._set_pin_mode(pin_number, PrivateConstants.AT_INPUT_PULL_DOWN,
                        callback=callback)</code></pre>
 </details>
+<div class="desc"><p>Set a pin as a digital input with pull down enabled.</p>
+<p>:param pin_number: pico GPIO pin number</p>
+<p>:param callback: callback function</p>
+<p>callback returns a data list:</p>
+<p>[DIGITAL_REPORT, pin_number, pin_value, raw_time_stamp]</p>
+<p>DIGITAL_REPORT= 2</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.set_pin_mode_digital_input_pullup"><code class="name flex">
 <span>def <span class="ident">set_pin_mode_digital_input_pullup</span></span>(<span>self, pin_number, callback=None)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Set a pin as a digital input with pullup enabled.</p>
-<p>:param pin_number: pico GPIO pin number</p>
-<p>:param callback: callback function</p>
-<p>callback returns a data list:</p>
-<p>[DIGITAL_REPORT, pin_number, pin_value, raw_time_stamp]</p>
-<p>The DIGITAL_REPORT = 2</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -5901,16 +3481,25 @@ DHT_REPORT =  12
     The DIGITAL_REPORT = 2
 
     &#34;&#34;&#34;
+    if not callback:
+        if self.shutdown_on_exception:
+            self.shutdown()
+        raise RuntimeError(&#39;A callback must be specified&#39;)
+
     self._set_pin_mode(pin_number, PrivateConstants.AT_INPUT_PULLUP,
                        callback=callback)</code></pre>
 </details>
+<div class="desc"><p>Set a pin as a digital input with pullup enabled.</p>
+<p>:param pin_number: pico GPIO pin number</p>
+<p>:param callback: callback function</p>
+<p>callback returns a data list:</p>
+<p>[DIGITAL_REPORT, pin_number, pin_value, raw_time_stamp]</p>
+<p>The DIGITAL_REPORT = 2</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.set_pin_mode_digital_output"><code class="name flex">
 <span>def <span class="ident">set_pin_mode_digital_output</span></span>(<span>self, pin_number)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Set a pin as a digital output pin.</p>
-<p>:param pin_number: pico GPIO pin number</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -5924,26 +3513,13 @@ DHT_REPORT =  12
 
     self._set_pin_mode(pin_number, PrivateConstants.AT_OUTPUT)</code></pre>
 </details>
+<div class="desc"><p>Set a pin as a digital output pin.</p>
+<p>:param pin_number: pico GPIO pin number</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.set_pin_mode_i2c"><code class="name flex">
 <span>def <span class="ident">set_pin_mode_i2c</span></span>(<span>self, i2c_port=0, sda_gpio=None, scl_gpio=None)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Establish the standard pico i2c pins for i2c utilization.</p>
-<p>SDA pins: port 0 = 4
-port 1 = 26
-SCL pins: port 0 = 5
-port 1 = 27</p>
-<p>:param i2c_port: 0 = i2c0, 1 = i2c1</p>
-<p>:param sda_gpio: gpio pin assigned to SDA</p>
-<p>:param scl_gpio: gpio pin assigned to SCL</p>
-<h2 id="notes">Notes</h2>
-<ol>
-<li>THIS METHOD MUST BE CALLED BEFORE ANY I2C REQUEST IS MADE <br></li>
-<li>Callbacks are set within the individual i2c read methods of this
-API.</li>
-</ol>
-<p>See i2c_read, and i2c_write</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -5998,18 +3574,26 @@ API.</li>
     command = [PrivateConstants.I2C_BEGIN, i2c_port]
     self._send_command(command)</code></pre>
 </details>
+<div class="desc"><p>Establish the standard pico i2c pins for i2c utilization.</p>
+<p>SDA pins: port 0 = 4
+port 1 = 26
+SCL pins: port 0 = 5
+port 1 = 27</p>
+<p>:param i2c_port: 0 = i2c0, 1 = i2c1</p>
+<p>:param sda_gpio: gpio pin assigned to SDA</p>
+<p>:param scl_gpio: gpio pin assigned to SCL</p>
+<h2 id="notes">Notes</h2>
+<ol>
+<li>THIS METHOD MUST BE CALLED BEFORE ANY I2C REQUEST IS MADE <br></li>
+<li>Callbacks are set within the individual i2c read methods of this
+API.</li>
+</ol>
+<p>See i2c_read, and i2c_write</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.set_pin_mode_neopixel"><code class="name flex">
 <span>def <span class="ident">set_pin_mode_neopixel</span></span>(<span>self, pin_number=28, num_pixels=8, fill_r=0, fill_g=0, fill_b=0)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Initialize the pico for NeoPixel control. Fill with rgb values specified.</p>
-<p>Default: Set all the pixels to off.</p>
-<p>:param pin_number: neopixel GPIO control pin</p>
-<p>:param num_pixels: number of pixels in the strip</p>
-<p>:param fill_r: initial red fill value 0-255</p>
-<p>:param fill_g: initial green fill value 0-255</p>
-<p>:param fill_b: initial blue fill value 0-255</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -6033,8 +3617,9 @@ API.</li>
 
 
     &#34;&#34;&#34;
-    if fill_r or fill_g or fill_g not in range(256):
-        raise RuntimeError(&#39;Pixel value must be in the range of 0-255&#39;)
+    for color in [fill_r, fill_g, fill_b]:
+        if not 0 &lt;= color &lt;= 255:
+            raise RuntimeError(&#39;RGB values must be in the range of 0-255&#39;)
 
     self.number_of_pixels = num_pixels
 
@@ -6047,15 +3632,18 @@ API.</li>
 
     self.neopixels_initiated = True</code></pre>
 </details>
+<div class="desc"><p>Initialize the pico for NeoPixel control. Fill with rgb values specified.</p>
+<p>Default: Set all the pixels to off.</p>
+<p>:param pin_number: neopixel GPIO control pin</p>
+<p>:param num_pixels: number of pixels in the strip</p>
+<p>:param fill_r: initial red fill value 0-255</p>
+<p>:param fill_g: initial green fill value 0-255</p>
+<p>:param fill_b: initial blue fill value 0-255</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.set_pin_mode_pwm_output"><code class="name flex">
 <span>def <span class="ident">set_pin_mode_pwm_output</span></span>(<span>self, pin_number)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Enable a pin as a PWM pin. Maximum number of PWMs is 16.</p>
-<p>Note: There are up to 16 pins that can be assigned as
-PWM. Servo pins share the 16 PWM pins.</p>
-<p>:param pin_number: pico GPIO pin number</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -6083,16 +3671,15 @@ PWM. Servo pins share the 16 PWM pins.</p>
     else:
         raise RuntimeError(&#39;Gpio Pin Number is invalid&#39;)</code></pre>
 </details>
+<div class="desc"><p>Enable a pin as a PWM pin. Maximum number of PWMs is 16.</p>
+<p>Note: There are up to 16 pins that can be assigned as
+PWM. Servo pins share the 16 PWM pins.</p>
+<p>:param pin_number: pico GPIO pin number</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.set_pin_mode_servo"><code class="name flex">
 <span>def <span class="ident">set_pin_mode_servo</span></span>(<span>self, pin_number, min_pulse=1000, max_pulse=2000)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Attach a pin to a servo motor</p>
-<p>There are 16 PWM pins shared between the Servo and PWM Output modes.</p>
-<p>:param pin_number: pin</p>
-<p>:param min_pulse: minimum pulse width in microseconds</p>
-<p>:param max_pulse: maximum pulse width in microseconds</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -6123,19 +3710,16 @@ PWM. Servo pins share the 16 PWM pins.</p>
     self._set_pin_mode(pin_number, PrivateConstants.AT_SERVO, min_pulse, max_pulse)
     self.pico_pins[pin_number] = PrivateConstants.AT_SERVO</code></pre>
 </details>
+<div class="desc"><p>Attach a pin to a servo motor</p>
+<p>There are 16 PWM pins shared between the Servo and PWM Output modes.</p>
+<p>:param pin_number: pin</p>
+<p>:param min_pulse: minimum pulse width in microseconds</p>
+<p>:param max_pulse: maximum pulse width in microseconds</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.set_pin_mode_sonar"><code class="name flex">
 <span>def <span class="ident">set_pin_mode_sonar</span></span>(<span>self, trigger_pin, echo_pin, callback=None)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>:param trigger_pin:
-Sensor trigger gpio pin</p>
-<p>:param echo_pin: Sensor echo gpio pin</p>
-<p>:param callback: callback</p>
-<p>callback returns a data list:</p>
-<p>[ SONAR_DISTANCE, trigger_pin, distance_value, time_stamp]</p>
-<p>SONAR_DISTANCE =
-11</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -6174,36 +3758,19 @@ Sensor trigger gpio pin</p>
             self.shutdown()
         raise RuntimeError(&#39;Maximum number of supported sonar devices exceeded.&#39;)</code></pre>
 </details>
+<div class="desc"><p>:param trigger_pin:
+Sensor trigger gpio pin</p>
+<p>:param echo_pin: Sensor echo gpio pin</p>
+<p>:param callback: callback</p>
+<p>callback returns a data list:</p>
+<p>[ SONAR_DISTANCE, trigger_pin, distance_value, time_stamp]</p>
+<p>SONAR_DISTANCE =
+11</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.set_pin_mode_spi"><code class="name flex">
 <span>def <span class="ident">set_pin_mode_spi</span></span>(<span>self, spi_port=0, chip_select=None, speed_maximum=500000, data_order=1, data_mode=0)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Specify the SPI port. The SPI port is configured as a "master".
-Optionally specify the chip select pin.</p>
-<p>This command also specifies the SPISettings for the selected SPI port.</p>
-<p>This method sets the SPISettings structure based on parameter values
-provided.</p>
-<p>SPI support is provided as an abstraction. It is intended that
-only a single device is connected to an SPI port.</p>
-<p>:param spi_port: 0 = spi0, 1 = spi1</p>
-<p>:param chip_select:
-spi0 = 17
-spi1 = 13 or select another pin</p>
-<p>:param speed_maximum: The maximum speed of communication. Maximum is 50000000</p>
-<p>:param data_order: 1=MSBFIRST,
-0=LSBFIRST,</p>
-<p>:param data_mode: 0=MODE0, 1=MODE1, 2=MODE2 3=MODE3</p>
-<p>miso: SPI data receive pin
-spi0 = 16
-spi1 = 12</p>
-<p>mosi: SPI data transmit pin
-spi0 = 19
-spi1 = 15</p>
-<p>clock_pin: clock pin
-spi0 = 18
-spi1 = 14</p>
-<p>command message: [command, spi, chip_select, speed, data_order, data_mode]</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -6294,38 +3861,36 @@ spi1 = 14</p>
                freq_bytes[1], freq_bytes[2], freq_bytes[3], data_order, data_mode]
     self._send_command(command)</code></pre>
 </details>
+<div class="desc"><p>Specify the SPI port. The SPI port is configured as a "master".
+Optionally specify the chip select pin.</p>
+<p>This command also specifies the SPISettings for the selected SPI port.</p>
+<p>This method sets the SPISettings structure based on parameter values
+provided.</p>
+<p>SPI support is provided as an abstraction. It is intended that
+only a single device is connected to an SPI port.</p>
+<p>:param spi_port: 0 = spi0, 1 = spi1</p>
+<p>:param chip_select:
+spi0 = 17
+spi1 = 13 or select another pin</p>
+<p>:param speed_maximum: The maximum speed of communication. Maximum is 50000000</p>
+<p>:param data_order: 1=MSBFIRST,
+0=LSBFIRST,</p>
+<p>:param data_mode: 0=MODE0, 1=MODE1, 2=MODE2 3=MODE3</p>
+<p>miso: SPI data receive pin
+spi0 = 16
+spi1 = 12</p>
+<p>mosi: SPI data transmit pin
+spi0 = 19
+spi1 = 15</p>
+<p>clock_pin: clock pin
+spi0 = 18
+spi1 = 14</p>
+<p>command message: [command, spi, chip_select, speed, data_order, data_mode]</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.set_pin_mode_stepper"><code class="name flex">
 <span>def <span class="ident">set_pin_mode_stepper</span></span>(<span>self, interface=1, pin1=2, pin2=3, pin3=4, pin4=5, enable=True)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Stepper motor support is implemented as a proxy for
-the AccelStepper library.</p>
-<p><a href="https://github.com/waspinator/AccelStepper">https://github.com/waspinator/AccelStepper</a></p>
-<p>Instantiate a stepper motor.</p>
-<p>Initialize the interface and pins for a stepper motor.</p>
-<p>:param interface: Motor Interface Type:</p>
-<pre><code>    1 = Stepper Driver, 2 driver pins required
-
-    2 = FULL2WIRE  2 wire stepper, 2 motor pins required
-
-    3 = FULL3WIRE 3 wire stepper, such as HDD spindle,
-        3 motor pins required
-
-    4 = FULL4WIRE, 4 wire full stepper, 4 motor pins
-        required
-
-    6 = HALF3WIRE, 3 wire half stepper, such as HDD spindle,
-        3 motor pins required
-
-    8 = HALF4WIRE, 4 wire half stepper, 4 motor pins required
-</code></pre>
-<p>:param pin1: Pico digital pin number for motor pin 1</p>
-<p>:param pin2: Pico digital pin number for motor pin 2</p>
-<p>:param pin3: Pico digital pin number for motor pin 3</p>
-<p>:param pin4: Pico digital pin number for motor pin 4</p>
-<p>:param enable: If this is true, the output pins are enabled at construction time.</p>
-<p>:return: Motor Reference number</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -6396,13 +3961,38 @@ the AccelStepper library.</p>
     # return motor id
     return motor_id</code></pre>
 </details>
+<div class="desc"><p>Stepper motor support is implemented as a proxy for
+the AccelStepper library.</p>
+<p><a href="https://github.com/waspinator/AccelStepper">https://github.com/waspinator/AccelStepper</a></p>
+<p>Instantiate a stepper motor.</p>
+<p>Initialize the interface and pins for a stepper motor.</p>
+<p>:param interface: Motor Interface Type:</p>
+<pre><code>    1 = Stepper Driver, 2 driver pins required
+
+    2 = FULL2WIRE  2 wire stepper, 2 motor pins required
+
+    3 = FULL3WIRE 3 wire stepper, such as HDD spindle,
+        3 motor pins required
+
+    4 = FULL4WIRE, 4 wire full stepper, 4 motor pins
+        required
+
+    6 = HALF3WIRE, 3 wire half stepper, such as HDD spindle,
+        3 motor pins required
+
+    8 = HALF4WIRE, 4 wire half stepper, 4 motor pins required
+</code></pre>
+<p>:param pin1: Pico digital pin number for motor pin 1</p>
+<p>:param pin2: Pico digital pin number for motor pin 2</p>
+<p>:param pin3: Pico digital pin number for motor pin 3</p>
+<p>:param pin4: Pico digital pin number for motor pin 4</p>
+<p>:param enable: If this is true, the output pins are enabled at construction time.</p>
+<p>:return: Motor Reference number</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.shutdown"><code class="name flex">
 <span>def <span class="ident">shutdown</span></span>(<span>self)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>This method attempts to perform an orderly shutdown.
-If any exceptions are thrown, they are ignored.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -6435,23 +4025,13 @@ If any exceptions are thrown, they are ignored.</p></div>
     except Exception:
         raise RuntimeError(&#39;Shutdown failed - could not send stop streaming message&#39;)</code></pre>
 </details>
+<div class="desc"><p>This method attempts to perform an orderly shutdown.
+If any exceptions are thrown, they are ignored.</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.spi_read_blocking"><code class="name flex">
 <span>def <span class="ident">spi_read_blocking</span></span>(<span>self, register, number_of_bytes, spi_port=0, call_back=None)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Read the specified number of bytes from the specified SPI port and
-call the callback function with the reported data.</p>
-<p>On the server side, this command incorporates SPI.beginTransaction
-and chip select control.</p>
-<p>:param register: Register to be selected</p>
-<p>:param number_of_bytes: Number of bytes to read</p>
-<p>:param spi_port: SPI port 0 or 1</p>
-<p>:param call_back: Required callback function to report spi data as a
-result of read command</p>
-<p>callback returns a data list:
-[SPI_READ_REPORT, spi_port, count of data bytes, data bytes, time-stamp]</p>
-<p>SPI_READ_REPORT = 13</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -6507,17 +4087,23 @@ result of read command</p>
                number_of_bytes]
     self._send_command(command)</code></pre>
 </details>
+<div class="desc"><p>Read the specified number of bytes from the specified SPI port and
+call the callback function with the reported data.</p>
+<p>On the server side, this command incorporates SPI.beginTransaction
+and chip select control.</p>
+<p>:param register: Register to be selected</p>
+<p>:param number_of_bytes: Number of bytes to read</p>
+<p>:param spi_port: SPI port 0 or 1</p>
+<p>:param call_back: Required callback function to report spi data as a
+result of read command</p>
+<p>callback returns a data list:
+[SPI_READ_REPORT, spi_port, count of data bytes, data bytes, time-stamp]</p>
+<p>SPI_READ_REPORT = 13</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.spi_write_blocking"><code class="name flex">
 <span>def <span class="ident">spi_write_blocking</span></span>(<span>self, bytes_to_write, spi_port=0)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Write a list of bytes to the SPI device.</p>
-<p>On the server side, this command incorporates SPI.beginTransaction
-and chip select control.</p>
-<p>:param bytes_to_write: A list of bytes to write. This must be in the form of a
-list.</p>
-<p>:param spi_port: SPI port 0 or 1</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -6556,20 +4142,17 @@ list.</p>
 
     self._send_command(command)</code></pre>
 </details>
+<div class="desc"><p>Write a list of bytes to the SPI device.</p>
+<p>On the server side, this command incorporates SPI.beginTransaction
+and chip select control.</p>
+<p>:param bytes_to_write: A list of bytes to write. This must be in the form of a
+list.</p>
+<p>:param spi_port: SPI port 0 or 1</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.stepper_disable_outputs"><code class="name flex">
 <span>def <span class="ident">stepper_disable_outputs</span></span>(<span>self, motor_id)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Disable motor pin outputs by setting them all LOW.</p>
-<p>Depending on the design of your electronics this may turn off
-the power to the motor coils, saving power.</p>
-<p>This is useful to support low power modes: disable the outputs
-during sleep and then re-enable with enableOutputs() before stepping
-again.</p>
-<p>If the enable Pin is defined, sets the pin to OUTPUT mode and clears
-the pin to be disabled.</p>
-<p>:param motor_id: 0 - 3</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -6598,16 +4181,20 @@ the pin to be disabled.</p>
     command = [PrivateConstants.STEPPER_DISABLE_OUTPUTS, motor_id]
     self._send_command(command)</code></pre>
 </details>
+<div class="desc"><p>Disable motor pin outputs by setting them all LOW.</p>
+<p>Depending on the design of your electronics this may turn off
+the power to the motor coils, saving power.</p>
+<p>This is useful to support low power modes: disable the outputs
+during sleep and then re-enable with enableOutputs() before stepping
+again.</p>
+<p>If the enable Pin is defined, sets the pin to OUTPUT mode and clears
+the pin to be disabled.</p>
+<p>:param motor_id: 0 - 3</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.stepper_enable_outputs"><code class="name flex">
 <span>def <span class="ident">stepper_enable_outputs</span></span>(<span>self, motor_id)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Enable motor pin outputs by setting the motor pins to OUTPUT
-mode.</p>
-<p>If the enable Pin is defined, sets it to OUTPUT mode and sets
-the pin to be enabled.</p>
-<p>:param motor_id: 0 - 3</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -6630,17 +4217,16 @@ the pin to be enabled.</p>
     command = [PrivateConstants.STEPPER_ENABLE_OUTPUTS, motor_id]
     self._send_command(command)</code></pre>
 </details>
+<div class="desc"><p>Enable motor pin outputs by setting the motor pins to OUTPUT
+mode.</p>
+<p>If the enable Pin is defined, sets it to OUTPUT mode and sets
+the pin to be enabled.</p>
+<p>:param motor_id: 0 - 3</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.stepper_get_current_position"><code class="name flex">
 <span>def <span class="ident">stepper_get_current_position</span></span>(<span>self, motor_id, current_position_callback)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Request the current motor position from the server.</p>
-<p>:param motor_id: 0 - 3</p>
-<p>:param current_position_callback: required callback function to receive report</p>
-<p>:return: The current motor position returned via the callback as a list:</p>
-<p>[REPORT_TYPE=17, motor_id, current position in steps, time_stamp]</p>
-<p>Positive is clockwise from the 0 position.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -6676,18 +4262,17 @@ the pin to be enabled.</p>
     command = [PrivateConstants.STEPPER_GET_CURRENT_POSITION, motor_id]
     self._send_command(command)</code></pre>
 </details>
+<div class="desc"><p>Request the current motor position from the server.</p>
+<p>:param motor_id: 0 - 3</p>
+<p>:param current_position_callback: required callback function to receive report</p>
+<p>:return: The current motor position returned via the callback as a list:</p>
+<p>[REPORT_TYPE=17, motor_id, current position in steps, time_stamp]</p>
+<p>Positive is clockwise from the 0 position.</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.stepper_get_distance_to_go"><code class="name flex">
 <span>def <span class="ident">stepper_get_distance_to_go</span></span>(<span>self, motor_id, distance_to_go_callback)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Request the distance from the current position to the target position
-from the server.</p>
-<p>:param motor_id: 0 - 3</p>
-<p>:param distance_to_go_callback: required callback function to receive report</p>
-<p>:return: The distance to go is returned via the callback as a list:</p>
-<p>[REPORT_TYPE=15, motor_id, distance in steps, time_stamp]</p>
-<p>A positive distance is clockwise from the current position.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -6723,16 +4308,18 @@ from the server.</p>
     command = [PrivateConstants.STEPPER_GET_DISTANCE_TO_GO, motor_id]
     self._send_command(command)</code></pre>
 </details>
+<div class="desc"><p>Request the distance from the current position to the target position
+from the server.</p>
+<p>:param motor_id: 0 - 3</p>
+<p>:param distance_to_go_callback: required callback function to receive report</p>
+<p>:return: The distance to go is returned via the callback as a list:</p>
+<p>[REPORT_TYPE=15, motor_id, distance in steps, time_stamp]</p>
+<p>A positive distance is clockwise from the current position.</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.stepper_get_max_speed"><code class="name flex">
 <span>def <span class="ident">stepper_get_max_speed</span></span>(<span>self, motor_id)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Returns the maximum speed configured for this stepper
-that was previously set by stepper_set_max_speed()</p>
-<p>Value is stored in the client, so no callback is required.</p>
-<p>:param motor_id: 0 - 3</p>
-<p>:return: The currently configured maximum speed.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -6755,17 +4342,16 @@ that was previously set by stepper_set_max_speed()</p>
 
     return self.stepper_info_list[motor_id][&#39;max_speed&#39;]</code></pre>
 </details>
+<div class="desc"><p>Returns the maximum speed configured for this stepper
+that was previously set by stepper_set_max_speed()</p>
+<p>Value is stored in the client, so no callback is required.</p>
+<p>:param motor_id: 0 - 3</p>
+<p>:return: The currently configured maximum speed.</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.stepper_get_speed"><code class="name flex">
 <span>def <span class="ident">stepper_get_speed</span></span>(<span>self, motor_id)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Returns the
-most recently set speed.
-that was previously set by stepper_set_speed();</p>
-<p>Value is stored in the client, so no callback is required.</p>
-<p>:param motor_id:
-0 - 3</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -6787,17 +4373,17 @@ that was previously set by stepper_set_speed();</p>
 
     return self.stepper_info_list[motor_id][&#39;speed&#39;]</code></pre>
 </details>
+<div class="desc"><p>Returns the
+most recently set speed.
+that was previously set by stepper_set_speed();</p>
+<p>Value is stored in the client, so no callback is required.</p>
+<p>:param motor_id:
+0 - 3</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.stepper_get_target_position"><code class="name flex">
 <span>def <span class="ident">stepper_get_target_position</span></span>(<span>self, motor_id, target_callback)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Request the most recently set target position from the server.</p>
-<p>:param motor_id: 0 - 3</p>
-<p>:param target_callback: required callback function to receive report</p>
-<p>:return: The distance to go is returned via the callback as a list:</p>
-<p>[REPORT_TYPE=16, motor_id, target position in steps, time_stamp]</p>
-<p>Positive is clockwise from the 0 position.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -6834,17 +4420,17 @@ that was previously set by stepper_set_speed();</p>
     command = [PrivateConstants.STEPPER_GET_TARGET_POSITION, motor_id]
     self._send_command(command)</code></pre>
 </details>
+<div class="desc"><p>Request the most recently set target position from the server.</p>
+<p>:param motor_id: 0 - 3</p>
+<p>:param target_callback: required callback function to receive report</p>
+<p>:return: The distance to go is returned via the callback as a list:</p>
+<p>[REPORT_TYPE=16, motor_id, target position in steps, time_stamp]</p>
+<p>Positive is clockwise from the 0 position.</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.stepper_is_running"><code class="name flex">
 <span>def <span class="ident">stepper_is_running</span></span>(<span>self, motor_id, callback)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Checks to see if the motor is currently running to a target.</p>
-<p>Callback return True if the speed is not zero or not at the target position.</p>
-<p>:param motor_id: 0-4</p>
-<p>:param callback: required callback function to receive report</p>
-<p>:return: The current running state returned via the callback as a list:</p>
-<p>[REPORT_TYPE=18, motor_id, True or False for running state, time_stamp]</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -6879,16 +4465,17 @@ that was previously set by stepper_set_speed();</p>
     command = [PrivateConstants.STEPPER_IS_RUNNING, motor_id]
     self._send_command(command)</code></pre>
 </details>
+<div class="desc"><p>Checks to see if the motor is currently running to a target.</p>
+<p>Callback return True if the speed is not zero or not at the target position.</p>
+<p>:param motor_id: 0-4</p>
+<p>:param callback: required callback function to receive report</p>
+<p>:return: The current running state returned via the callback as a list:</p>
+<p>[REPORT_TYPE=18, motor_id, True or False for running state, time_stamp]</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.stepper_move"><code class="name flex">
 <span>def <span class="ident">stepper_move</span></span>(<span>self, motor_id, relative_position)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Set the target position relative to the current position.</p>
-<p>:param motor_id: motor id: 0 - 3</p>
-<p>:param relative_position: The desired position relative to the current
-position. Negative is anticlockwise from
-the current position. Maximum value is 32 bits.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -6922,21 +4509,16 @@ the current position. Maximum value is 32 bits.</p></div>
     command.append(polarity)
     self._send_command(command)</code></pre>
 </details>
+<div class="desc"><p>Set the target position relative to the current position.</p>
+<p>:param motor_id: motor id: 0 - 3</p>
+<p>:param relative_position: The desired position relative to the current
+position. Negative is anticlockwise from
+the current position. Maximum value is 32 bits.</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.stepper_move_to"><code class="name flex">
 <span>def <span class="ident">stepper_move_to</span></span>(<span>self, motor_id, position)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Set an absolution target position. If position is positive, the movement is
-clockwise, else it is counter-clockwise.</p>
-<p>The run() function (below) will try to move the motor (at most one step per call)
-from the current position to the target position set by the most
-recent call to this function. Caution: moveTo() also recalculates the
-speed for the next step.
-If you are trying to use constant speed movements, you should call setSpeed()
-after calling moveTo().</p>
-<p>:param motor_id: motor id: 0 - 3</p>
-<p>:param position: target position. Maximum value is 32 bits.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -6975,19 +4557,21 @@ after calling moveTo().</p>
     command.append(polarity)
     self._send_command(command)</code></pre>
 </details>
+<div class="desc"><p>Set an absolution target position. If position is positive, the movement is
+clockwise, else it is counter-clockwise.</p>
+<p>The run() function (below) will try to move the motor (at most one step per call)
+from the current position to the target position set by the most
+recent call to this function. Caution: moveTo() also recalculates the
+speed for the next step.
+If you are trying to use constant speed movements, you should call setSpeed()
+after calling moveTo().</p>
+<p>:param motor_id: motor id: 0 - 3</p>
+<p>:param position: target position. Maximum value is 32 bits.</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.stepper_run"><code class="name flex">
 <span>def <span class="ident">stepper_run</span></span>(<span>self, motor_id, completion_callback=None)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>This method steps the selected motor based on the current speed.</p>
-<p>Once called, the server will continuously attempt to step the motor.</p>
-<p>:param motor_id: 0 - 3</p>
-<p>:param completion_callback: call back function to receive motion complete
-notification</p>
-<p>callback returns a data list:</p>
-<p>[report_type, motor_id, raw_time_stamp]</p>
-<p>The report_type = 19</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -7024,15 +4608,19 @@ notification</p>
     command = [PrivateConstants.STEPPER_RUN, motor_id]
     self._send_command(command)</code></pre>
 </details>
+<div class="desc"><p>This method steps the selected motor based on the current speed.</p>
+<p>Once called, the server will continuously attempt to step the motor.</p>
+<p>:param motor_id: 0 - 3</p>
+<p>:param completion_callback: call back function to receive motion complete
+notification</p>
+<p>callback returns a data list:</p>
+<p>[report_type, motor_id, raw_time_stamp]</p>
+<p>The report_type = 19</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.stepper_run_speed"><code class="name flex">
 <span>def <span class="ident">stepper_run_speed</span></span>(<span>self, motor_id)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>This method steps the selected motor based at a constant speed as set by the most
-recent call to stepper_set_max_speed(). The motor will run continuously.</p>
-<p>Once called, the server will continuously attempt to step the motor.</p>
-<p>:param motor_id: 0 - 3</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -7055,20 +4643,15 @@ recent call to stepper_set_max_speed(). The motor will run continuously.</p>
     command = [PrivateConstants.STEPPER_RUN_SPEED, motor_id]
     self._send_command(command)</code></pre>
 </details>
+<div class="desc"><p>This method steps the selected motor based at a constant speed as set by the most
+recent call to stepper_set_max_speed(). The motor will run continuously.</p>
+<p>Once called, the server will continuously attempt to step the motor.</p>
+<p>:param motor_id: 0 - 3</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.stepper_run_speed_to_position"><code class="name flex">
 <span>def <span class="ident">stepper_run_speed_to_position</span></span>(<span>self, motor_id, completion_callback=None)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Runs the motor at the currently selected speed until the target position is
-reached.</p>
-<p>Does not implement accelerations.</p>
-<p>:param motor_id: 0 - 3</p>
-<p>:param completion_callback: call back function to receive motion complete
-notification</p>
-<p>callback returns a data list:</p>
-<p>[report_type, motor_id, raw_time_stamp]</p>
-<p>The report_type = 19</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -7106,16 +4689,20 @@ notification</p>
     command = [PrivateConstants.STEPPER_RUN_SPEED_TO_POSITION, motor_id]
     self._send_command(command)</code></pre>
 </details>
+<div class="desc"><p>Runs the motor at the currently selected speed until the target position is
+reached.</p>
+<p>Does not implement accelerations.</p>
+<p>:param motor_id: 0 - 3</p>
+<p>:param completion_callback: call back function to receive motion complete
+notification</p>
+<p>callback returns a data list:</p>
+<p>[report_type, motor_id, raw_time_stamp]</p>
+<p>The report_type = 19</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.stepper_set_3_pins_inverted"><code class="name flex">
 <span>def <span class="ident">stepper_set_3_pins_inverted</span></span>(<span>self, motor_id, direction=False, step=False, enable=False)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Sets the inversion for stepper driver pins.</p>
-<p>:param motor_id: 0 - 3</p>
-<p>:param direction: True=inverted or False</p>
-<p>:param step: True=inverted or False</p>
-<p>:param enable: True=inverted or False</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -7143,18 +4730,16 @@ notification</p>
 
     self._send_command(command)</code></pre>
 </details>
+<div class="desc"><p>Sets the inversion for stepper driver pins.</p>
+<p>:param motor_id: 0 - 3</p>
+<p>:param direction: True=inverted or False</p>
+<p>:param step: True=inverted or False</p>
+<p>:param enable: True=inverted or False</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.stepper_set_4_pins_inverted"><code class="name flex">
-<span>def <span class="ident">stepper_set_4_pins_inverted</span></span>(<span>self, motor_id, pin1_invert=False, pin2_invert=False, pin3_invert=False, pin4_invert=False, enable=False)</span>
+<span>def <span class="ident">stepper_set_4_pins_inverted</span></span>(<span>self,<br>motor_id,<br>pin1_invert=False,<br>pin2_invert=False,<br>pin3_invert=False,<br>pin4_invert=False,<br>enable=False)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Sets the inversion for 2, 3 and 4 wire stepper pins</p>
-<p>:param motor_id: 0 - 3</p>
-<p>:param pin1_invert: True=inverted or False</p>
-<p>:param pin2_invert: True=inverted or False</p>
-<p>:param pin3_invert: True=inverted or False</p>
-<p>:param pin4_invert: True=inverted or False</p>
-<p>:param enable: True=inverted or False</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -7186,18 +4771,18 @@ notification</p>
 
     self._send_command(command)</code></pre>
 </details>
+<div class="desc"><p>Sets the inversion for 2, 3 and 4 wire stepper pins</p>
+<p>:param motor_id: 0 - 3</p>
+<p>:param pin1_invert: True=inverted or False</p>
+<p>:param pin2_invert: True=inverted or False</p>
+<p>:param pin3_invert: True=inverted or False</p>
+<p>:param pin4_invert: True=inverted or False</p>
+<p>:param enable: True=inverted or False</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.stepper_set_acceleration"><code class="name flex">
 <span>def <span class="ident">stepper_set_acceleration</span></span>(<span>self, motor_id, acceleration)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Sets the acceleration/deceleration rate.</p>
-<p>:param motor_id: 0 - 3</p>
-<p>:param acceleration: The desired acceleration in steps
-per second. Must be &gt; 0.0. This is an
-expensive call since it requires a square
-root to be calculated on the server.
-Don't call more often than needed.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -7235,19 +4820,18 @@ Don't call more often than needed.</p></div>
                max_accel_lsb]
     self._send_command(command)</code></pre>
 </details>
+<div class="desc"><p>Sets the acceleration/deceleration rate.</p>
+<p>:param motor_id: 0 - 3</p>
+<p>:param acceleration: The desired acceleration in steps
+per second. Must be &gt; 0.0. This is an
+expensive call since it requires a square
+root to be calculated on the server.
+Don't call more often than needed.</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.stepper_set_current_position"><code class="name flex">
 <span>def <span class="ident">stepper_set_current_position</span></span>(<span>self, motor_id, position)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Resets the current position of the motor, so that wherever the motor
-happens to be right now is considered to be the new 0 position. Useful
-for setting a zero position on a stepper after an initial hardware
-positioning move.</p>
-<p>Has the side effect of setting the current motor speed to 0.</p>
-<p>:param motor_id:
-0 - 3</p>
-<p>:param position: Position in steps. This is a 32 bit value</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -7277,18 +4861,19 @@ positioning move.</p>
         command.append(value)
     self._send_command(command)</code></pre>
 </details>
+<div class="desc"><p>Resets the current position of the motor, so that wherever the motor
+happens to be right now is considered to be the new 0 position. Useful
+for setting a zero position on a stepper after an initial hardware
+positioning move.</p>
+<p>Has the side effect of setting the current motor speed to 0.</p>
+<p>:param motor_id:
+0 - 3</p>
+<p>:param position: Position in steps. This is a 32 bit value</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.stepper_set_enable_pin"><code class="name flex">
 <span>def <span class="ident">stepper_set_enable_pin</span></span>(<span>self, motor_id, pin=255)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Sets the enable-pin number for stepper drivers.
-0xFF indicates unused (default).</p>
-<p>Otherwise, if a pin is set, the pin will be turned on when
-enableOutputs() is called and switched off when disableOutputs()
-is called.</p>
-<p>:param motor_id: 0 - 4
-:param pin: 0-0xff</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -7319,19 +4904,18 @@ is called.</p>
 
     self._send_command(command)</code></pre>
 </details>
+<div class="desc"><p>Sets the enable-pin number for stepper drivers.
+0xFF indicates unused (default).</p>
+<p>Otherwise, if a pin is set, the pin will be turned on when
+enableOutputs() is called and switched off when disableOutputs()
+is called.</p>
+<p>:param motor_id: 0 - 4
+:param pin: 0-0xff</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.stepper_set_max_speed"><code class="name flex">
 <span>def <span class="ident">stepper_set_max_speed</span></span>(<span>self, motor_id, max_speed)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Sets the maximum permitted speed. The stepper_run() function will accelerate
-up to the speed set by this function.</p>
-<p>Caution: the maximum speed achievable depends on your processor and clock speed.
-The default maxSpeed is 1 step per second.</p>
-<p>Caution: Speeds that exceed the maximum speed supported by the processor may
-result in non-linear accelerations and decelerations.</p>
-<p>:param motor_id: 0 - 3</p>
-<p>:param max_speed: 1 - 1000</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -7370,16 +4954,19 @@ result in non-linear accelerations and decelerations.</p>
                max_speed_lsb]
     self._send_command(command)</code></pre>
 </details>
+<div class="desc"><p>Sets the maximum permitted speed. The stepper_run() function will accelerate
+up to the speed set by this function.</p>
+<p>Caution: the maximum speed achievable depends on your processor and clock speed.
+The default maxSpeed is 1 step per second.</p>
+<p>Caution: Speeds that exceed the maximum speed supported by the processor may
+result in non-linear accelerations and decelerations.</p>
+<p>:param motor_id: 0 - 3</p>
+<p>:param max_speed: 1 - 1000</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.stepper_set_min_pulse_width"><code class="name flex">
 <span>def <span class="ident">stepper_set_min_pulse_width</span></span>(<span>self, motor_id, minimum_width)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Sets the minimum pulse width allowed by the stepper driver.</p>
-<p>The minimum practical pulse width is approximately 20 microseconds.</p>
-<p>Times less than 20 microseconds will usually result in 20 microseconds or so.</p>
-<p>:param motor_id: 0 -3</p>
-<p>:param minimum_width: A 16 bit unsigned value expressed in microseconds.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -7414,20 +5001,16 @@ result in non-linear accelerations and decelerations.</p>
                width_lsb]
     self._send_command(command)</code></pre>
 </details>
+<div class="desc"><p>Sets the minimum pulse width allowed by the stepper driver.</p>
+<p>The minimum practical pulse width is approximately 20 microseconds.</p>
+<p>Times less than 20 microseconds will usually result in 20 microseconds or so.</p>
+<p>:param motor_id: 0 -3</p>
+<p>:param minimum_width: A 16 bit unsigned value expressed in microseconds.</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.stepper_set_speed"><code class="name flex">
 <span>def <span class="ident">stepper_set_speed</span></span>(<span>self, motor_id, speed)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Sets the desired constant speed for use with stepper_run_speed().</p>
-<p>:param motor_id: 0 - 3</p>
-<p>:param speed: 0 - 1000 The desired constant speed in steps per
-second. Positive is clockwise. Speeds of more than 1000 steps per
-second are unreliable. Speed accuracy depends on the board
-crystal. Jitter depends on how frequently you call the
-stepper_run_speed() method.
-The speed will be limited by the current value of
-stepper_set_max_speed().</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -7465,16 +5048,20 @@ stepper_set_max_speed().</p></div>
     command = [PrivateConstants.STEPPER_SET_SPEED, motor_id, speed_msb, speed_lsb]
     self._send_command(command)</code></pre>
 </details>
+<div class="desc"><p>Sets the desired constant speed for use with stepper_run_speed().</p>
+<p>:param motor_id: 0 - 3</p>
+<p>:param speed: 0 - 1000 The desired constant speed in steps per
+second. Positive is clockwise. Speeds of more than 1000 steps per
+second are unreliable. Speed accuracy depends on the board
+crystal. Jitter depends on how frequently you call the
+stepper_run_speed() method.
+The speed will be limited by the current value of
+stepper_set_max_speed().</p></div>
 </dd>
 <dt id="telemetrix_rpi_pico_w.telemetrix_rpi_pico_w.TelemetrixRpiPicoW.stepper_stop"><code class="name flex">
 <span>def <span class="ident">stepper_stop</span></span>(<span>self, motor_id)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Sets a new target position that causes the stepper
-to stop as quickly as possible, using the current speed and
-acceleration parameters.</p>
-<p>:param motor_id:
-0 - 3</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -7495,6 +5082,11 @@ acceleration parameters.</p>
     command = [PrivateConstants.STEPPER_STOP, motor_id]
     self._send_command(command)</code></pre>
 </details>
+<div class="desc"><p>Sets a new target position that causes the stepper
+to stop as quickly as possible, using the current speed and
+acceleration parameters.</p>
+<p>:param motor_id:
+0 - 3</p></div>
 </dd>
 </dl>
 </dd>
@@ -7502,7 +5094,6 @@ acceleration parameters.</p>
 </section>
 </article>
 <nav id="sidebar">
-<h1>Index</h1>
 <div class="toc">
 <ul></ul>
 </div>
@@ -7582,7 +5173,7 @@ acceleration parameters.</p>
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
 </footer>
 </body>
 </html>
