@@ -1,5 +1,5 @@
 """
- Copyright (c) 2022 Alan Yorinks All rights reserved.
+ Copyright (c) 2022-2025 Alan Yorinks All rights reserved.
 
  This program is free software; you can redistribute it and/or
  modify it under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE
@@ -584,8 +584,9 @@ class TelemetrixRpiPicoWAio:
         if pixel_number > self.number_of_pixels:
             raise RuntimeError('Pixel number is out of legal range')
 
-        if r and g and b not in range(256):
-            raise RuntimeError('Pixel value must be in the range of 0-255')
+        for color in [r, g, b]:
+            if not 0 <= color <= 255:
+                raise RuntimeError('RGB values must be in the range of 0-255')
 
         command = [PrivateConstants.SET_NEOPIXEL, pixel_number, r, g, b, auto_show]
         await self._send_command(command)
@@ -621,8 +622,9 @@ class TelemetrixRpiPicoWAio:
         """
         if not self.neopixels_initiated:
             raise RuntimeError('You must call set_pin_mode_neopixel first')
-        if r and g and b not in range(256):
-            raise RuntimeError('Pixel value must be in the range of 0-255')
+        for color in [r, g, b]:
+            if not 0 <= color <= 255:
+                raise RuntimeError('RGB values must be in the range of 0-255')
         command = [PrivateConstants.FILL_NEOPIXELS, r, g, b, auto_show]
         await self._send_command(command)
 
@@ -704,10 +706,10 @@ class TelemetrixRpiPicoWAio:
         modify the polling interval.
 
         :param threshold:    The threshold value is used to determine when a
-        temperature report is generated. The current temperature is compared to
+        temperature report is to be generated. The current temperature is compared to
         plus and minus the threshold value and if the value is exceeded, a report is
-        generated. To receive continuous reports, set the threshold to 0. A maximum of
-        5.0 degrees is allowed.
+        generated. To receive continuous reports, set the threshold to 0. The threshold
+        maximum is 5.0 degrees.
 
         :param polling_interval: number of milliseconds between temperature reads.
                                  Maximum of 60 seconds (6000 ms.)
@@ -842,8 +844,9 @@ class TelemetrixRpiPicoWAio:
 
 
         """
-        if fill_r or fill_g or fill_g not in range(256):
-            raise RuntimeError('Pixel value must be in the range of 0-255')
+        for color in [fill_r, fill_g, fiil_b]:
+            if not 0 <= color <= 255:
+                raise RuntimeError('RGB values must be in the range of 0-255')
 
         self.number_of_pixels = num_pixels
 

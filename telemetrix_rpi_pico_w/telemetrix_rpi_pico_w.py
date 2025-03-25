@@ -1,5 +1,5 @@
 """
- Copyright (c) 2022 Alan Yorinks All rights reserved.
+ Copyright (c) 2022-2025 Alan Yorinks All rights reserved.
 
  This program is free software; you can redistribute it and/or
  modify it under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE
@@ -545,7 +545,7 @@ class TelemetrixRpiPicoW(threading.Thread):
                 raise RuntimeError(
                     'I2C Write: set_pin_mode i2c never called for i2c port 2.')
 
-        if type(args) != list:
+        if type(args) is not list:
             raise RuntimeError('args must be in the form of a list')
 
         command = [PrivateConstants.I2C_WRITE, i2c_port, address, len(args)]
@@ -577,8 +577,9 @@ class TelemetrixRpiPicoW(threading.Thread):
         if pixel_number > self.number_of_pixels:
             raise RuntimeError('Pixel number is out of legal range')
 
-        if r and g and b not in range(256):
-            raise RuntimeError('Pixel value must be in the range of 0-255')
+        for color in [r, g, b]:
+            if not 0 <= color <= 255:
+                raise RuntimeError('RGB values must be in the range of 0-255')
 
         command = [PrivateConstants.SET_NEOPIXEL, pixel_number, r, g, b, auto_show]
         self._send_command(command)
@@ -614,8 +615,9 @@ class TelemetrixRpiPicoW(threading.Thread):
         """
         if not self.neopixels_initiated:
             raise RuntimeError('You must call set_pin_mode_neopixel first')
-        if r and g and b not in range(256):
-            raise RuntimeError('Pixel value must be in the range of 0-255')
+        for color in [r, g, b]:
+            if not 0 <= color <= 255:
+                raise RuntimeError('RGB values must be in the range of 0-255')
         command = [PrivateConstants.FILL_NEOPIXELS, r, g, b, auto_show]
         self._send_command(command)
 
@@ -692,14 +694,14 @@ class TelemetrixRpiPicoW(threading.Thread):
     def get_cpu_temperature(self, threshold=1.0, polling_interval=1000, callback=None):
         """
         Request the CPU temperature. This will continuously monitor the temperature
-        and report it back in degrees celsius. Call only once, unless you wish to
+        and report it back in degrees Celsius. Call only once, unless you wish to
         modify the polling interval.
 
         :param threshold:    The threshold value is used to determine when a
         temperature report is generated. The current temperature is compared to
-        plus and minus the threshold value and if the value is exceeded, a report is
-        generated. To receive continuous reports, set the threshold to 0. A maximum of
-        5.0 degrees is allowed.
+        plus and minus the threshold value and if the value is exceeded, a report
+        will be generated. To receive continuous reports, set the threshold to 0.
+        The maximum of 5.0 degrees.
 
         :param polling_interval: number of milliseconds between temperature reads.
                                  Maximum of 60 seconds (6000 ms.)
@@ -837,8 +839,9 @@ class TelemetrixRpiPicoW(threading.Thread):
 
 
         """
-        if fill_r or fill_g or fill_g not in range(256):
-            raise RuntimeError('Pixel value must be in the range of 0-255')
+        for color in [fill_r, fill_g, fill_b]:
+            if not 0 <= color <= 255:
+                raise RuntimeError('RGB values must be in the range of 0-255')
 
         self.number_of_pixels = num_pixels
 
@@ -933,7 +936,7 @@ class TelemetrixRpiPicoW(threading.Thread):
 
       callback returns a data list:
 
-    DHT REPORT, DHT_DATA=1, PIN, Humidity,  Temperature (c),Time]
+        [DHT REPORT, DHT_DATA=1, PIN, Humidity,  Temperature (c),Time]
 
     DHT_REPORT =  12
 
