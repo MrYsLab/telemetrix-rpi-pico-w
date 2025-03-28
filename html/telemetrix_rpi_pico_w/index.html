@@ -372,10 +372,14 @@ USA</p>
         &#34;&#34;&#34;
         if self.pico_pins[pin] != PrivateConstants.AT_PWM_OUTPUT \
                 and self.pico_pins[pin] != PrivateConstants.AT_SERVO:
+            if self.shutdown_on_exception:
+                self.shutdown()
             raise RuntimeError(&#39;pwm_write: You must set the pin mode before &#39;
-                               &#39;performing an pwm write.&#39;)
+                               &#39;performing a pwm write.&#39;)
 
         if not (0 &lt;= duty_cycle &lt;= self.maximum_pwm_duty_cycle):
+            if self.shutdown_on_exception:
+                self.shutdown()
             raise RuntimeError(&#39;Raw PWM duty cycle out of range&#39;)
 
         value = duty_cycle.to_bytes(2, byteorder=&#39;big&#39;)
@@ -395,6 +399,8 @@ USA</p>
             command = [PrivateConstants.SET_PWM_FREQ, freq[0], freq[1], freq[2], freq[3]]
             self._send_command(command)
         else:
+            if self.shutdown_on_exception:
+                self.shutdown()
             raise RuntimeError(&#39;pwm_frequency is out of range&#39;)
 
     def pwm_range(self, range_pwm):
@@ -413,6 +419,8 @@ USA</p>
                        data[2], data[3]]
             self._send_command(command)
         else:
+            if self.shutdown_on_exception:
+                self.shutdown()
             raise RuntimeError(&#39;pwm_range is out of range&#39;)
 
     def digital_write(self, pin, value):
@@ -425,6 +433,8 @@ USA</p>
 
         &#34;&#34;&#34;
         if self.pico_pins[pin] != PrivateConstants.AT_OUTPUT:
+            if self.shutdown_on_exception:
+                self.shutdown()
             raise RuntimeError(&#39;digital_write: You must set the pin mode before &#39;
                                &#39;performing a digital write.&#39;)
         command = [PrivateConstants.DIGITAL_WRITE, pin, value]
@@ -587,6 +597,8 @@ USA</p>
                     &#39;I2C Write: set_pin_mode i2c never called for i2c port 2.&#39;)
 
         if type(args) is not list:
+            if self.shutdown_on_exception:
+                self.shutdown()
             raise RuntimeError(&#39;args must be in the form of a list&#39;)
 
         command = [PrivateConstants.I2C_WRITE, i2c_port, address, len(args)]
@@ -613,13 +625,19 @@ USA</p>
 
         &#34;&#34;&#34;
         if not self.neopixels_initiated:
+            if self.shutdown_on_exception:
+                self.shutdown()
             raise RuntimeError(&#39;You must call set_pin_mode_neopixel first&#39;)
 
-        if pixel_number &gt; self.number_of_pixels:
+        if not 0 &lt;= pixel_number &lt; self.number_of_pixels:
+            if self.shutdown_on_exception:
+                self.shutdown()
             raise RuntimeError(&#39;Pixel number is out of legal range&#39;)
 
         for color in [r, g, b]:
             if not 0 &lt;= color &lt;= 255:
+                if self.shutdown_on_exception:
+                    self.shutdown()
                 raise RuntimeError(&#39;RGB values must be in the range of 0-255&#39;)
 
         command = [PrivateConstants.SET_NEOPIXEL, pixel_number, r, g, b, auto_show]
@@ -636,6 +654,8 @@ USA</p>
 
         &#34;&#34;&#34;
         if not self.neopixels_initiated:
+            if self.shutdown_on_exception:
+                self.shutdown()
             raise RuntimeError(&#39;You must call set_pin_mode_neopixel first&#39;)
         command = [PrivateConstants.CLEAR_NEOPIXELS, auto_show]
         self._send_command(command)
@@ -655,9 +675,13 @@ USA</p>
         :param auto_show: call show automatically
         &#34;&#34;&#34;
         if not self.neopixels_initiated:
+            if self.shutdown_on_exception:
+                self.shutdown()
             raise RuntimeError(&#39;You must call set_pin_mode_neopixel first&#39;)
         for color in [r, g, b]:
             if not 0 &lt;= color &lt;= 255:
+                if self.shutdown_on_exception:
+                    self.shutdown()
                 raise RuntimeError(&#39;RGB values must be in the range of 0-255&#39;)
         command = [PrivateConstants.FILL_NEOPIXELS, r, g, b, auto_show]
         self._send_command(command)
@@ -671,6 +695,8 @@ USA</p>
 
         &#34;&#34;&#34;
         if not self.neopixels_initiated:
+            if self.shutdown_on_exception:
+                self.shutdown()
             raise RuntimeError(&#39;You must call set_pin_mode_neopixel first&#39;)
         command = [PrivateConstants.SHOW_NEOPIXELS]
         self._send_command(command)
@@ -728,6 +754,8 @@ USA</p>
 
         # make sure adc number is in range
         if not 0 &lt;= adc_number &lt; 4:
+            if self.shutdown_on_exception:
+                self.shutdown()
             raise RuntimeError(&#39;Invalid ADC Number&#39;)
         self._set_pin_mode(adc_number, PrivateConstants.AT_ANALOG, differential,
                            callback=callback)
@@ -777,8 +805,12 @@ USA</p>
 
                 self._send_command(command)
             else:
+                if self.shutdown_on_exception:
+                    self.shutdown()
                 raise RuntimeError(&#39;get_cpu_temperature: polling interval out of range.&#39;)
         else:
+            if self.shutdown_on_exception:
+                self.shutdown()
             raise RuntimeError(&#39;get_cpu_temperature: threshold out of range.&#39;)
 
     def set_pin_mode_digital_input(self, pin_number, callback=None):
@@ -882,6 +914,8 @@ USA</p>
         &#34;&#34;&#34;
         for color in [fill_r, fill_g, fill_b]:
             if not 0 &lt;= color &lt;= 255:
+                if self.shutdown_on_exception:
+                    self.shutdown()
                 raise RuntimeError(&#39;RGB values must be in the range of 0-255&#39;)
 
         self.number_of_pixels = num_pixels
@@ -909,6 +943,8 @@ USA</p>
         if pin_number in self.pico_pins:
             self.pico_pins[pin_number] = PrivateConstants.AT_PWM_OUTPUT
             if self.pwm_active_count &gt;= 15:
+                if self.shutdown_on_exception:
+                    self.shutdown()
                 raise RuntimeError(
                     &#39;pwm or servo set mode: number of active PWM pins is at maximum&#39;)
 
@@ -916,6 +952,8 @@ USA</p>
 
             self._set_pin_mode(pin_number, PrivateConstants.AT_PWM_OUTPUT)
         else:
+            if self.shutdown_on_exception:
+                self.shutdown()
             raise RuntimeError(&#39;Gpio Pin Number is invalid&#39;)
 
     def set_pin_mode_i2c(self, i2c_port=0, sda_gpio=None, scl_gpio=None):
@@ -943,6 +981,8 @@ USA</p>
 
         # determine if the i2c port is specified correctly
         if i2c_port not in [0, 1]:
+            if self.shutdown_on_exception:
+                self.shutdown()
             raise RuntimeError(&#39;i2c port must be either a 0 or 1&#39;)
         if sda_gpio or scl_gpio:
             if i2c_port == 0:
@@ -1189,6 +1229,8 @@ USA</p>
         &#34;&#34;&#34;
 
         if self.pico_pins[pin_number] != PrivateConstants.AT_SERVO:
+            if self.shutdown_on_exception:
+                self.shutdown()
             raise RuntimeError(&#39;You must call set_pin_mode_servo before trying to &#39;
                                &#39;write a value to a servo or servo was detached.&#39;)
 
@@ -1980,6 +2022,8 @@ USA</p>
             if pin_number in self.pico_pins:
                 self.pico_pins[pin_number] = pin_state
             else:
+                if self.shutdown_on_exception:
+                    self.shutdown()
                 raise RuntimeError(&#39;Gpio Pin Number is invalid&#39;)
 
         if callback:
@@ -2572,6 +2616,8 @@ receiving a KeyboardInterrupt exception</p>
 
     &#34;&#34;&#34;
     if self.pico_pins[pin] != PrivateConstants.AT_OUTPUT:
+        if self.shutdown_on_exception:
+            self.shutdown()
         raise RuntimeError(&#39;digital_write: You must set the pin mode before &#39;
                            &#39;performing a digital write.&#39;)
     command = [PrivateConstants.DIGITAL_WRITE, pin, value]
@@ -2741,8 +2787,12 @@ receiving a KeyboardInterrupt exception</p>
 
             self._send_command(command)
         else:
+            if self.shutdown_on_exception:
+                self.shutdown()
             raise RuntimeError(&#39;get_cpu_temperature: polling interval out of range.&#39;)
     else:
+        if self.shutdown_on_exception:
+            self.shutdown()
         raise RuntimeError(&#39;get_cpu_temperature: threshold out of range.&#39;)</code></pre>
 </details>
 <div class="desc"><p>Request the CPU temperature. This will continuously monitor the temperature
@@ -2956,6 +3006,8 @@ data bytes, time-stamp]</p>
                 &#39;I2C Write: set_pin_mode i2c never called for i2c port 2.&#39;)
 
     if type(args) is not list:
+        if self.shutdown_on_exception:
+            self.shutdown()
         raise RuntimeError(&#39;args must be in the form of a list&#39;)
 
     command = [PrivateConstants.I2C_WRITE, i2c_port, address, len(args)]
@@ -3030,13 +3082,19 @@ an integer.</p>
 
     &#34;&#34;&#34;
     if not self.neopixels_initiated:
+        if self.shutdown_on_exception:
+            self.shutdown()
         raise RuntimeError(&#39;You must call set_pin_mode_neopixel first&#39;)
 
-    if pixel_number &gt; self.number_of_pixels:
+    if not 0 &lt;= pixel_number &lt; self.number_of_pixels:
+        if self.shutdown_on_exception:
+            self.shutdown()
         raise RuntimeError(&#39;Pixel number is out of legal range&#39;)
 
     for color in [r, g, b]:
         if not 0 &lt;= color &lt;= 255:
+            if self.shutdown_on_exception:
+                self.shutdown()
             raise RuntimeError(&#39;RGB values must be in the range of 0-255&#39;)
 
     command = [PrivateConstants.SET_NEOPIXEL, pixel_number, r, g, b, auto_show]
@@ -3069,6 +3127,8 @@ the value provided.</p>
 
     &#34;&#34;&#34;
     if not self.neopixels_initiated:
+        if self.shutdown_on_exception:
+            self.shutdown()
         raise RuntimeError(&#39;You must call set_pin_mode_neopixel first&#39;)
     command = [PrivateConstants.CLEAR_NEOPIXELS, auto_show]
     self._send_command(command)
@@ -3099,9 +3159,13 @@ the value provided.</p>
     :param auto_show: call show automatically
     &#34;&#34;&#34;
     if not self.neopixels_initiated:
+        if self.shutdown_on_exception:
+            self.shutdown()
         raise RuntimeError(&#39;You must call set_pin_mode_neopixel first&#39;)
     for color in [r, g, b]:
         if not 0 &lt;= color &lt;= 255:
+            if self.shutdown_on_exception:
+                self.shutdown()
             raise RuntimeError(&#39;RGB values must be in the range of 0-255&#39;)
     command = [PrivateConstants.FILL_NEOPIXELS, r, g, b, auto_show]
     self._send_command(command)
@@ -3129,6 +3193,8 @@ the value provided.</p>
 
     &#34;&#34;&#34;
     if not self.neopixels_initiated:
+        if self.shutdown_on_exception:
+            self.shutdown()
         raise RuntimeError(&#39;You must call set_pin_mode_neopixel first&#39;)
     command = [PrivateConstants.SHOW_NEOPIXELS]
     self._send_command(command)</code></pre>
@@ -3155,6 +3221,8 @@ the value provided.</p>
         command = [PrivateConstants.SET_PWM_FREQ, freq[0], freq[1], freq[2], freq[3]]
         self._send_command(command)
     else:
+        if self.shutdown_on_exception:
+            self.shutdown()
         raise RuntimeError(&#39;pwm_frequency is out of range&#39;)</code></pre>
 </details>
 <div class="desc"><p>Modify the pwm frequency. Valid values are in the range of 100Hz to 1MHz</p>
@@ -3184,6 +3252,8 @@ the value provided.</p>
                    data[2], data[3]]
         self._send_command(command)
     else:
+        if self.shutdown_on_exception:
+            self.shutdown()
         raise RuntimeError(&#39;pwm_range is out of range&#39;)</code></pre>
 </details>
 <div class="desc"><p>Set the duty cycle range.
@@ -3213,10 +3283,14 @@ The range of values is 16 to 65535</p>
     &#34;&#34;&#34;
     if self.pico_pins[pin] != PrivateConstants.AT_PWM_OUTPUT \
             and self.pico_pins[pin] != PrivateConstants.AT_SERVO:
+        if self.shutdown_on_exception:
+            self.shutdown()
         raise RuntimeError(&#39;pwm_write: You must set the pin mode before &#39;
-                           &#39;performing an pwm write.&#39;)
+                           &#39;performing a pwm write.&#39;)
 
     if not (0 &lt;= duty_cycle &lt;= self.maximum_pwm_duty_cycle):
+        if self.shutdown_on_exception:
+            self.shutdown()
         raise RuntimeError(&#39;Raw PWM duty cycle out of range&#39;)
 
     value = duty_cycle.to_bytes(2, byteorder=&#39;big&#39;)
@@ -3250,6 +3324,8 @@ may be modified by calling pwm_range</p></div>
     &#34;&#34;&#34;
 
     if self.pico_pins[pin_number] != PrivateConstants.AT_SERVO:
+        if self.shutdown_on_exception:
+            self.shutdown()
         raise RuntimeError(&#39;You must call set_pin_mode_servo before trying to &#39;
                            &#39;write a value to a servo or servo was detached.&#39;)
 
@@ -3310,6 +3386,8 @@ may be modified by calling pwm_range</p></div>
 
     # make sure adc number is in range
     if not 0 &lt;= adc_number &lt; 4:
+        if self.shutdown_on_exception:
+            self.shutdown()
         raise RuntimeError(&#39;Invalid ADC Number&#39;)
     self._set_pin_mode(adc_number, PrivateConstants.AT_ANALOG, differential,
                        callback=callback)</code></pre>
@@ -3549,6 +3627,8 @@ DHT_REPORT =  12
 
     # determine if the i2c port is specified correctly
     if i2c_port not in [0, 1]:
+        if self.shutdown_on_exception:
+            self.shutdown()
         raise RuntimeError(&#39;i2c port must be either a 0 or 1&#39;)
     if sda_gpio or scl_gpio:
         if i2c_port == 0:
@@ -3619,6 +3699,8 @@ API.</li>
     &#34;&#34;&#34;
     for color in [fill_r, fill_g, fill_b]:
         if not 0 &lt;= color &lt;= 255:
+            if self.shutdown_on_exception:
+                self.shutdown()
             raise RuntimeError(&#39;RGB values must be in the range of 0-255&#39;)
 
     self.number_of_pixels = num_pixels
@@ -3662,6 +3744,8 @@ API.</li>
     if pin_number in self.pico_pins:
         self.pico_pins[pin_number] = PrivateConstants.AT_PWM_OUTPUT
         if self.pwm_active_count &gt;= 15:
+            if self.shutdown_on_exception:
+                self.shutdown()
             raise RuntimeError(
                 &#39;pwm or servo set mode: number of active PWM pins is at maximum&#39;)
 
@@ -3669,6 +3753,8 @@ API.</li>
 
         self._set_pin_mode(pin_number, PrivateConstants.AT_PWM_OUTPUT)
     else:
+        if self.shutdown_on_exception:
+            self.shutdown()
         raise RuntimeError(&#39;Gpio Pin Number is invalid&#39;)</code></pre>
 </details>
 <div class="desc"><p>Enable a pin as a PWM pin. Maximum number of PWMs is 16.</p>

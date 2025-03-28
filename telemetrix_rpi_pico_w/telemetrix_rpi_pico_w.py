@@ -588,7 +588,7 @@ class TelemetrixRpiPicoW(threading.Thread):
                 self.shutdown()
             raise RuntimeError('You must call set_pin_mode_neopixel first')
 
-        if pixel_number > self.number_of_pixels:
+        if not 0 <= pixel_number < self.number_of_pixels:
             if self.shutdown_on_exception:
                 self.shutdown()
             raise RuntimeError('Pixel number is out of legal range')
