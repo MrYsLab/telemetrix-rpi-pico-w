@@ -880,7 +880,7 @@ class TelemetrixRpiPicoWAio:
 
 
         """
-        for color in [fill_r, fill_g, fiil_b]:
+        for color in [fill_r, fill_g, fill_b]:
             if not 0 <= color <= 255:
                 if self.shutdown_on_exception:
                     await self.shutdown()
