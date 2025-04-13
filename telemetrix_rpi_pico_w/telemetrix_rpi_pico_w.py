@@ -39,13 +39,17 @@ class TelemetrixRpiPicoW(threading.Thread):
 
     All pin numbers are specified using PICO GPIO pin numbering.
 
+    To use a serial interface, set transport_type to 1
+
     """
 
     def __init__(self, ip_address=None,
                  ip_port=31335,
                  sleep_tune=0.000001,
                  shutdown_on_exception=True,
-                 reset_on_shutdown=True):
+                 reset_on_shutdown=True,
+                 com_port=None,
+                 transport_type=0):
 
         """
 
@@ -60,6 +64,13 @@ class TelemetrixRpiPicoW(threading.Thread):
                                       receiving a KeyboardInterrupt exception
 
         :param reset_on_shutdown: Reset the board upon shutdown
+
+        :param com_port: e.g. COM3 or /dev/ttyACM0.
+                         Only use if you wish to bypass auto com port
+                         detection.
+
+        :param transport_type: 0 = WIFI
+                               1 = USBSerial
         """
 
         # initialize threading parent

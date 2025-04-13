@@ -46,7 +46,7 @@ class PrivateConstants:
     SPI_READ_BLOCKING = 20
     SPI_SET_FORMAT = 21
     SPI_CS_CONTROL = 22
-    ONE_WIRE_INIT = 23 # NOTE onewire is currently not supported
+    ONE_WIRE_INIT = 23  # NOTE onewire is currently not supported
     ONE_WIRE_RESET = 24
     ONE_WIRE_SELECT = 25
     ONE_WIRE_SKIP = 26
@@ -85,7 +85,9 @@ class PrivateConstants:
     SET_PWM_FREQ = 59
     SET_PWM_RANGE = 60
     GET_CPU_TEMPERATURE = 61
+    RETRIEVE_PICO_UNIQUE_ID = 62
 
+    # reports
     DIGITAL_REPORT = DIGITAL_WRITE
     ANALOG_REPORT = 3
     FIRMWARE_REPORT = GET_FIRMWARE_VERSION
@@ -103,10 +105,11 @@ class PrivateConstants:
     STEPPER_RUNNING_REPORT = 18
     STEPPER_RUN_COMPLETE_REPORT = 19
     CPU_TEMP_REPORT = 20
+    UNIQUE_ID_REPORT = RETRIEVE_PICO_UNIQUE_ID
 
     DEBUG_PRINT = 99
 
-    TELEMETRIX_VERSION = "1.54"
+    TELEMETRIX_VERSION = "2.0.0"
 
     # reporting control
     REPORTING_DISABLE_ALL = 0
@@ -166,3 +169,7 @@ class PrivateConstants:
     RED = 0
     GREEN = 1
     BLUE = 2
+
+    # Transport Modes
+    WIFI_TRANSPORT = 0
+    SERIAL_TRANSPORT = 1

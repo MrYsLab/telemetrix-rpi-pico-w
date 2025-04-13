@@ -47,7 +47,10 @@ class TelemetrixRpiPicoWAio:
                  loop=None,
                  shutdown_on_exception=True,
                  reset_on_shutdown=True,
-                 close_loop_on_shutdown=True):
+                 close_loop_on_shutdown=True,
+                 transport_mode=WIFI_TRANSPORT,
+                 pico_instance_id=None,
+                 com_port=None):
 
         """
 
@@ -69,6 +72,15 @@ class TelemetrixRpiPicoWAio:
         :param reset_on_shutdown: Reset the board upon shutdown
 
         :param close_loop_on_shutdown: If true, close the loop during shutdown
+
+        :param transport_mode: WIFI_TRANSPORT or SERIAL_TRANSPORT
+
+        :param pico_instance_id: A list containing unique pico ID
+                                 When using a serial transport, if specified,
+                                 assure that board ID matches.
+
+        :param com_port: Optional com_port number when using serial transport
+                         to manually select COM port.
         """
 
         self.shutdown_on_exception = shutdown_on_exception
@@ -81,6 +93,9 @@ class TelemetrixRpiPicoWAio:
         self.ip_address = ip_address
         self.ip_port = ip_port
         self.sleep_tune = sleep_tune
+        self.transport_mode = transport_mode
+        self.pico_instance_id = pico_instance_id
+        self.com_port = com_port
 
         # set the event loop
         if loop is None:
@@ -101,7 +116,7 @@ class TelemetrixRpiPicoWAio:
             else:
                 if self.shutdown_on_exception:
                     raise RuntimeError("ERROR: Python 3.7 or greater is "
-                                   "required for use of this program.")
+                                       "required for use of this program.")
 
         # The report_dispatch dictionary is used to process
         # incoming report messages by looking up the report message
@@ -2189,7 +2204,7 @@ class TelemetrixRpiPicoWAio:
             f_temperature = float(report[6] + report[7] / 100)
             if report[3]:
                 f_temperature *= -1.0
-            message = [PrivateConstants.DHT_REPORT,  report[1],
+            message = [PrivateConstants.DHT_REPORT, report[1],
                        f_humidity, f_temperature, time.time()]
 
             await self.dht_callbacks[report[1]](message)
