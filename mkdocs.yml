@@ -53,6 +53,10 @@ nav:
 theme:
   name: 'material'
 
+plugins:
+  - search
+  - open-in-new-tab
+
 
 extra:
   social:
