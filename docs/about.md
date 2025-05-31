@@ -16,6 +16,3 @@ For comments or questions, please use [this link](https://github.com/MrYsLab/tel
 <br>
 <br>
 
-
-
-Copyright (C) 2022 Alan Yorinks. All Rights Reserved.

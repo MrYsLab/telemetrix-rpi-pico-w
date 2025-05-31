@@ -35,7 +35,4 @@ The Pico allows up to 16 GPIO pins to be assigned as PWM outputs.
 ```
 
 ## Example: [fade_aio.py](https://github.com/MrYsLab/telemetrix-rpi-pico-w/blob/master/examples_aio/neopixels_aio.py)
-<br>
-<br>
 
-Copyright (C) 2022 Alan Yorinks. All Rights Reserved.

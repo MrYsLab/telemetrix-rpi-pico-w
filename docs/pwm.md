@@ -40,4 +40,3 @@ The Pico allows up to 16 GPIO pins to be assigned as PWM outputs.
 
 _**NOTE**_: The BoardLED cannot be controlled via PWM for the Pico W.
 
-Copyright (C) 2022 Alan Yorinks. All Rights Reserved.

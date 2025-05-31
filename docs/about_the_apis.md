@@ -30,9 +30,3 @@ Traceback (most recent call last):
     raise RuntimeError('digital_write: You must set the pin mode before '
 RuntimeError: digital_write: You must set the pin mode before performing a digital write.
 ```
-
-
-<br>
-<br>
-
-Copyright (C) 2022 Alan Yorinks. All Rights Reserved.

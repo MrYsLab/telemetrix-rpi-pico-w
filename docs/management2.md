@@ -22,7 +22,3 @@ ensure that any streaming data coming from the Pico is halted.
 
 ## Example: All the examples call shutdown.
 
-<br>
-<br>
-
-Copyright (C) 2022 Alan Yorinks. All Rights Reserved.

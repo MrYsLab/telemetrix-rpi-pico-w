@@ -152,6 +152,3 @@ They both utilize the same server and support similar features.
 
 
 
-Copyright (C) 2022 Alan Yorinks. All Rights Reserved.
-
-**Last updated 21 September 2022**

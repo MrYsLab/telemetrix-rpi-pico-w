@@ -24,9 +24,3 @@ Python 3.8.6
 If you need to install Python 3, refer to [python.org.](https://www.python.org/)
 
 
-<br>
-<br>
-
-
-Copyright (C) 2022 Alan Yorinks. All Rights Reserved.
-

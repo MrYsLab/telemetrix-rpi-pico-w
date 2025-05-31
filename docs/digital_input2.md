@@ -117,7 +117,3 @@ Re-enabling reporting for pin 12.
 Report Type: 2 Pin: 12 Value: 0 Time Stamp: 2021-03-18 14:37:16
 Report Type: 2 Pin: 12 Value: 1 Time Stamp: 2021-03-18 14:37:16
 ```
-<br>
-<br>
-
-Copyright (C) 2022 Alan Yorinks. All Rights Reserved.

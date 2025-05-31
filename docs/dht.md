@@ -31,7 +31,3 @@ DHT Data Report:Pin: 15 Humidity: 45.7 Temperature:  23.79c  75f  Time: 2021-05-
 
 ```
 
-<br>
-<br>
-
-Copyright (C) 2022 Alan Yorinks. All Rights Reserved.

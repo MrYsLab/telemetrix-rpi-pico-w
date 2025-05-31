@@ -90,7 +90,3 @@ DEBUG ID: _**byte_id**_ Value: **_int_value_**
 
 _**NOTE:**_ You may also add Serial.println statements to the server sketch and use a 
 serial monitor to retrieve debug information. 
-<br>
-<br>
-
-Copyright (C) 2022 Alan Yorinks. All Rights Reserved.

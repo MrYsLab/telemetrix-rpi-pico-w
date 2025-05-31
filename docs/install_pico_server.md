@@ -127,6 +127,3 @@ Write down the assigned IP address, set the delay to 500, and save and upload ag
 
 
 
-<br>
-<br>
-Copyright (C) 2022 Alan Yorinks. All Rights Reserved.

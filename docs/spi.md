@@ -79,7 +79,3 @@ This method writes a list of bytes to the specified SPI port.
 ## Example: [spi_bme280.py](https://github.com/MrYsLab/telemetrix-rpi-pico-w/blob/master/examples/spi_bme280.py)
 
 
-<br>
-<br>
-
-Copyright (C) 2022 Alan Yorinks. All Rights Reserved.

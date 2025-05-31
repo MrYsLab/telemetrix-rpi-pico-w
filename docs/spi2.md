@@ -90,7 +90,3 @@ This method writes a list of bytes to the specified SPI port.
 
 
 
-<br>
-<br>
-
-Copyright (C) 2022 Alan Yorinks. All Rights Reserved.

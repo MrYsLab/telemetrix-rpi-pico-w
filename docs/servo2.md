@@ -32,7 +32,3 @@ assignment of 16 PWM pins.
 ## Example: [servo_aio.py](https://github.com/MrYsLab/telemetrix-rpi-pico-w/blob/master/examples_aio/servo_aio.py)
 
 
-<br>
-<br>
-
-Copyright (C) 2022 Alan Yorinks. All Rights Reserved.

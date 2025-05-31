@@ -37,8 +37,3 @@ pip install telemetrix-rpi-pico --upgrade
 
 
 
-<br>
-<br>
-
-
-Copyright (C) 2022 Alan Yorinks. All Rights Reserved.

@@ -36,4 +36,3 @@ Copyright (c) 2022 Alan Yorinks All Rights Reserved.
 2021-05-04 17:18:52	 Trigger Pin::	16	 Distance(cm):	30.22
 ```
 
-Copyright (C) 2022 Alan Yorinks. All Rights Reserved.

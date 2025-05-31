@@ -422,8 +422,3 @@ def stepper_stop(self, motor_id)
     :param motor_id: 0 - 3
 ```
 
-<br>
-<br>
-
-
-Copyright (C) 2022 Alan Yorinks. All Rights Reserved.

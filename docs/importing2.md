@@ -152,7 +152,3 @@ will flash twice, indicating the Pico has been reset.
 Typically the event loop is shutdown when the application exits. If you
 wish to leave event loop open, set this parameter False.
    
-<br>
-<br>
-
-Copyright (C) 2022 Alan Yorinks. All Rights Reserved.

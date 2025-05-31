@@ -85,8 +85,3 @@ To convert the raw timestamp field to a human-readable time, use **time.localtim
 date = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(data[CB_TIME]))
 ```
 
-
-<br>
-<br>
-
-Copyright (C) 2022 Alan Yorinks. All Rights Reserved.

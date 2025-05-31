@@ -22,7 +22,4 @@
 ## Example: [blink.py](https://github.com/MrYsLab/telemetrix-rpi-pico-w/blob/master/examples/blink.py)
 
 
-<br>
-<br>
-
-Copyright (C) 2022 Alan Yorinks. All Rights Reserved.
+<

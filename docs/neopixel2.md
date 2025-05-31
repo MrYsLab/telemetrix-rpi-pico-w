@@ -93,7 +93,3 @@ This method is used to display color updates for all LEDs.
 
 ## Example: [neopixels_aio.py](https://github.com/MrYsLab/telemetrix-rpi-pico-w/blob/master/examples_aio/neopixels_aio.py)
 
-<br>
-<br>
-
-Copyright (C) 2021 Alan Yorinks. All Rights Reserved.

@@ -104,7 +104,4 @@ To re-enable, you will need to re-enable each pin individually.
 ```python
 ADC Report Type: 3 ADC: 2 Value: 870 Time Stamp: 2021-03-18 14:11:12
 ```
-<br>
-<br>
-
-Copyright (C) 2022 Alan Yorinks. All Rights Reserved.
+<

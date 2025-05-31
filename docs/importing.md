@@ -120,7 +120,3 @@ will stay lit until a connection is made with your router.
 
 
    
-<br>
-<br>
-
-Copyright (C) 2022 Alan Yorinks. All Rights Reserved.

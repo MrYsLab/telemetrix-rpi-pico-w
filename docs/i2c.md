@@ -110,7 +110,3 @@ ADXL345 Report On: 2021-05-04 17:36:52:
 		
 ```
 
-<br>
-<br>
-
-Copyright (C) 2022 Alan Yorinks. All Rights Reserved.

@@ -24,7 +24,3 @@ and then click Download ZIP. Next, extract all the files.
 4. In a terminal, run the example with Python.
 
 
-<br>
-<br>
-
-Copyright (C) 2022 Alan Yorinks. All Rights Reserved.
