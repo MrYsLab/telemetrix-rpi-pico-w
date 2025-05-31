@@ -57,6 +57,11 @@ Follow the instructions in the [User's Guide.](https://mryslab.github.io/telemet
 2. Open the _examples_ directory and run any of the examples using Python3. You may
 modify them to suit your needs.
 
+## If you wish to extend Telemetrix's capabilities, a tutorial on how to do so is [available](https://mryslab.github.io/bits-n-bots/2025/05/20/telemetrix-under-the-hood--part-1/).
+
+
+
+
 
 This project was developed with [Pycharm](https://www.jetbrains.com/pycharm/?from=telemetrix-rpi-pico-w)![logo](https://github.com/MrYsLab/python_banyan/blob/master/images/icon_PyCharm.png)
 
