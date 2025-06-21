@@ -26,7 +26,7 @@ import warnings
 from telemetrix_rpi_pico_w.private_constants import PrivateConstants
 
 
-# noinspection PyMethodMayBeStatic
+# noinspection PyMethodMayBeStatic,PyTypeChecker
 
 
 class TelemetrixRpiPicoW(threading.Thread):
@@ -45,7 +45,8 @@ class TelemetrixRpiPicoW(threading.Thread):
                  ip_port=31335,
                  sleep_tune=0.000001,
                  shutdown_on_exception=True,
-                 reset_on_shutdown=True):
+                 reset_on_shutdown=True,
+                 transport_type=PrivateConstants.WIFI):
 
         """
 
@@ -60,6 +61,10 @@ class TelemetrixRpiPicoW(threading.Thread):
                                       receiving a KeyboardInterrupt exception
 
         :param reset_on_shutdown: Reset the board upon shutdown
+
+        :param transport_type: Transport type
+            WIFI, SERIAL, BT, BLE
+            Note: BT is classic BlueTooth
         """
 
         # initialize threading parent

@@ -166,3 +166,9 @@ class PrivateConstants:
     RED = 0
     GREEN = 1
     BLUE = 2
+
+    # transport type
+    WIFI = 0
+    SERIAL = 1
+    BT = 2
+    BLE = 3
