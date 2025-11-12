@@ -25,7 +25,6 @@ import warnings
 
 from telemetrix_rpi_pico_w.private_constants import PrivateConstants
 
-
 # noinspection PyMethodMayBeStatic,PyTypeChecker
 
 
